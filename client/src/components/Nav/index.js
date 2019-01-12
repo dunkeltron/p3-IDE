@@ -16,8 +16,8 @@ function Nav() {
             UserName
           </a>
           <div className="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-            <a className="dropdown-item" href="#">Account</a>
-            <a className="dropdown-item" href="#">Other Projects</a>
+            <a className="dropdown-item" href="/profile">Account</a>
+            <a className="dropdown-item" href="#">Add Collaborators</a>
             <div className="dropdown-divider"></div>
             <a className="dropdown-item" href="#">Log Out</a>
           </div>
