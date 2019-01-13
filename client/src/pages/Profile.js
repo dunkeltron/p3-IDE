@@ -8,7 +8,9 @@ function Profile() {
       <Row>
         <Col size="md-12">
           <Jumbotron>
-            <h1 className="text-center">Profile Page</h1>            
+            <h1 className="text-center">Profile Page</h1>   
+            <a className="editor-redir" alt=""href="/editor"> To the Editor.</a>  
+            <a className="log-in-redir" alt=""href="/"> To the Log In.</a>       
           </Jumbotron>
         </Col>
       </Row>
