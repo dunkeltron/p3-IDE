@@ -2,9 +2,10 @@
 import React, { Component } from "react";
 class LogIn extends Component {
     
+  //will have to change function once authentication is up
     handleSubmit = (event) => {
         event.preventDefault();
-        window.location.href="/editor";
+        window.location.href="/editor"; 
     }
     render(){
     return (
@@ -15,7 +16,8 @@ class LogIn extends Component {
             <form class="form-signin">
                 <input type="username" id="inputUsername" class="form-control" placeholder="Username" required />
                 <input type="password" id="inputPassword" class="form-control" placeholder="Password" required/> 
-                {/* <div id="remember" class="checkbox">
+                {/* potentially  nice feature to have.
+                <div id="remember" class="checkbox">
                     <label>
                         <input type="checkbox" value="remember-me"> Remember me</input>
                     </label>
@@ -23,7 +25,7 @@ class LogIn extends Component {
                 <a class="btn btn-lg btn-primary btn-block btn-signin"  href="/profile">Sign in</a>
             </form>
             <a href="/editor" class="forgot-password">
-                Forgot the password?
+                Forgot your password?
             </a>
          </div>{/*<!-- /card-container --> */}
     </div>
