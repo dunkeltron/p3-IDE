@@ -13,8 +13,7 @@ class LogIn extends Component {
             <img id="profile-img" class="profile-img-card" src="//ssl.gstatic.com/accounts/ui/avatar_2x.png" />
             <p id="profile-name" class="profile-name-card"></p>
             <form class="form-signin">
-                <span id="reauth-email" class="reauth-email"></span>
-                <input type="email" id="inputEmail" class="form-control" placeholder="Email address" required />
+                <input type="username" id="inputUsername" class="form-control" placeholder="Username" required />
                 <input type="password" id="inputPassword" class="form-control" placeholder="Password" required/> 
                 {/* <div id="remember" class="checkbox">
                     <label>
