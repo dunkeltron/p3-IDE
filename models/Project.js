@@ -1,8 +1,8 @@
-var mongoose = require("mongoose");
+const mongoose = require("mongoose");
 
-var Schema = mongoose.Schema;
+const Schema = mongoose.Schema;
 
-var ProjectSchema = new Schema({
+const ProjectSchema = new Schema({
   owner: {
     //I think this is what we wanted to do not sure?
     type: Schema.Types.ObjectId,
@@ -25,6 +25,6 @@ var ProjectSchema = new Schema({
   collaborators: []
 });
 
-var Project = mongoose.model("Project", ProjectSchema);
+const Project = mongoose.model("Project", ProjectSchema);
 
 module.exports = Project;
