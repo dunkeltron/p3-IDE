@@ -8,9 +8,8 @@ class LogIn extends Component {
     }
     render(){
     return (
-        <div class="container">
-        <div class="card card-container">
-           <img class="profile-img-card" src="//lh3.googleusercontent.com/-6V8xOA6M7BA/AAAAAAAAAAI/AAAAAAAAAAA/rzlHcD0KYwo/photo.jpg?sz=120" alt="" />
+        <div class="container justify-content-center">
+        <div class="card card-container col-4 mx-auto">
             <img id="profile-img" class="profile-img-card" src="//ssl.gstatic.com/accounts/ui/avatar_2x.png" />
             <p id="profile-name" class="profile-name-card"></p>
             <form class="form-signin">
@@ -22,7 +21,7 @@ class LogIn extends Component {
                         <input type="checkbox" value="remember-me"> Remember me</input>
                     </label>
                 </div> */}
-                <button class="btn btn-lg btn-primary btn-block btn-signin"  href="/editor">Sign in</button>
+                <a class="btn btn-lg btn-primary btn-block btn-signin"  href="/profile">Sign in</a>
             </form>
             <a href="/editor" class="forgot-password">
                 Forgot the password?
