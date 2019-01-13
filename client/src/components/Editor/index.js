@@ -11,11 +11,12 @@ require( "./editor.css");
 function Editor(props) {
   return (
     <div className="col-md-6 border border-secondary mh-25 editor">
+
         <CodeMirror
             value='<h1>I ♥ react-codemirror2</h1>'//this.state.code
             options={{
                 mode: props.lang,
-                theme: 'material',
+                theme: 'monokai',
                 lineNumbers: true
             }}
             onChange={(editor, data, value) => {
