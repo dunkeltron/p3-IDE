@@ -4,7 +4,7 @@ const userRoutes = require("./users");
 const projectRoutes = require("./projects");
 
 // User Routes
-router.use("/profile", userRoutes);
+router.use("/user", userRoutes);
 
 // Project Routes
 router.use("/editor", projectRoutes);

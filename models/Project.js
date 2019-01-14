@@ -6,7 +6,8 @@ const ProjectSchema = new Schema({
   owner: {
     //I think this is what we wanted to do not sure?
     type: Schema.Types.ObjectId,
-    required: true
+    required: true,
+    ref: "User"
   },
   projectName: {
     type: String,
