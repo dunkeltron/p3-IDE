@@ -6,7 +6,7 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background: #334d4d;
+  background-image: url("./images/debut_dark.png");
   
 }
 
@@ -17,6 +17,5 @@ code {
 
 .editor{
   background: #282c34;
-  min-height: 100vh;
-  color: 
+  min-height: 25%;
 }
