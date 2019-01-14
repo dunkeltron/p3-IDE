@@ -34,7 +34,9 @@ class EditorContainer extends Component{
                     </div>
                     <div className ="row bottom-row mh-25">                
                         <Editor lang ="htmlmixed"/> {/* add code prop*/}
-                        <iframe className="render-window mh-25 md-6" title="Render Panel"></iframe>
+                        <div className="border border-secondary md-6">
+                        <iframe width="100%" className="render-window " title="Render Panel"></iframe>
+                        </div>
                     </div>
                 </div>
             </div>
