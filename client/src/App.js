@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import { BrowserRouter as Router, Route, Switch} from "react-router-dom";
 import EditorContainer from "./pages/EditorContainer";
 import NoMatch from "./pages/NoMatch";
 import LogIn from "./pages/LogIn";
@@ -14,8 +14,9 @@ class App extends Component {
        
        <Switch>
           <Route exact path="/" component={LogIn} />
-          <Route exact path="/editor" component={EditorContainer} />
-          <Route exact path="/profile" component={Profile} />
+          <Route  exact path="/project" component={EditorContainer} />
+          <Route exact path="/:user/project/:id" component={EditorContainer} />
+          <Route exact path="/:user" component={Profile} />
           <Route component={NoMatch} />
         </Switch>
       </div>
