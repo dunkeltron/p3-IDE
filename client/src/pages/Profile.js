@@ -15,7 +15,7 @@ class Profile extends Component {
         <Col size="md-12">
           <Jumbotron>
             <h1 className="text-center"> {this.props.match.params.user}</h1>   
-            <a className="editor-redir" alt=""href="/editor"> To the Editor.</a>  
+            <a className="editor-redir" alt=""href="/project"> To the Editor.</a>  
             <a className="log-in-redir" alt=""href="/"> To the Log In.</a>       
           </Jumbotron>
         </Col>

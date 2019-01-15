@@ -4,12 +4,20 @@ import Editor from "../components/Editor";
 import Nav from "../components/Nav";
 class EditorContainer extends Component{
     state={
-        project:{}
+        project:{},
+        user:{}
     }
     componentDidMount(){
         const {user,id} = this.props.match.params;
-        if(id){
+        if(id&&user){
             console.log(user,id);
+            this.setState({
+                user:user,
+                id:id
+            })
+        }
+        else if(user&&!id){
+
         }
         else{
             console.log("no id");
@@ -22,7 +30,7 @@ class EditorContainer extends Component{
         return (
             <div>
                 {/* remember to mess with .editor class in codemirror */}
-            <Nav/>
+            <Nav user ={this.props.match.params.user}/>
             <div className="container editor-container ">
             
                 <div className="col projects">

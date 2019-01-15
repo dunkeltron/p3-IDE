@@ -1,6 +1,7 @@
-import React from "react";
+import React, {Component} from "react";
 
-function Nav() {
+class Nav extends Component {
+  render(){
   return (
     <nav className="navbar navbar-expand-lg border-bottom border-secondary">
       <a className="navbar-brand" href="/">Test IDE</a>
@@ -25,10 +26,10 @@ function Nav() {
       
         <li className="nav-item   dropdown  ">
           <a className="nav-link dropdown-toggle  " href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            UserName
+            {this.props.user}
           </a>
           <div className="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-            <a className="dropdown-item" href="/profile">Account</a>
+            <a className="dropdown-item" href={"/"+this.props.user}>Account</a>
             <a className="dropdown-item" href="#">Add Collaborators</a>
             <div className="dropdown-divider"></div>
             <a className="dropdown-item" href="#">Log Out</a>
@@ -40,6 +41,7 @@ function Nav() {
   </div>
   </nav>
   );
+}
 }
 
 export default Nav;
