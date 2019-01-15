@@ -4,13 +4,19 @@ import Jumbotron from "../components/Jumbotron";
 import Nav from "../components/Nav";
 
 class Profile extends Component {
+  state={
+    user:{}
+  }
     componentDidMount(){
         const {user} = this.props.match.params;
+        this.setState({
+          user:user
+        })
     }
   render(){
     return (
     <Container fluid>
-    <Nav/>
+    <Nav user={this.state.user} mode="profile"/>
       <Row>
         <Col size="md-12">
           <Jumbotron>

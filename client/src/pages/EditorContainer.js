@@ -13,7 +13,7 @@ class EditorContainer extends Component{
             console.log(user,id);
             this.setState({
                 user:user,
-                id:id
+                project:id
             })
         }
         else if(user&&!id){
@@ -30,7 +30,7 @@ class EditorContainer extends Component{
         return (
             <div>
                 {/* remember to mess with .editor class in codemirror */}
-            <Nav user ={this.props.match.params.user}/>
+            <Nav mode="project"user ={this.state.user } project={this.state.project}/>
             <div className="container editor-container ">
             
                 <div className="col projects">
