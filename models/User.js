@@ -3,19 +3,22 @@ const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
 const UserSchema = new Schema({
-  //Passportjs
-  userName: {
+  username: {
     type: String,
     required: true
   },
-  //Passportjs
+  email: {
+    type: String,
+    required: true
+  },
   password: {
     type: String,
     required: true
   },
-  //Not totally sure if date needs required: true or not
+  name:{
+    type:String
+  },
   dateCreation: { type: Date, default: Date.now },
-  name: String,
   profilePic: String,
   ownedProjects: [],
   collabProjects: [],

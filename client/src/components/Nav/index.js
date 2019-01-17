@@ -52,6 +52,7 @@ class Nav extends Component {
           </a>
           <div className="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
             <a className="dropdown-item" href={"/"+this.props.user.username}>Account</a>
+            <a className="dropdown-item" href={"/settings/"+this.props.user.username}>Edit Profile</a>
             <div className="dropdown-divider"></div>
             <a className="dropdown-item" href="/">Log Out</a>
           </div>
