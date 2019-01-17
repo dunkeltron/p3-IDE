@@ -1,35 +1,41 @@
-const mongoose = require("mongoose");
+const mongoose = require('mongoose');
 
-const Schema = mongoose.Schema;
-
-const UserSchema = new Schema({
-  //Passportjs
-  userName: {
+const UserSchema = new mongoose.Schema({
+  name: {
     type: String,
     required: true
   },
-  //Passportjs
+  userName: {
+    type: String,
+    require: true
+  },
+  email: {
+    type: String,
+    required: true
+  },
   password: {
     type: String,
     required: true
   },
-  //Not totally sure if date needs required: true or not
-  dateCreation: { type: Date, default: Date.now },
-  name: String,
-  profilePic: String,
-  ownedProjects: [],
-  collabProjects: [],
-  socialLinks: {
-    git: String,
-    linkedIn: String,
-    personalSite: String,
+  date: {
+    type: Date,
+    default: Date.now
   },
-  project: {
-    type: Schema.Types.ObjectId,
-    ref: "Project"
+  profilePic: {
+    type: String
+  },
+  gitHub: {
+    type: String
+  },
+  linkedIn: {
+    type: String
+  }, 
+  personalSite: {
+    type: String
   }
+
 });
 
-const User = mongoose.model("User", UserSchema);
+const User = mongoose.model('User', UserSchema);
 
 module.exports = User;
