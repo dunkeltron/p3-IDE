@@ -4,10 +4,10 @@ const userRoutes = require("./users");
 const projectRoutes = require("./projects");
 
 // User Routes
-router.use("/user", userRoutes);
+router.use("/users", userRoutes);
 
 // Project Routes
-router.use("/editor", projectRoutes);
+router.use("/projects", projectRoutes);
 
 // For anything else, render the html page
 router.use(function(req, res) {

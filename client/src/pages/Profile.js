@@ -10,7 +10,9 @@ class Profile extends Component {
     componentDidMount(){
         const {user} = this.props.match.params;
         this.setState({
-          user:user
+          user:{
+            username:user
+          }
         })
     }
   render(){
@@ -21,7 +23,8 @@ class Profile extends Component {
         <Col size="md-12">
           <Jumbotron>
             <h1 className="text-center"> {this.props.match.params.user}</h1>   
-            <a className="editor-redir" alt=""href="/project"> To the Editor.</a>  
+            {/* this href needs to be changed to pop up a modal to create a project*/}
+            <a className="editor-redir" alt=""href={"/"+this.props.match.params.user+"/project/newProject"}> To the Editor.</a>  
             <a className="log-in-redir" alt=""href="/"> To the Log In.</a>       
           </Jumbotron>
         </Col>
