@@ -1,33 +1,31 @@
 const db = require("../models");
 
-{/*Boiler plate from class code*/}
-
-// // Defining methods for the bookController
-// module.exports = {
-//   findAll: function(req, res) {
-//     db.Book.find(req.query)
-//       .then(dbBook => res.json(dbBook))
-//       .catch(err => res.status(422).json(err));
-//   },
-//   findById: function(req, res) {
-//     db.Book.findById(req.params.id)
-//       .then(dbBook => res.json(dbBook))
-//       .catch(err => res.status(422).json(err));
-//   },
-//   create: function(req, res) {
-//     db.Book.create(req.body)
-//       .then(dbBook => res.json(dbBook))
-//       .catch(err => res.status(422).json(err));
-//   },
+// // Defining methods for the ProjectController
+ module.exports = {
+  findAll: function(req, res) {
+    db.Project.find(req.query)
+      .then(dbProject => res.json(dbProject))
+      .catch(err => res.status(422).json(err));
+  },
+  findById: function(req, res) {
+    db.Project.findById(req.params.id)
+      .then(dbProject => res.json(dbProject))
+      .catch(err => res.status(422).json(err));
+  },
+  create: function(req, res) {
+    db.Project.create(req.body)
+      .then(dbProject => res.json(dbProject))
+      .catch(err => res.status(422).json(err));
+  }
 //   update: function(req, res) {
-//     db.Book.findOneAndUpdate({ id: req.params.id }, req.body)
-//       .then(dbBook => res.json(dbBook))
+//     db.Project.findOneAndUpdate({ id: req.params.id }, req.body)
+//       .then(dbProject => res.json(dbProject))
 //       .catch(err => res.status(422).json(err));
 //   },
 //   remove: function(req, res) {
-//     db.Book.findById(req.params.id)
-//       .then(dbBook => dbBook.remove())
-//       .then(dbBook => res.json(dbBook))
+//     db.Project.findById(req.params.id)
+//       .then(dbProject => dbProject.remove())
+//       .then(dbProject => res.json(dbProject))
 //       .catch(err => res.status(422).json(err));
 //   }
-// };
+ };

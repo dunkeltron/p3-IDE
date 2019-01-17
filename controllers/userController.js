@@ -1,33 +1,35 @@
 const db = require("../models");
 
-{/*Boiler plate from class code*/}
-
-// // Defining methods for the bookController
-// module.exports = {
-//   findAll: function(req, res) {
-//     db.Book.find(req.query)
-//       .then(dbBook => res.json(dbBook))
-//       .catch(err => res.status(422).json(err));
-//   },
-//   findById: function(req, res) {
-//     db.Book.findById(req.params.id)
-//       .then(dbBook => res.json(dbBook))
-//       .catch(err => res.status(422).json(err));
-//   },
-//   create: function(req, res) {
-//     db.Book.create(req.body)
-//       .then(dbBook => res.json(dbBook))
-//       .catch(err => res.status(422).json(err));
-//   },
-//   update: function(req, res) {
-//     db.Book.findOneAndUpdate({ id: req.params.id }, req.body)
-//       .then(dbBook => res.json(dbBook))
-//       .catch(err => res.status(422).json(err));
-//   },
-//   remove: function(req, res) {
-//     db.Book.findById(req.params.id)
-//       .then(dbBook => dbBook.remove())
-//       .then(dbBook => res.json(dbBook))
-//       .catch(err => res.status(422).json(err));
-//   }
-// };
+// // Defining methods for the UserController
+module.exports = {
+  findAll: function(req, res) {
+    db.User.find(req.query)
+      .then(dbUser => res.json(dbUser))
+      .catch(err => res.status(422).json(err));
+  },
+  findByUsername: function(req, res) {
+    db.User.findOne({
+      where: {
+        username: req.params.id
+      }
+    })
+      .then(dbUser => res.json(dbUser))
+      .catch(err => res.status(422).json(err));
+  },
+  create: function(req, res) {
+    db.User.create(req.body)
+      .then(dbUser => res.json(dbUser))
+      .catch(err => res.status(422).json(err));
+  },
+  update: function(req, res) {
+    db.User.findOneAndUpdate({ id: req.params.id }, req.body)
+      .then(dbUser => res.json(dbUser))
+      .catch(err => res.status(422).json(err));
+  }
+  //   remove: function(req, res) {
+  //     db.User.findById(req.params.id)
+  //       .then(dbUser => dbUser.remove())
+  //       .then(dbUser => res.json(dbUser))
+  //       .catch(err => res.status(422).json(err));
+  //   }
+};
