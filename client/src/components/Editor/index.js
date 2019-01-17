@@ -10,10 +10,10 @@ require('codemirror/mode/htmlmixed/htmlmixed.js');
 require( "./editor.css");
 function Editor(props) {
   return (
-    <div className="col-md-6 border border-secondary mh-25 editor">
+    <div className="col-6 border border-secondary mh-25 editor">
 
         <CodeMirror
-            value= {props.code} //this.state.code
+            value= {props.code} 
             options={{
                 mode: props.lang,
                 theme: 'monokai',

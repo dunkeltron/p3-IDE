@@ -16,7 +16,7 @@ class Nav extends Component {
       <a className="navbar-brand " href="/">Test IDE</a>
       { (this.state.mode==="project")? 
           <ul className="navbar-nav ml-0">
-            
+            {/* If we're in project mode we need to render project specific buttons to the nav */}
               <li className="nav-text align-middle"  id="project-brand" >
                 <span className=" project-name-banner ">{this.props.project.name }</span>
                 
@@ -33,7 +33,9 @@ class Nav extends Component {
             </li>
           </ul>
           :
+          
           <ul className="navbar-nav ml-0">
+          {/* Or we are in profile view and don't need project buttons */}
             <li className="nav-text  mr-0">
               <form className="form-inline ml-5 ">
                 <button className="btn btn-secondary ml-3" type="button">New Project</button>
@@ -50,7 +52,6 @@ class Nav extends Component {
           </a>
           <div className="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
             <a className="dropdown-item" href={"/"+this.props.user.username}>Account</a>
-            <a className="dropdown-item" href={"/"+this.props.user.username+"/project/newProject"}>New Project</a>
             <div className="dropdown-divider"></div>
             <a className="dropdown-item" href="/">Log Out</a>
           </div>
