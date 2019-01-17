@@ -13,7 +13,7 @@ function Editor(props) {
     <div className="col-md-6 border border-secondary mh-25 editor">
 
         <CodeMirror
-            value='<h1>I ♥ react-codemirror2</h1>'//this.state.code
+            value= {props.code} //this.state.code
             options={{
                 mode: props.lang,
                 theme: 'monokai',

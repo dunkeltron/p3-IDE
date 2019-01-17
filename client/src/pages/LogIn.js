@@ -13,7 +13,7 @@ class LogIn extends Component {
     return (
         <div className="container mt-5 justify-content-center">
         <div className="card card-container col-md-4 col-xs-12 col-xl-4 mx-auto">
-            <img id="profile-img" className="profile-img-card" src="//ssl.gstatic.com/accounts/ui/avatar_2x.png" />
+            <img id="profile-img" className="profile-img-card" src="//ssl.gstatic.com/accounts/ui/avatar_2x.png" alt="Google Default User" />
             <p id="profile-name" className="profile-name-card text-center">Brand Image</p>
             <form className="form-signin">
                 <input type="username" id="inputUsername" className="form-control" placeholder="Username" required />
@@ -25,8 +25,8 @@ class LogIn extends Component {
                     </label>
                 </div> */}
                 {/* the hrefs for these buttons will have to be changed once user authentication is added */}
-                <a className="btn  btn-secondary btn-block btn-signin"  href="/editor/33">Sign in</a>
-                <a className="btn  btn-secondary btn-block btn-signin"  href="/profile">Register</a>
+                <a className="btn  btn-secondary btn-block btn-signin"  href="/anon/project/33">Sign in</a>
+                <a className="btn  btn-secondary btn-block btn-signin"  href="/anon">Register</a>
             </form>
             {/* If we get to this point we'll have to create a page or form for this. 
             <a  href ="/forgotpassword" className="forgot-password">
