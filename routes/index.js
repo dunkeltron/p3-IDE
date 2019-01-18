@@ -11,5 +11,3 @@ router.use((req, res) =>
 );
 
 module.exports = router;
-
-//Pretty sure we don't touch this at all
