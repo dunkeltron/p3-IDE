@@ -73,7 +73,7 @@ class EditorContainer extends Component{
                         
                     </div>
                     <div className="col-11 mx-0 px-0">
-                        <div className = "row top-row mh-50 col-12 mx-0 px-0">
+                        <div className = "row top-row mh-50r col-12 mx-0 px-0">
                             <Editor lang ="javascript" code ={this.state.project.code.javascript}/> {/* add code prop*/}
                             <Editor lang ="css" code ={this.state.project.code.css}/> {/* add code prop*/}
                         </div>
