@@ -13,9 +13,9 @@ const ProjectSchema = new Schema({
     required: Boolean
   },
   codeBundle: {
-      html: {},
-      js: {},
-      css: {},
+      html: "",
+      js: "",
+      css: ""
   },
   isPublic: Boolean,
   settings: [],

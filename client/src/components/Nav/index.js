@@ -29,6 +29,8 @@ class Nav extends Component {
               <form className="form-inline ml-5 ">
                 <button className="btn btn-success" type="button">Comments {this.state.project.comments.length}</button>
                 <button className="btn btn-secondary ml-3" type="button">Settings</button>
+                <button className="btn btn-success save" type="button">Save </button>
+                <button className="btn btn-secondary ml-3 run" type="button">Run</button>
               </form>
             </li>
           </ul>

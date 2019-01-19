@@ -9,7 +9,7 @@ class EditorContainer extends Component{
             owner: this.props.match.params.user,
             comments:["test1","test2","test3"],
             code:{
-                javascript:"var i = 0; \n return i+2;",
+                js:"var i = 0; \n return i+2;",
                 css:"body { background: #fff}",
                 html:"<div class = \"new-div\"></div>"
             }
@@ -22,7 +22,7 @@ class EditorContainer extends Component{
                     owner: this.props.match.params.user,
                     comments:["test3"],
                     code:{
-                        javascript:"console.log(\"Hello World!\");",
+                        js:"console.log(\"Hello World!\");",
                         css:"body { background: #000}",
                         html:"<button class = \"new-button\"></button>"
                     }
@@ -32,7 +32,7 @@ class EditorContainer extends Component{
                     owner: this.props.match.params.user,
                     comments:["test1","test2","test3"],
                     code:{
-                        javascript:"var i = 0; \n return i+2;",
+                        js:"var i = 0; \n return i+2;",
                         css:"body { background: #fff}",
                         html:"<div class = \"new-div\"></div>"
                     }
@@ -49,7 +49,7 @@ class EditorContainer extends Component{
             this.setState({
                 
                 /* I think this is where the API get function call should go*/
-                /*project:{}*/
+                /*project:{api call}*/
             })
         }
         else{
@@ -74,7 +74,7 @@ class EditorContainer extends Component{
                     </div>
                     <div className="col-11 mx-0 px-0">
                         <div className = "row top-row mh-50r col-12 mx-0 px-0">
-                            <Editor lang ="javascript" code ={this.state.project.code.javascript}/> {/* add code prop*/}
+                            <Editor lang ="javascript" code ={this.state.project.code.js}/> {/* add code prop*/}
                             <Editor lang ="css" code ={this.state.project.code.css}/> {/* add code prop*/}
                         </div>
                         <div className ="row bottom-row mh-50 col-12 mx-0 px-0">

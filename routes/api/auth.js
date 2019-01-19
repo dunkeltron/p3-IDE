@@ -25,24 +25,24 @@ router.post('/register', (req, res) => {
   }
 
   if (errors.length > 0) {
-    res.redirect('/register', {
+    res.redirect({
       errors,
       name,
       email,
       password,
       password2
-    });
+    },'/register' );
   } else {
     User.findByEmail({ email: email }).then(user => {
       if (user) {
         errors.push({ msg: 'Email already exists' });
-        res.redirect('/register', {
+        res.redirect({
           errors,
           name,
           email,
           password,
           password2
-        });
+        },'/register' );
       } else {
         const newUser = new User({
           name,
@@ -63,7 +63,7 @@ router.post('/register', (req, res) => {
                 );
                 res.redirect('/');
               })
-              .catch(err => console.log(err));
+              .catch(err => console.log("error",err));
           });
         });
       }

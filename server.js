@@ -4,10 +4,6 @@ const passport = require('passport');
 const flash = require('connect-flash');
 const session = require('express-session');
 
-<<<<<<< HEAD
-=======
-const mongoose = require("mongoose");
->>>>>>> 40910f0465c02d248259b7be63c47830aa3491dc
 const routes = require("./routes");
 const app = express();
 const PORT = process.env.PORT || 3001;
@@ -66,11 +62,7 @@ app.use(function(req, res, next) {
 app.use(routes);
 
 // Connect to the Mongo DB
-<<<<<<< HEAD
-mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/reactreadinglist");
-=======
-mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/p3database");
->>>>>>> 40910f0465c02d248259b7be63c47830aa3491dc
+
 
 // Start the API server
 app.listen(PORT, function() {
