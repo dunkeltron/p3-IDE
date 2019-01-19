@@ -13,5 +13,4 @@ console.log("inside user routes");
    .get(userController.findByUsername)
 //   .put(userController.update)
 //   .delete(userController.remove);
-router.route("/test").get(userController.test);
 module.exports = router;

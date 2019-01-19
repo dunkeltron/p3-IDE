@@ -2,6 +2,7 @@
   "name": "project3-frontend",
   "version": "0.1.0",
   "private": true,
+  "proxy": "http://localhost:3001/",
   "dependencies": {
     "codemirror": "^5.42.2",
     "react": "^16.7.0",

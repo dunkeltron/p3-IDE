@@ -1,5 +1,5 @@
 import React, {Component} from "react";
-
+import API from "../../utils/API";
 class Nav extends Component {
   state = {
     mode:this.props.mode,
@@ -7,7 +7,7 @@ class Nav extends Component {
     project:this.props.project
   }
   componentDidMount(){
-    
+   API.getProjects().then(res => console.log(res));
   }
   
   render(){
