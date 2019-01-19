@@ -29,6 +29,8 @@ class Nav extends Component {
               <form className="form-inline ml-5 ">
                 <button className="btn btn-success" type="button">Comments {this.state.project.comments.length}</button>
                 <button className="btn btn-secondary ml-3" type="button">Settings</button>
+                <button className="btn btn-success save" type="button">Save </button>
+                <button className="btn btn-secondary ml-3 run" type="button">Run</button>
               </form>
             </li>
           </ul>
@@ -54,7 +56,7 @@ class Nav extends Component {
             <a className="dropdown-item" href={"/"+this.props.user.username}>Account</a>
             <a className="dropdown-item" href={"/settings/"+this.props.user.username}>Edit Profile</a>
             <div className="dropdown-divider"></div>
-            <a className="dropdown-item" href="/">Log Out</a>
+            <a className="dropdown-item" href="/api/auth/logout">Log Out</a>
           </div>
         </li>
       

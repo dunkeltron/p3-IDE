@@ -1,22 +1,11 @@
 const express = require('express');
+const expressLayouts = require('express-ejs-layouts');
 const mongoose = require('mongoose');
 const passport = require('passport');
 const flash = require('connect-flash');
 const session = require('express-session');
 
-const routes = require("./routes");
 const app = express();
-const PORT = process.env.PORT || 3001;
-
-// Define middleware here
-app.use(express.urlencoded({ extended: true }));
-app.use(express.json());
-// Serve up static assets (usually on heroku)
-if (process.env.NODE_ENV === "production") {
-  app.use(express.static("client/public"));
-}
-
-
 
 // Passport Config
 require('./config/passport')(passport);
@@ -33,7 +22,12 @@ mongoose
   .then(() => console.log('MongoDB Connected'))
   .catch(err => console.log(err));
 
+// EJS
+app.use(expressLayouts);
+app.set('view engine', 'ejs');
 
+// Express body parser
+app.use(express.urlencoded({ extended: true }));
 
 // Express session
 app.use(
@@ -58,13 +52,9 @@ app.use(function(req, res, next) {
   res.locals.error = req.flash('error');
   next();
 });
-// Add routes, both API and view
-app.use(routes);
 
-// Connect to the Mongo DB
+// Routes
+app.use('/', require('./routes/index.js'));
+app.use('/users', require('./routes/users.js'));
 
 
-// Start the API server
-app.listen(PORT, function() {
-  console.log(`🌎  ==> API Server now listening on PORT ${PORT}!`);
-});

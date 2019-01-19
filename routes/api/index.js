@@ -1,17 +1,17 @@
-const path = require("path");
 const router = require("express").Router();
 const userRoutes = require("./users");
 const projectRoutes = require("./projects");
-
+const authRoutes = require("./auth");
+console.log("inside api folder");
 // User Routes
 router.use("/users", userRoutes);
 
 // Project Routes
 router.use("/projects", projectRoutes);
 
-// For anything else, render the html page
-router.use(function(req, res) {
-  res.sendFile(path.join(__dirname, "../../client/build/index.html"));
-});
+//Auth Routes
+router.use("/auth",authRoutes);
+
+
 
 module.exports = router;

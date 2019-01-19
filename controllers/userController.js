@@ -16,6 +16,15 @@ module.exports = {
       .then(dbUser => res.json(dbUser))
       .catch(err => res.status(422).json(err));
   },
+  findByEmail: function(req, res) {
+    db.User.findOne({
+      where: {
+        email: req.body.email
+      }
+    })
+      .then(dbUser => res.json(dbUser))
+      .catch(err => res.status(422).json(err));
+  },
   create: function(req, res) {
     db.User.create(req.body)
       .then(dbUser => res.json(dbUser))
@@ -25,6 +34,9 @@ module.exports = {
     db.User.findOneAndUpdate({ id: req.params.id }, req.body)
       .then(dbUser => res.json(dbUser))
       .catch(err => res.status(422).json(err));
+  },
+  test: function(req,res){
+      res.json({test:"User test worked"});
   }
   //   remove: function(req, res) {
   //     db.User.findById(req.params.id)

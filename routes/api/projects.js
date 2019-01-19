@@ -1,5 +1,6 @@
 const router = require("express").Router();
 const projectController = require("../../controllers/projectController");
+console.log("inside project routes");
 
 // // Matches with "/api/projects"
  router.route("/")
@@ -12,5 +13,4 @@ const projectController = require("../../controllers/projectController");
    .get(projectController.findById)
 //   .put(projectController.update)
 //   .delete(projectController.remove);
-
 module.exports = router;
