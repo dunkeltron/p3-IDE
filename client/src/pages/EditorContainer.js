@@ -73,14 +73,14 @@ class EditorContainer extends Component{
                         
                     </div>
                     <div className="col-11 mx-0 px-0">
-                        <div className = "row top-row mh-33 col-12 mx-0 px-0">
+                        <div className = "row top-row mh-50 col-12 mx-0 px-0">
                             <Editor lang ="javascript" code ={this.state.project.code.javascript}/> {/* add code prop*/}
                             <Editor lang ="css" code ={this.state.project.code.css}/> {/* add code prop*/}
                         </div>
-                        <div className ="row bottom-row mh-33 col-12 mx-0 px-0">
+                        <div className ="row bottom-row mh-50 col-12 mx-0 px-0">
                             <Editor lang ="htmlmixed" code ={this.state.project.code.html}/> {/* add code prop*/}
-                            <div className="border border-secondary md-6">
-                            <iframe width="100%" className="render-window " title="Render Panel"></iframe>
+                            <div className="border border-secondary md-6 resp-container px-0 mx-0 col-6">
+                                <iframe  className="render-window resp-iframe col-12" title="Render Panel"></iframe>
                             </div>
                         </div>
                     </div>
