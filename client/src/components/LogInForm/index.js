@@ -2,7 +2,7 @@ import React from "react";
 function LogInForm({handleInputChange,handleFormSubmit}) {
 
     return(
-        <form action="/auth/login" method="POST">
+        <form action="/api/auth/login" method="POST">
           <div className="form-group">
           <label for="email">Email</label>
           <input

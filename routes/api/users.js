@@ -1,5 +1,6 @@
 const router = require("express").Router();
 const userController = require("../../controllers/userController");
+console.log("inside user routes");
 
 // // Matches with "/api/users"
  router.route("/")
@@ -12,5 +13,5 @@ const userController = require("../../controllers/userController");
    .get(userController.findByUsername)
 //   .put(userController.update)
 //   .delete(userController.remove);
-
+router.route("/test").get(userController.test);
 module.exports = router;

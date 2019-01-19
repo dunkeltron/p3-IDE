@@ -54,7 +54,7 @@ class Nav extends Component {
             <a className="dropdown-item" href={"/"+this.props.user.username}>Account</a>
             <a className="dropdown-item" href={"/settings/"+this.props.user.username}>Edit Profile</a>
             <div className="dropdown-divider"></div>
-            <a className="dropdown-item" href="/">Log Out</a>
+            <a className="dropdown-item" href="/api/auth/logout">Log Out</a>
           </div>
         </li>
       

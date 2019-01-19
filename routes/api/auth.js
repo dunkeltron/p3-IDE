@@ -4,10 +4,11 @@ const bcrypt = require('bcryptjs');
 const passport = require('passport');
 // Load User model
 const User = require("../../controllers/userController");
+console.log("inside auth routes");
 
-
-// Register mapped to /auth/register
+// Register mapped to /api/auth/register
 router.post('/register', (req, res) => {
+  console.log("register");
   const { name, email, password, password2 } = req.body;
   let errors = [];
 
@@ -67,23 +68,23 @@ router.post('/register', (req, res) => {
         });
       }
     });
+    console.log("user register");
   }
 });
 
-// Login mapped to /auth/login
+// Login mapped to /api/auth/login
 router.post('/login', (req, res, next) => {
   passport.authenticate('local', {
-    successRedirect: '/dashboard',
+    successRedirect: '/anon',
     failureRedirect: '/',
     failureFlash: true
   })(req, res, next);
 });
 
-// Logout mapped to /auth/logout
+// Logout mapped to /api/auth/logout
 router.get('/logout', (req, res) => {
   req.logout();
   req.flash('success_msg', 'You are logged out');
   res.redirect('/');
 });
-
 module.exports = router;

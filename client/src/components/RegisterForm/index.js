@@ -2,7 +2,7 @@ import React from "react";
 function RegisterForm({handleInputChange,handleFormSubmit}) {
 
     return(
-        <form action="/auth/register" method="POST">
+        <form action="/api/auth/register" method="POST">
                 <div className="form-group">
                     <label for="name">Full Name</label>
                     <input
