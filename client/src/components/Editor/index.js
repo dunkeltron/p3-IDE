@@ -10,7 +10,7 @@ require('codemirror/mode/htmlmixed/htmlmixed.js');
 require( "./editor.css");
 function Editor(props) {
   return (
-    <div className="col-6 border border-secondary mh-25 editor">
+    <div className={"col-6 border border-secondary editor "+props.lang}>
 
         <CodeMirror
             value= {props.code} 

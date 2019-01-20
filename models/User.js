@@ -25,13 +25,10 @@ const UserSchema = new Schema({
     git: String,
     linkedIn: String,
     personalSite: String,
-  },
-  project: {
-    type: Schema.Types.ObjectId,
-    ref: "Project"
   }
+
 });
 
-const User = mongoose.model("User", UserSchema);
+const User = mongoose.model('User', UserSchema);
 
 module.exports = User;
