@@ -18,7 +18,7 @@ class Nav extends Component {
           <ul className="navbar-nav ml-0">
             {/* If we're in project mode we need to render project specific buttons to the nav */}
               <li className="nav-text align-middle"  id="project-brand" >
-                <span className=" project-name-banner ">{this.props.project.name }</span>
+                <span className=" project-name-banner ">{this.state.project.name}</span>
                 
               </li>
             
@@ -27,7 +27,7 @@ class Nav extends Component {
                     put number of comments in a circle or something*/}
             <li className="nav-text  mr-0">
               <form className="form-inline ml-5 ">
-                <button className="btn btn-success" type="button">Comments {this.state.project.comments.length}</button>
+                <button className="btn btn-success" type="button">Comments {this.state.project.comments.length} </button>
                 <button className="btn btn-secondary ml-3" type="button">Settings</button>
                 <button className="btn btn-success save" type="button">Save </button>
                 <button className="btn btn-secondary ml-3 run" type="button">Run</button>
