@@ -7,7 +7,7 @@ class Nav extends Component {
     project:this.props.project
   }
   componentDidMount(){
-   API.getProjects().then(res => console.log(res));
+    API.getProjects().then(res => console.log(res));
   }
   
   render(){
