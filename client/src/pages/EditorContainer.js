@@ -52,8 +52,7 @@ class EditorContainer extends Component {
         // console.log("result: ", res.data),
         // console.log("projectName: ", res.data[0].projectName),
         // projectName = res.data[0].projectName,
-        this.setState({ project: res.data[0] }),
-        console.log("UPDATED PROJECT: ", this.state.project)
+        this.setState({ project: res.data[0] })
       )
       .catch(err => console.log(err));
   };
@@ -61,12 +60,12 @@ class EditorContainer extends Component {
   componentDidMount() {
     const { user, id } = this.props.match.params;
     if (id && user) {
-    //   console.log(user, id);
+      //   console.log(user, id);
       this.getProjects();
-    //   this.setState({
-    //     /* I think this is where the API get function call should go*/
-    //     /*project:{api call}*/
-    //   });
+      //   this.setState({
+      //     /* I think this is where the API get function call should go*/
+      //     /*project:{api call}*/
+      //   });
     } else {
       console.log("no id");
     }
@@ -89,13 +88,22 @@ class EditorContainer extends Component {
             </div>
             <div className="col-11 mx-0 px-0">
               <div className="row top-row mh-50r col-12 mx-0 px-0">
-                <Editor lang="javascript" code={this.state.project.codeBundle.js} />{" "}
+                <Editor
+                  lang="javascript"
+                  code={this.state.project.codeBundle.js}
+                />{" "}
                 {/* add code prop*/}
-                <Editor lang="css" code={this.state.project.codeBundle.css} />{" "}
+                <Editor
+                  lang="css"
+                  code={this.state.project.codeBundle.css}
+                />{" "}
                 {/* add code prop*/}
               </div>
               <div className="row bottom-row mh-50 col-12 mx-0 px-0">
-                <Editor lang="htmlmixed" code={this.state.project.codeBundle.html} />{" "}
+                <Editor
+                  lang="htmlmixed"
+                  code={this.state.project.codeBundle.html}
+                />{" "}
                 {/* add code prop*/}
                 <div className="border border-secondary md-6 resp-container px-0 mx-0 col-6">
                   <iframe
