@@ -32,11 +32,14 @@ module.exports = {
     })
       
       .catch(err => {return err})
-      .then(dbUser => {return dbUser});
+      .then(dbUser => {
+        return dbUser});
   },
   create: function(req, res) {
     db.User.create(req.body)
-      .then(dbUser => res.json(dbUser))
+      .then(dbUser => {
+        res.json("new User",dbUser);
+      })
       .catch(err => res.status(422).json(err));
   },
   update: function(req, res) {

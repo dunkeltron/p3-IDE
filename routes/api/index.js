@@ -9,7 +9,6 @@ router.use("/users", userRoutes);
 // Project Routes
 router.use("/projects", projectRoutes);
 
-//Auth Routes
 router.use("/auth",authRoutes);
 
 

@@ -5,9 +5,9 @@ mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/p3database");
 
 const userSeed = [
   {
-    username: "TestUsername",
-    email: "TestEmail@email.com",
-    password: "TestPassword",
+    username: "Test",
+    email: "Test@email.com",
+    password: "Pass",
     name: "TestName",
     dateCreation: new Date(Date.now()),
     profilePic: "IMG@URL.COM",

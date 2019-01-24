@@ -11,7 +11,6 @@ class LogIn extends Component {
   
   //will have to change function once authentication is up
     handleFormSubmit = (event) => {
-        event.preventDefault();
         console.log(this.state);
     }
     handleInputChange = (event) => {

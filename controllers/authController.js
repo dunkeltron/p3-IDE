@@ -4,6 +4,7 @@ const bcrypt = require('bcryptjs');
 const passport = require('passport');
 // Load User model
 const User = require("./userController");
+const NewUser = require("../models/User");
 console.log("inside auth routes");
 module.exports = {
 
@@ -17,7 +18,6 @@ module.exports = {
             password,
             password2
         } = req.body;
-        console.log(req.body);
         let errors = [];
 
         if (!name || !email || !password || !password2) {
@@ -28,30 +28,37 @@ module.exports = {
             console.log("Passwords must match")
         }
 
-        if (password.length < 5){}
+        if (password.length < 5){
+            console.log("length less than five")
+        }
         
 
         if (errors.length > 0) {
             res.redirect('/register');
         } else {
             console.log("hash password");
-            const newUser = {
+            const newUser = new NewUser({
                 name,
                 email,
                 password
-            };
+              });
 
             bcrypt.genSalt(10, (err, salt) => {
+                
                 bcrypt.hash(newUser.password, salt, (err, hash) => {
+                  console.log("gonna save");
                     if (err) throw err;
-                    newUser.password = hash;
-                    
-                    User.findByEmail(newUser);
-                    res.status(200).redirect("/");
-                    
-                        
+                  newUser.password = hash;
+                  newUser
+                    .save()
+                    .then(user => {
+                      console.log("success");
+                      res.status(200).redirect('/');
+                    })
+                    .catch(err => console.log("didn't work =("));
                 });
             });
+
             
         }
         console.log("user register");
