@@ -8,12 +8,13 @@ module.exports = {
       .catch(err => res.status(422).json(err));
   },
   findByUsername: function(req, res) {
+    console.log("FINDBYUSERNAME");
     db.User.findOne({
       where: {
         username: req.params.id
       }
     })
-      .then(dbUser => res.json(dbUser))
+      .then(dbUser => res.json(dbUser), console.log(".THEN", res.json(dbUser)))
       .catch(err => res.status(422).json(err));
   },
   findByEmail: function(req, res) {
@@ -36,8 +37,8 @@ module.exports = {
       .then(dbUser => res.json(dbUser))
       .catch(err => res.status(422).json(err));
   },
-  test: function(req,res){
-      res.json({test:"User test worked"});
+  test: function(req, res) {
+    res.json({ test: "User test worked" });
   }
   //   remove: function(req, res) {
   //     db.User.findById(req.params.id)

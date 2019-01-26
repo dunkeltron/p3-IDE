@@ -5,11 +5,12 @@ console.log("inside user routes");
 // // Matches with "/api/users"
  router.route("/")
    .get(userController.findAll)
-    .post(userController.create);
+  // .get(userController.findByUsername)
+   .post(userController.create);
 
 // // Matches with "/api/users/:id"
  router
-  .route("/:id")
+  .route("/:user")
    .get(userController.findByUsername)
 //   .put(userController.update)
 //   .delete(userController.remove);

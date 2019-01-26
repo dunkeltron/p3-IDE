@@ -45,26 +45,54 @@ class EditorContainer extends Component {
       ]
     }
   };
+  
+  componentDidMount() {
+    const { user, id } = this.props.match.params;
+    if (id && user) {
+      this.getUsers();
+    } else {
+      console.log("no id");
+    }
+  }
 
-  //Call Selected project based on user and project route
-  getProjects = () => {
-    API.getProjects()
-      .then(res =>
-        // console.log("result: ", res.data),
-        // console.log("projectName: ", res.data[0].projectName),
-        // projectName = res.data[0].projectName,
-        this.setState({ project: res.data[0] })
+  //Does user check against user URL
+  getUsers = () => {
+    // console.log(this.props.match.params.user)
+    API.getUsers()
+      .then(
+        res =>
+          // console.log("result: ", res.data[0].username),
+          res.data[0].username === this.props.match.params.user
+            ? this.getProjects()
+            : console.log("False, keeps everything at default")
       )
       .catch(err => console.log(err));
   };
 
-  saveProjects = (id) => {
+  //Call Selected project based on user and project route
+  getProjects = () => {
+    console.log(this.props.match.params.id)
+    API.getProjects()
+      .then(res =>
+        // console.log("result: ", res.data),
+        // console.log("projectName: ", res.data[0].projectName),
+        
+        res.data[0].projectName === this.props.match.params.id
+         ? this.setState({
+          project: res.data[0]
+        })
+        : console.log("Project not found")
+      )
+      .catch(err => console.log(err));
+  };
+
+  saveProjects = id => {
     API.saveProjects(id)
       .then(res => this.getProjects())
       .catch(err => console.log(err));
   };
 
-  handleOnSaveClick = (event) => {
+  handleOnSaveClick = event => {
     event.preventDefault();
     // if (this.state.title && this.state.author) {
     //   API.saveBook({
@@ -78,34 +106,20 @@ class EditorContainer extends Component {
     console.log("Save Button Clicked");
   };
 
-  handleOnSettingsClick = (event) => {
+  handleOnSettingsClick = event => {
     event.preventDefault();
-    console.log("Settings Button Clicked")
-  }
+    console.log("Settings Button Clicked");
+  };
 
-  handleOnCommentsClick = (event) => {
+  handleOnCommentsClick = event => {
     event.preventDefault();
-    console.log("Comments Button Clicked")
-  }
+    console.log("Comments Button Clicked");
+  };
 
-  handleOnRunClick = (event) => {
+  handleOnRunClick = event => {
     event.preventDefault();
-    console.log("Run Button Clicked")
-  }
-
-  componentDidMount() {
-    const { user, id } = this.props.match.params;
-    if (id && user) {
-      //   console.log(user, id);
-      this.getProjects();
-      //   this.setState({
-      //     /* I think this is where the API get function call should go*/
-      //     /*project:{api call}*/
-      //   });
-    } else {
-      console.log("no id");
-    }
-  }
+    console.log("Run Button Clicked");
+  };
 
   render() {
     return (
