@@ -6,12 +6,12 @@ export default {
     return axios.get("/api/projects");
   },
   // Gets all saved books
-  getSavedBooks: function() {
-    return axios.get("/api/books");
+  saveProject: function(projectName) {
+    return axios.get("/api/projects/" + projectName);
   },
   // Deletes the saved book with the given id
-  deleteBook: function(id) {
-    return axios.delete("/api/books/" + id);
+  deleteBook: function(projectName) {
+    return axios.delete("/api/projects/" + projectName);
   },
   // Saves an book to the database
   saveBook: function(bookData) {

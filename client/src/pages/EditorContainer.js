@@ -46,6 +46,7 @@ class EditorContainer extends Component {
     }
   };
 
+  //Call Selected project based on user and project route
   getProjects = () => {
     API.getProjects()
       .then(res =>
@@ -56,6 +57,41 @@ class EditorContainer extends Component {
       )
       .catch(err => console.log(err));
   };
+
+  saveProjects = (id) => {
+    API.saveProjects(id)
+      .then(res => this.getProjects())
+      .catch(err => console.log(err));
+  };
+
+  handleOnSaveClick = (event) => {
+    event.preventDefault();
+    // if (this.state.title && this.state.author) {
+    //   API.saveBook({
+    //     title: this.state.title,
+    //     author: this.state.author,
+    //     synopsis: this.state.synopsis
+    //   })
+    //     .then(res => this.loadBooks())
+    //     .catch(err => console.log(err));
+    // }
+    console.log("Save Button Clicked");
+  };
+
+  handleOnSettingsClick = (event) => {
+    event.preventDefault();
+    console.log("Settings Button Clicked")
+  }
+
+  handleOnCommentsClick = (event) => {
+    event.preventDefault();
+    console.log("Comments Button Clicked")
+  }
+
+  handleOnRunClick = (event) => {
+    event.preventDefault();
+    console.log("Run Button Clicked")
+  }
 
   componentDidMount() {
     const { user, id } = this.props.match.params;
@@ -70,6 +106,7 @@ class EditorContainer extends Component {
       console.log("no id");
     }
   }
+
   render() {
     return (
       <div className="container-fluid mx-0 px-0">
@@ -78,6 +115,10 @@ class EditorContainer extends Component {
           mode="project"
           user={this.state.user}
           project={this.state.project}
+          handleOnSaveClick={this.handleOnSaveClick}
+          handleOnSettingsClick={this.handleOnSettingsClick}
+          handleOnCommentsClick={this.handleOnCommentsClick}
+          handleOnRunClick={this.handleOnRunClick}
         />
         <div className=" col-12 editor-container mx-0 px-0 ">
           <div className="row col-12 mx-0 px-0">
@@ -92,19 +133,13 @@ class EditorContainer extends Component {
                   lang="javascript"
                   code={this.state.project.codeBundle.js}
                 />{" "}
-                {/* add code prop*/}
-                <Editor
-                  lang="css"
-                  code={this.state.project.codeBundle.css}
-                />{" "}
-                {/* add code prop*/}
+                <Editor lang="css" code={this.state.project.codeBundle.css} />{" "}
               </div>
               <div className="row bottom-row mh-50 col-12 mx-0 px-0">
                 <Editor
                   lang="htmlmixed"
                   code={this.state.project.codeBundle.html}
                 />{" "}
-                {/* add code prop*/}
                 <div className="border border-secondary md-6 resp-container px-0 mx-0 col-6">
                   <iframe
                     className="render-window resp-iframe col-12"
