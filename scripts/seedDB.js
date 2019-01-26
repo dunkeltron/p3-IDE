@@ -5,9 +5,9 @@ mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/p3database");
 
 const userSeed = [
   {
-    username: "TestUsername",
-    email: "TestEmail@email.com",
-    password: "TestPassword",
+    username: "Test",
+    email: "Test@email.com",
+    password: "Pass",
     name: "TestName",
     dateCreation: new Date(Date.now()),
     profilePic: "IMG@URL.COM",
@@ -22,16 +22,16 @@ const userSeed = [
 ];
 
 const projectSeed = [{
-  owner: "notsurehowtorefuser",
-  projectName: "22",
+  owner: "anon",
+  projectName: "55",
   codeBundle: {
-    html: {},
-    js: {},
-    css: {},
+    html: "<p class='textStuff'> This is database HTML </p>",
+    js: "let i = 3",
+    css: ".textStuff { color: blue }",
   },
   isPublic: true,
   settings: [],
-  comments: [],
+  comments: ["test1", "test2", "test3", "test4"],
   views: 2030,
   watchers: 3,
   collaborators: [],

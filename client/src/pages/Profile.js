@@ -2,7 +2,7 @@ import React, {Component} from "react";
 import { Col, Row, Container } from "../components/Grid";
 import Jumbotron from "../components/Jumbotron";
 import Nav from "../components/Nav";
-
+import API from "../utils/API";
 class Profile extends Component {
   state={
     user:{}
@@ -15,10 +15,13 @@ class Profile extends Component {
           }
         })
     }
+    onLogOut(){
+      API.logout();
+    }
   render(){
     return (
     <Container fluid>
-    <Nav user={this.state.user} mode="profile"/>
+    <Nav user={this.state.user} onLogOut={this.onLogOut} mode="profile"/>
       <Row>
         <Col size="md-12">
           <Jumbotron>

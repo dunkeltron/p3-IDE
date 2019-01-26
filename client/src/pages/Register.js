@@ -6,7 +6,7 @@ class Register extends Component {
     state={
         email:"",
         password:"",
-        userName:"",
+        username:"",
         name:"",
         password2:""
     }

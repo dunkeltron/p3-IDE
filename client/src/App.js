@@ -16,7 +16,7 @@ class App extends Component {
        <Switch>
           <Route exact path="/" component={LogIn} />
           <Route exact path="/register" component={Register}/>
-          {/* <Route exact path="/register" component={Register}/> */}
+          {/* <Route exact path="/:user/update" component={Settings}/> */}
           <Route  exact path="/project" component={EditorContainer} />
           <Route exact path="/:user/project/:id" component={EditorContainer} />
           <Route exact path="/:user" component={Profile} />

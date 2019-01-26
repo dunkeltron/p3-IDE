@@ -10,8 +10,7 @@ class LogIn extends Component {
     }
   
   //will have to change function once authentication is up
-    handleSubmit = (event) => {
-        event.preventDefault();
+    handleFormSubmit = (event) => {
         console.log(this.state);
     }
     handleInputChange = (event) => {
@@ -25,8 +24,10 @@ class LogIn extends Component {
             <div className="row mt-5">
                 <div className="col-md-6 m-auto">
                     <div className="card card-body">
-                        <h1 className="text-center mb-3"><i className="fas fa-door-open"></i>  Login</h1>
-                        <LogInForm handleFormSubmit={this.handleSubmit} handleInputChange ={this.handleInputChange}/>
+                        <h1 className="text-center mb-3">
+                            <i className="fas fa-door-open"></i> Login
+                        </h1>
+                        <LogInForm handleFormSubmit={this.handleFormSubmit} handleInputChange ={this.handleInputChange}/>
                     
                         <p className="lead mt-4">
                             Need an Account?  

@@ -17,18 +17,29 @@ module.exports = {
       .catch(err => res.status(422).json(err));
   },
   findByEmail: function(req, res) {
-    console.log(req);
-    db.User.findOne({
-      where: {
+    db.User.findOneAndUpdate(
+      {
+      where: {  //search by email address
         email: req.email
+      },
+      update:{  //update with the body of the request object
+        req
+      },
+      options:{     //options object
+        new:true,   //returns modified document instead of original
+        upsert:true //creates the object if it doesn't exist
       }
     })
-      .then(dbUser => res.json(dbUser))
-      .catch(err => res.status(422).json(err));
+      
+      .catch(err => {return err})
+      .then(dbUser => {
+        return dbUser});
   },
   create: function(req, res) {
     db.User.create(req.body)
-      .then(dbUser => res.json(dbUser))
+      .then(dbUser => {
+        res.json("new User",dbUser);
+      })
       .catch(err => res.status(422).json(err));
   },
   update: function(req, res) {
