@@ -56,6 +56,11 @@ class EditorContainer extends Component {
       )
       .catch(err => console.log(err));
   };
+  onLogOut =() =>{
+    API.logout()
+    .then(result =>
+      console.log(result));
+  }
 
   componentDidMount() {
     const { user, id } = this.props.match.params;
@@ -78,6 +83,7 @@ class EditorContainer extends Component {
           mode="project"
           user={this.state.user}
           project={this.state.project}
+          onLogOut={this.onLogOut}
         />
         <div className=" col-12 editor-container mx-0 px-0 ">
           <div className="row col-12 mx-0 px-0">

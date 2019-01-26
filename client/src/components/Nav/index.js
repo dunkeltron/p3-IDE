@@ -1,6 +1,6 @@
 import React from "react";
 
-function Nav (props) {
+function Nav (props,{handleLogOut}) {
   // props = {
   //   mode:props.mode,
   //   user:props.user,
@@ -52,7 +52,7 @@ function Nav (props) {
             <a className="dropdown-item" href={"/"+props.user.username}>Account</a>
             <a className="dropdown-item" href={"/settings/"+props.user.username}>Edit Profile</a>
             <div className="dropdown-divider"></div>
-            <a className="dropdown-item" href="/api/auth/logout">Log Out</a>
+            <a className="dropdown-item" onClick={handleLogOut}>Log Out</a>
           </div>
         </li>
       

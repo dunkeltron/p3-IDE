@@ -12,15 +12,17 @@ module.exports = {
     // Register mapped to /api/auth/register=
     register: function (req, res) {
         console.log("register");
+        console.log(req.body);
         const {
             name,
+            username,
             email,
             password,
             password2
         } = req.body;
         let errors = [];
 
-        if (!name || !email || !password || !password2) {
+        if (!name || !username  || !email || !password || !password2) {
             console.log("all fields must be filled in.")
         }
 
@@ -39,6 +41,7 @@ module.exports = {
             console.log("hash password");
             const newUser = new NewUser({
                 name,
+                username,
                 email,
                 password
               });
@@ -68,17 +71,23 @@ module.exports = {
     // Login mapped to /api/auth/login
     login: function (req, res,next) {
         console.log("login function");
-        passport.authenticate('local', {
-            successRedirect: '/anon',
-            failureRedirect: '/'
-        })(req, res, next);
-        console.log("exit login");
+        //console.log(req);
+        passport.authenticate('local', function(err,user,info){
+            if(err) {return next(err)}
+            if(!user) { return res.redirect("/")}
+            console.log(req.user);
+            res.redirect("/tryme");
+        }
+        );
+        
     },
 
     // Logout mapped to /api/auth/logout
     logout: function (req, res) {
 
-        req.logout().then(msg => res.redirect('/'));
+        req.logout();
+        console.log('loged out');
+        res.redirect('/');
 
     }
 }
