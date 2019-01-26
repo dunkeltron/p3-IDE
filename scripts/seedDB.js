@@ -18,34 +18,64 @@ const userSeed = [
       linkedIn: "linkedin.com",
       personalSite: "personalSite.com"
     }
+  },
+  {
+    username: "anon",
+    email: "anon@email.com",
+    password: "TestPassword",
+    name: "TestNameAnon",
+    dateCreation: new Date(Date.now()),
+    profilePic: "IMGfsdafads@URL.COM",
+    ownedProjects: [],
+    collabProjects: [],
+    socialLinks: {
+      git: "githubf.com",
+      linkedIn: "lifnkedin.com",
+      personalSite: "perfsonalSite.com"
+    }
   }
 ];
 
-const projectSeed = [{
-  owner: "anon",
-  projectName: "55",
-  codeBundle: {
-    html: "<p class='textStuff'> This is database HTML </p>",
-    js: "let i = 3",
-    css: ".textStuff { color: blue }",
+const projectSeed = [
+  {
+    owner: "TestUsername",
+    projectName: "55",
+    codeBundle: {
+      html: "<p class='textStuff'> This is database HTML TestUsername's PROJECT </p>",
+      js: "let i = 3",
+      css: ".textStuff { color: blue }"
+    },
+    isPublic: true,
+    settings: [],
+    comments: ["test1", "test2", "test3", "test4"],
+    views: 2030,
+    watchers: 3,
+    collaborators: []
   },
-  isPublic: true,
-  settings: [],
-  comments: ["test1", "test2", "test3", "test4"],
-  views: 2030,
-  watchers: 3,
-  collaborators: [],
-}];
+  {
+    owner: "anon",
+    projectName: "88",
+    codeBundle: {
+      html: "<p class='textStuff'> This is database HTML ANON's PROJECT </p>",
+      js: "let i = 43",
+      css: ".textStuff { color: yellow }"
+    },
+    isPublic: true,
+    settings: [],
+    comments: ["test1", "test2", "test3", "test4", "test5"],
+    views: 2030,
+    watchers: 3,
+    collaborators: []
+  }
+];
 
 db.User.remove({})
   .then(() => db.User.collection.insertMany(userSeed))
   .then(data => {
     console.log(data.result.n + " userinfo inserted!");
-    process.exit(0);
   })
   .catch(err => {
     console.error(err);
-    process.exit(1);
   });
 
 db.Project.remove({})

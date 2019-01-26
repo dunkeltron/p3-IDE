@@ -64,14 +64,14 @@ class EditorContainer extends Component {
           // console.log("result: ", res.data[0].username),
           res.data[0].username === this.props.match.params.user
             ? this.getProjects()
-            : console.log("False, keeps everything at default")
+            : console.log("User not found, keeps everything at default")
       )
       .catch(err => console.log(err));
   };
 
   //Call Selected project based on user and project route
   getProjects = () => {
-    console.log(this.props.match.params.id)
+    // console.log(this.props.match.params.id)
     API.getProjects()
       .then(res =>
         // console.log("result: ", res.data),
@@ -81,7 +81,7 @@ class EditorContainer extends Component {
          ? this.setState({
           project: res.data[0]
         })
-        : console.log("Project not found")
+        : console.log("User found but Project not found, keeps everything at default")
       )
       .catch(err => console.log(err));
   };
