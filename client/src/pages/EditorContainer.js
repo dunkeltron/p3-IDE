@@ -49,20 +49,21 @@ class EditorContainer extends Component {
   componentDidMount() {
     const { user, id } = this.props.match.params;
     if (id && user) {
-      this.getUsers();
+      this.getUser();
     } else {
       console.log("no id");
     }
   }
 
-  //Does user check against user URL
-  getUsers = () => {
+  //Does user check against user URL  
+  getUser = currentUsername => {
     // console.log(this.props.match.params.user)
-    API.getUsers()
+    currentUsername = this.props.match.params.user
+    API.getUser(currentUsername)
       .then(
         res =>
-          // console.log("result: ", res.data[0].username),
-          res.data[0].username === this.props.match.params.user
+          // console.log("result: ", res.data.username),
+          res.data.username === this.props.match.params.user
             ? this.getProjects()
             : console.log("User not found, keeps everything at default")
       )

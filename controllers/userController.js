@@ -3,18 +3,18 @@ const db = require("../models");
 // // Defining methods for the UserController
 module.exports = {
   findAll: function(req, res) {
+    console.log("FINDALLUSERS");
     db.User.find(req.query)
       .then(dbUser => res.json(dbUser))
       .catch(err => res.status(422).json(err));
   },
+  //Deleting where makes this work flawlessly
   findByUsername: function(req, res) {
-    console.log("FINDBYUSERNAME");
+    console.log("FINDBYUSERNAME", req.params.user);
     db.User.findOne({
-      where: {
-        username: req.params.id
-      }
+        username: req.params.user
     })
-      .then(dbUser => res.json(dbUser), console.log(".THEN", res.json(dbUser)))
+      .then(dbUser => res.json(dbUser))
       .catch(err => res.status(422).json(err));
   },
   findByEmail: function(req, res) {

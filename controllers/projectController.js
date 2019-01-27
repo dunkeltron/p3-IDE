@@ -3,6 +3,7 @@ const db = require("../models");
 // // Defining methods for the ProjectController
  module.exports = {
   findAll: function(req, res) {
+    console.log("FINALLPROJECTS")
     db.Project.find(req.query)
       .then(dbProject => res.json(dbProject))
       .catch(err => res.status(422).json(err));

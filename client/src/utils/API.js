@@ -6,6 +6,11 @@ export default {
     return axios.get("/api/projects");
   },
 
+  getUser: function(userName) {
+    console.log("userName: ", userName);
+    return axios.get("/api/users/" + userName);
+  },
+
   getUsers: function() {
     return axios.get("/api/users");
   },

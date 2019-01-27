@@ -5,7 +5,7 @@ console.log("inside user routes");
 // // Matches with "/api/users"
  router.route("/")
    .get(userController.findAll)
-  // .get(userController.findByUsername)
+   // .get(userController.findByUsername)
    .post(userController.create);
 
 // // Matches with "/api/users/:id"
