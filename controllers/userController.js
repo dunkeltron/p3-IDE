@@ -12,8 +12,9 @@ module.exports = {
   findByUsername: function(req, res) {
     console.log("FINDBYUSERNAME", req.params.user);
     db.User.findOne({
-        username: req.params.user
+      username: req.params.user
     })
+      .populate("ownedProjects")
       .then(dbUser => res.json(dbUser))
       .catch(err => res.status(422).json(err));
   },

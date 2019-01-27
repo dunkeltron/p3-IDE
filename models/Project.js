@@ -25,6 +25,6 @@ const ProjectSchema = new Schema({
   collaborators: []
 });
 
-const Project = mongoose.model("Project", ProjectSchema);
+const Project = mongoose.model("projects", ProjectSchema);
 
 module.exports = Project;

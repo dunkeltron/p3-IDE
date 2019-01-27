@@ -62,10 +62,10 @@ class EditorContainer extends Component {
     API.getUser(currentUsername)
       .then(
         res =>
-          // console.log("result: ", res.data.username),
-          res.data.username === this.props.match.params.user
-            ? this.getProjects()
-            : console.log("User not found, keeps everything at default")
+          console.log("result: ", res.data)
+          // res.data.username === currentUsername
+          //   ? this.getProjects()
+          //   : console.log("User not found, keeps everything at default")
       )
       .catch(err => console.log(err));
   };
@@ -76,13 +76,13 @@ class EditorContainer extends Component {
     API.getProjects()
       .then(res =>
         // console.log("result: ", res.data),
-        // console.log("projectName: ", res.data[0].projectName),
+        console.log("projectName: ", res.data[0].projectName),
         
-        res.data[0].projectName === this.props.match.params.id
-         ? this.setState({
-          project: res.data[0]
-        })
-        : console.log("User found but Project not found, keeps everything at default")
+        // res.data[0].projectName === this.props.match.params.id
+        //  ? this.setState({
+        //   project: res.data[0]
+        // })
+        // : console.log("User found but Project not found, keeps everything at default")
       )
       .catch(err => console.log(err));
   };
