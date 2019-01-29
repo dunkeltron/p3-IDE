@@ -6,8 +6,9 @@ export default {
     return axios.get("/api/users/" + userName);
   },
   saveProject: function(projectData) {
-    console.log("ProjectData: ", projectData.obj.projectName);
-    return axios.put("/api/projects/"+ projectData.obj.projectName, projectData);
+    console.log("ProjectData: ", projectData.projectObject);
+    const projectDataName = projectData.projectObject.projectName
+    return axios.put("/api/projects/"+ projectDataName, projectData);
   },
 
   //

@@ -110,16 +110,23 @@ class EditorContainer extends Component {
       "saveProject->this.props.match.params.id",
       this.props.match.params.id
     );
-    console.log("this.state: ", this.state);
 
-    const obj = {
+    const projectObject = {
+      _id: this.state.project._id,
+      owner: this.state.project.owner,
       projectName: this.state.project.projectName,
-      owner: this.state.project.owner
-    }; //http://localhost:3000/TestUsername/project/55
+      codeBundle: this.state.project.codeBundle,
+      isPublic: this.state.project.isPublic,
+      settings: this.state.project.settings,
+      comments: this.state.project.comments,
+      views: this.state.project.views,
+      watchers: this.state.project.watchers,
+      collaborators: this.state.project.collaborators
+    };
 
     for (let i = 0; i < selectedProject.length; ++i) {
       selectedProject[i].projectName === this.props.match.params.id
-        ? API.saveProject({ obj })
+        ? API.saveProject({ projectObject })
         : console.log(); //"saveProject->selectedProject not found"
     }
   };
@@ -137,6 +144,7 @@ class EditorContainer extends Component {
   handleOnCommentsClick = event => {
     event.preventDefault();
     console.log("Comments Button Clicked");
+    console.log(this.state.project.codeBundle.js);
   };
 
   handleOnRunClick = event => {
