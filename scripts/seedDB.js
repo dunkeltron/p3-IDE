@@ -53,6 +53,21 @@ const projectSeed = [
     collaborators: []
   },
   {
+    owner: "TestUsername",
+    projectName: "77",
+    codeBundle: {
+      html: "<p class='textStuff'> This is database HTML TestUsername's PROJECT 77</p>",
+      js: "let i = 3333333",
+      css: ".textStuff { color: green }"
+    },
+    isPublic: true,
+    settings: [],
+    comments: ["test1", "test2", "test3", "test4", "test5"],
+    views: 2030,
+    watchers: 3,
+    collaborators: []
+  },
+  {
     owner: "anon",
     projectName: "88",
     codeBundle: {
