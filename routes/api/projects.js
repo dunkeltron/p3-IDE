@@ -10,7 +10,7 @@ console.log("inside project routes");
 // // Matches with "/api/projects/:id"
  router
    .route("/:id")
-   .get(projectController.findById)
-//   .put(projectController.update)
+   .get(projectController.findByProjectName)
+   .put(projectController.update)
 //   .delete(projectController.remove);
 module.exports = router;

@@ -45,7 +45,7 @@ class EditorContainer extends Component {
       ]
     }
   };
-  
+
   componentDidMount() {
     const { user, id } = this.props.match.params;
     if (id && user) {
@@ -55,56 +55,68 @@ class EditorContainer extends Component {
     }
   }
 
-  //Does user check against user URL  
+  //Does user check against user URL
   getUser = currentUsername => {
     // console.log(this.props.match.params.user)
-    currentUsername = this.props.match.params.user
+    currentUsername = this.props.match.params.user;
     API.getUser(currentUsername)
-      .then(
-        res =>
-          // console.log("result: ", res.data)
-          res.data.username === currentUsername
-            ? this.getProjects()
-            : console.log("User not found, keeps everything at default")
-      )
-      .catch(err => console.log(err));
-  };
-
-  //Call Selected project based on user and project route
-  getProjects = () => {
-    // console.log(this.props.match.params.id)
-    API.getProjects()
       .then(res =>
-        // console.log("result: ", res.data),
-        // console.log("projectName: ", res.data[0].projectName),
-        
-        res.data[0].projectName === this.props.match.params.id
-         ? this.setState({
-         project: res.data[0]
-        })
-        : console.log("User found but Project not found, keeps everything at default")
+        // console.log("result: ", res.data)
+        res.data.username === currentUsername
+          ? this.getProjects(res.data.ownedProjects)
+          : console.log("User not found, keeps everything at default")
       )
       .catch(err => console.log(err));
   };
 
-  saveProjects = id => {
-    API.saveProjects(id)
-      .then(res => this.getProjects())
-      .catch(err => console.log(err));
+  getProjects = ownedProjects => {
+    // console.log(this.props.match.params.id);
+    console.log("OwnedProjects: ", ownedProjects);
+    for (let i = 0; i < ownedProjects.length; ++i) {
+      ownedProjects[i].projectName === this.props.match.params.id
+        ? //Return
+          this.setState({
+            project: ownedProjects[i]
+          })
+        : console.log();
+    }
   };
 
   handleOnSaveClick = event => {
     event.preventDefault();
-    // if (this.state.title && this.state.author) {
-    //   API.saveBook({
-    //     title: this.state.title,
-    //     author: this.state.author,
-    //     synopsis: this.state.synopsis
-    //   })
-    //     .then(res => this.loadBooks())
-    //     .catch(err => console.log(err));
-    // }
     console.log("Save Button Clicked");
+    this.findProject(this.props.match.params.user);
+  };
+
+  findProject = currentUsername => {
+    const authUser = "TestUsername";
+
+    console.log("findProject(): ", currentUsername);
+    authUser === currentUsername
+      ? API.getUser(authUser)
+          .then(res =>
+            // console.log("findProject->getUserResult: ", res.data)
+            res.data.username === authUser
+              ? this.saveProject(authUser, res.data.ownedProjects)
+              : console.log("findProject->getUser: User not found")
+          )
+          .catch(err => console.log(err))
+      : console.log("Authed User trying to save project that isn't owned");
+  };
+
+  saveProject = (authUser, selectedProject) => {
+    console.log("saveProject->selectedProjects: ", selectedProject);
+    console.log("saveProject->this.props.match.params.id", this.props.match.params.id);
+    for (let i = 0; i < selectedProject.length; ++i) {
+      selectedProject[i].projectName === this.props.match.params.id
+        ? API.saveProject(selectedProject[i].projectName)
+        : console.log() //"saveProject->selectedProject not found"
+    }
+  };
+
+  handleOnNewProjectClick = event => {
+    event.preventDefault();
+    console.log("New Project Button Clicked");
   };
 
   handleOnSettingsClick = event => {
@@ -120,7 +132,16 @@ class EditorContainer extends Component {
   handleOnRunClick = event => {
     event.preventDefault();
     console.log("Run Button Clicked");
+    // this.getProjects();
   };
+
+  // getProjects = () => {
+  //   API.getProjects()
+  //   .then(res =>
+  //     console.log("getProjects ALL", res.data)
+  //   )
+  //   .catch(err => console.log(err))
+  // }
 
   render() {
     return (
@@ -134,6 +155,7 @@ class EditorContainer extends Component {
           handleOnSettingsClick={this.handleOnSettingsClick}
           handleOnCommentsClick={this.handleOnCommentsClick}
           handleOnRunClick={this.handleOnRunClick}
+          handleOnNewProjectClick={this.handleOnNewProjectClick}
         />
         <div className=" col-12 editor-container mx-0 px-0 ">
           <div className="row col-12 mx-0 px-0">

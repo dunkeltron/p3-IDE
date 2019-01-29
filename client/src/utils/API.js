@@ -1,23 +1,23 @@
 import axios from "axios";
 
 export default {
-  // Gets books from the Google API
-  getProjects: function() {
-    return axios.get("/api/projects");
-  },
-
   getUser: function(userName) {
     console.log("userName: ", userName);
     return axios.get("/api/users/" + userName);
   },
+  saveProject: function(projectName) {
+    return axios.put("/api/projects/" + projectName);
+  },
 
+  //
+  getProjects: function() {
+    return axios.get("/api/projects");
+  },
+
+  //
+  //
   getUsers: function() {
     return axios.get("/api/users");
-  },
-  
-  // Gets all saved books
-  saveProject: function(projectName) {
-    return axios.get("/api/projects/" + projectName);
   },
   // Deletes the saved book with the given id
   deleteBook: function(projectName) {

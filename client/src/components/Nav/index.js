@@ -64,6 +64,13 @@ function Nav(props) {
               >
               Run
               </Button>
+              <Button
+                className="newProject"
+                onClick={props.handleOnNewProjectClick}
+                type="success"
+              >
+              +
+              </Button>
             </form>
           </li>
         </ul>
