@@ -144,13 +144,19 @@ class EditorContainer extends Component {
   handleOnCommentsClick = event => {
     event.preventDefault();
     console.log("Comments Button Clicked");
-    console.log(this.state.project.codeBundle.js);
+    console.log("Run Button Clicked ", this.state.project.isPublic)
   };
 
   handleOnRunClick = event => {
     event.preventDefault();
-    console.log("Run Button Clicked");
-    // this.getProjects();
+    let projectCopy = Object.assign({}, this.state.project); 
+    projectCopy.isPublic = false;
+    // console.log("org: ", this.state.project)
+    console.log("Copy: ", projectCopy)
+    this.setState({
+      project: projectCopy
+    })
+        // this.getProjects();
   };
 
   // getProjects = () => {

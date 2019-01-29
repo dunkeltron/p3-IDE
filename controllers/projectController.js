@@ -9,8 +9,8 @@ module.exports = {
       .catch(err => res.status(422).json(err));
   },
   update: function(req, res) {
-    console.log("updateproject: ", req.body);
-    db.Project.findOneAndUpdate({ _id: req.body._id}, {codeBundle: req.body.codeBundle})
+    console.log("u-----------------------pdateproject: ", req.body.projectObject);
+    db.Project.findOneAndUpdate({ "_id" : req.body.projectObject._id }, {"isPublic" : req.body.projectObject.isPublic})
       .then(dbProject => res.json(dbProject))
       .catch(err => res.status(422).json(err));
   },
