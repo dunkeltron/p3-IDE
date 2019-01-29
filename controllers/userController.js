@@ -10,7 +10,7 @@ module.exports = {
   },
   //Deleting where makes this work flawlessly
   findByUsername: function(req, res) {
-    console.log("FINDBYUSERNAME", req.params.user);
+    console.log("FINDBYUSERNAME");
     db.User.findOne({
       username: req.params.user
     })
@@ -28,7 +28,7 @@ module.exports = {
   //
   //
   findByEmail: function(req, res) {
-    console.log(req);
+    // console.log(req);
     db.User.findOne({
       where: {
         email: req.email

@@ -8,7 +8,7 @@ class EditorContainer extends Component {
   state = {
     project: {
       id: this.props.match.params.id,
-      name: "Testing Project",
+      projectName: "Testing Project",
       owner: this.props.match.params.user,
       comments: ["test1", "test2", "test3"],
       codeBundle: {
@@ -22,7 +22,7 @@ class EditorContainer extends Component {
       projects: [
         {
           id: "project2",
-          name: "Project 2",
+          projectName: "Project 2",
           owner: this.props.match.params.user,
           comments: ["test3"],
           codeBundle: {
@@ -33,7 +33,7 @@ class EditorContainer extends Component {
         },
         {
           id: "project1",
-          name: "Project 1",
+          projectName: "Project 1",
           owner: this.props.match.params.user,
           comments: ["test1", "test2", "test3"],
           codeBundle: {
@@ -106,11 +106,21 @@ class EditorContainer extends Component {
 
   saveProject = (authUser, selectedProject) => {
     console.log("saveProject->selectedProjects: ", selectedProject);
-    console.log("saveProject->this.props.match.params.id", this.props.match.params.id);
+    console.log(
+      "saveProject->this.props.match.params.id",
+      this.props.match.params.id
+    );
+    console.log("this.state: ", this.state);
+
+    const obj = {
+      projectName: this.state.project.projectName,
+      owner: this.state.project.owner
+    }; //http://localhost:3000/TestUsername/project/55
+
     for (let i = 0; i < selectedProject.length; ++i) {
       selectedProject[i].projectName === this.props.match.params.id
-        ? API.saveProject(selectedProject[i].projectName)
-        : console.log() //"saveProject->selectedProject not found"
+        ? API.saveProject({ obj })
+        : console.log(); //"saveProject->selectedProject not found"
     }
   };
 

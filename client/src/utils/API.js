@@ -5,8 +5,9 @@ export default {
     console.log("userName: ", userName);
     return axios.get("/api/users/" + userName);
   },
-  saveProject: function(projectName) {
-    return axios.put("/api/projects/" + projectName);
+  saveProject: function(projectData) {
+    console.log("ProjectData: ", projectData.obj.projectName);
+    return axios.put("/api/projects/"+ projectData.obj.projectName, projectData);
   },
 
   //

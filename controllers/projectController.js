@@ -9,8 +9,8 @@ module.exports = {
       .catch(err => res.status(422).json(err));
   },
   update: function(req, res) {
-    console.log("updateproject: ", req.body);
-    db.Project.findOneAndUpdate({ projectName: req.params.id }, req.body)
+    console.log("-------------------------------------------updateproject: ");
+    db.Project.findOneAndUpdate({ projectName: req.params.id })
       .then(dbProject => res.json(dbProject))
       .catch(err => res.status(422).json(err));
   },
@@ -18,15 +18,15 @@ module.exports = {
   //
   //
   //
-  findByProjectName: function(req, res) {
-    console.log("findbyprojectname: ", req.body);
-    db.Project.findOneAndUpdate({
-      username: req.params.user,
-      projectName: req.params.id
-    })
-      .then(dbProject => res.json(dbProject))
-      .catch(err => res.status(422).json(err));
-  },
+  // findByProjectName: function(req, res) {
+  //   // console.log("findbyprojectname: ", req.body);
+  //   db.Project.findOneAndUpdate({
+  //     username: req.params.user,
+  //     projectName: req.params.id
+  //   })
+  //     .then(dbProject => res.json(dbProject))
+  //     .catch(err => res.status(422).json(err));
+  // },
   create: function(req, res) {
     db.Project.create(req.body)
       .then(dbProject => res.json(dbProject))
