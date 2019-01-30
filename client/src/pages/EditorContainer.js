@@ -44,6 +44,8 @@ class EditorContainer extends Component {
         }
       ]
     }
+    ,
+    currentUser: this.props.user
   };
 
   getProjects = () => {
@@ -98,6 +100,7 @@ onNewChange = (editor, data, value) =>{
           user={this.state.user}
           project={this.state.project}
           onLogOut={this.onLogOut}
+          _logout={this.props._logout}
         />
         <div className=" col-12 editor-container mx-0 px-0 ">
           <div className="row col-12 mx-0 px-0">

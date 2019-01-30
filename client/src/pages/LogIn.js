@@ -11,10 +11,14 @@ class LogIn extends Component {
   
   //will have to change function once authentication is up
     handleFormSubmit = (event) => {
+        //attempt to login using api call from App.js and current state of email and password.
+        event.preventDefault();
+        this.props._login(this.state.email,this.state.password);
         console.log(this.state);
     }
     handleInputChange = (event) => {
         const {name,value} = event.target;
+        console.log(value);
         this.setState({
             [name]:value
         })

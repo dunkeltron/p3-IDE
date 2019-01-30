@@ -5,6 +5,7 @@ import Nav from "../components/Nav";
 import API from "../utils/API";
 class Profile extends Component {
   state={
+    currentUser:this.props.user,
     user:{}
   }
     componentDidMount(){
@@ -21,7 +22,7 @@ class Profile extends Component {
   render(){
     return (
     <Container fluid>
-    <Nav user={this.state.user} onLogOut={this.onLogOut} mode="profile"/>
+    <Nav user={this.state.user} onLogOut={this.props._logout} mode="profile"/>
       <Row>
         <Col size="md-12">
           <Jumbotron>
