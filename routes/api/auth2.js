@@ -5,9 +5,25 @@ console.log("inside project routes");
 
 router.route("/register").post(authController.register);
 
-router.route("/login").post(passport.authenticate("local"),function(req,res){
-    console.log(req.user);
-    res.redirect("/"+req.user.username);
+router.route("/login").post(function(req, res, next) {
+    console.log(req.body)
+    console.log('================')
+    next()
+},passport.authenticate("local"),function(req,res){
+    //console.log(req.user);
+    //i think cookie savign goes here
+    //res.send(req.user);
+    //res.redirect("/"+req.user.username);
+
+    //copy pasta code
+    console.log('POST to /login')
+		const user = JSON.parse(JSON.stringify(req.user)) // hack
+		const cleanUser = Object.assign({}, user)
+		if (cleanUser.local) {
+			console.log(`Deleting ${cleanUser.local.password}`)
+			delete cleanUser.local.password
+		}
+		res.json({ user: cleanUser })
 });
 
 router.route("/logout").get(authController.logout);

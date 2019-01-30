@@ -61,7 +61,21 @@ class EditorContainer extends Component {
     .then(result =>
       console.log(result));
   }
-
+  handleJSInputChange = (event) => {
+    const {value} = event.target;
+    console.log(value);
+    this.setState({
+        project:{
+          codeBundle:{
+            js:value
+        }
+      }
+    })
+}
+onNewChange = (editor, data, value) =>{
+  console.log(data);
+  console.log(value);
+}
   componentDidMount() {
     const { user, id } = this.props.match.params;
     if (id && user) {
@@ -97,6 +111,7 @@ class EditorContainer extends Component {
                 <Editor
                   lang="javascript"
                   code={this.state.project.codeBundle.js}
+                  onNewChange={this.onNewChange}
                 />{" "}
                 {/* add code prop*/}
                 <Editor

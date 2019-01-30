@@ -68,26 +68,32 @@ module.exports = {
 
     },
 
-    // Login mapped to /api/auth/login
-    login: function (req, res,next) {
-        console.log("login function");
-        //console.log(req);
-        passport.authenticate('local', function(err,user,info){
-            if(err) {return next(err)}
-            if(!user) { return res.redirect("/")}
-            console.log(req.user);
-            res.redirect("/tryme");
-        }
-        );
+    // Login mapped to /api/auth/login deprecated
+    // login: function (req, res, next) {
+    //     console.log("login function");
+    //     //console.log(req);
+    //     passport.authenticate('local', function(err,user,info){
+    //         if(err) {return next(err)}
+    //         if(!user) { return res.redirect("/")}
+    //         res.json(req.user);
+    //     }
+    //     );
         
-    },
+    // },
 
     // Logout mapped to /api/auth/logout
     logout: function (req, res) {
-
-        req.logout();
-        console.log('loged out');
-        res.redirect('/');
+        if(req.user) {
+            req.session.destroy()
+            res.clearCookie('connect.sid');
+            console.log('logged out');
+            res.redirect("/");
+            
+        }
+       
+        else{
+            res.json({msg: " no user to log out!"});
+        }
 
     }
 }
