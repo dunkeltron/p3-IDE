@@ -6,15 +6,20 @@ import NoMatch from "./pages/NoMatch";
 import LogIn from "./pages/LogIn";
 import Profile from "./pages/Profile";
 import Register from "./pages/Register";  
+import Test from "./pages/Test";
 import './App.css';
 
 class App extends Component {
-
-  state = {
+constructor(){
+  super();
+  this.state = {
     loggedIn: false,
     currentUser: null
-  }
+  };
+  this._logout = this._logout.bind(this);
+  this._login = this._login.bind(this);
 
+}
 
 _logout(event) {
   event.preventDefault()
@@ -30,19 +35,20 @@ _logout(event) {
   })
 }
 
-_login(username, password) {
+_login(email, password) {
   axios
     .post('/api/auth/login', {
-      username,
+      email,
       password
     })
     .then(response => {
       console.log(response)
       if (response.status === 200) {
         // update the state
-        this.setState({
+          this.setState({
           loggedIn: true,
           currentUser: response.data.user
+          
         })
       }
     })
@@ -53,12 +59,13 @@ _login(username, password) {
       <div className="App">
        
        <Switch>
-          <Route exact path="/" component={<LogIn _login={this._login}/>} />
+          <Route exact path="/" render={() => <LogIn _login={this._login} currentUser={this.state.currentUser}/>} />
           <Route exact path="/register" component={Register}/>
           {/* <Route exact path="/:user/update" component={Settings}/> */}
-          <Route  exact path="/project" component={<EditorContainer _logout={this._logout} _loggedIn={this.state.loggedIn} currentUser={this.state.currentUser}/>} />
-          <Route exact path="/:user/project/:id" component={<EditorContainer _logout={this._logout} _loggedIn={this.state.loggedIn} currentUser={this.state.currentUser}/>} />
-          <Route exact path="/:user" component={<Profile _logout={this._logout} _loggedIn={this.state.loggedIn} currentUser={this.state.currentUser}/>} />
+          <Route exact path="/test" render={()=> <Test _logout={this._logout} _loggedIn={this.state.loggedIn} currentUser={this.state.currentUser}/> }/>
+          <Route  exact path="/project" render={() => <EditorContainer _logout={this._logout} _loggedIn={this.state.loggedIn} currentUser={this.state.currentUser}/>} />
+          <Route exact path="/:user/project/:id" render={() => <EditorContainer _logout={this._logout} _loggedIn={this.state.loggedIn} currentUser={this.state.currentUser}/>} />
+          <Route exact path="/:user" render={() => <Profile _logout={this._logout} _loggedIn={this.state.loggedIn} currentUser={this.state.currentUser}/>} />
           <Route component={NoMatch} />
         </Switch>
       </div>

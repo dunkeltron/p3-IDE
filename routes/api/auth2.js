@@ -6,7 +6,7 @@ console.log("inside project routes");
 router.route("/register").post(authController.register);
 
 router.route("/login").post(function(req, res, next) {
-    console.log(req.body)
+    console.log("req.body",req.body)
     console.log('================')
     next()
 },passport.authenticate("local"),function(req,res){
@@ -16,7 +16,7 @@ router.route("/login").post(function(req, res, next) {
     //res.redirect("/"+req.user.username);
 
     //copy pasta code
-    console.log('POST to /login')
+    console.log("inside authenticate callback")
 		const user = JSON.parse(JSON.stringify(req.user)) // hack
 		const cleanUser = Object.assign({}, user)
 		if (cleanUser.local) {
