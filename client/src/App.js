@@ -59,13 +59,13 @@ _login(email, password) {
       <div className="App">
        
        <Switch>
-          <Route exact path="/" render={() => <LogIn _login={this._login} currentUser={this.state.currentUser}/>} />
+          <Route exact path="/" render={(props) => <LogIn {...props} _login={this._login} currentUser={this.state.currentUser}/>} />
           <Route exact path="/register" component={Register}/>
           {/* <Route exact path="/:user/update" component={Settings}/> */}
-          <Route exact path="/test" render={()=> <Test _logout={this._logout} _loggedIn={this.state.loggedIn} currentUser={this.state.currentUser}/> }/>
-          <Route  exact path="/project" render={() => <EditorContainer _logout={this._logout} _loggedIn={this.state.loggedIn} currentUser={this.state.currentUser}/>} />
-          <Route exact path="/:user/project/:id" render={() => <EditorContainer _logout={this._logout} _loggedIn={this.state.loggedIn} currentUser={this.state.currentUser}/>} />
-          <Route exact path="/:user" render={() => <Profile _logout={this._logout} _loggedIn={this.state.loggedIn} currentUser={this.state.currentUser}/>} />
+          <Route exact path="/test/test" render={(props)=> <Test {...props} _logout={this._logout} _loggedIn={this.state.loggedIn} currentUser={this.state.currentUser}/> }/>
+          <Route  exact path="/project" render={(props) => <EditorContainer  {...props}_logout={this._logout} _loggedIn={this.state.loggedIn} currentUser={this.state.currentUser}/>} />
+          <Route exact path="/:user/project/:id" render={(props) => <EditorContainer {...props} _logout={this._logout} _loggedIn={this.state.loggedIn} currentUser={this.state.currentUser}/>} />
+          <Route exact path="/:user" render={(props) => <Profile {...props} _logout={this._logout} _loggedIn={this.state.loggedIn} currentUser={this.state.currentUser}/>} />
           <Route component={NoMatch} />
         </Switch>
       </div>

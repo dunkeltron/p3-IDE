@@ -25,7 +25,7 @@ class LogIn extends Component {
         console.log(this.state);
         this.props._login(this.state.email,this.state.password);
         this.setState({
-            redirectTo: '/test'
+            redirectTo: '/test/test'
         })
  
     }

@@ -1,4 +1,5 @@
 import React from "react";
+import {Link} from "react-router-dom";
 
 function Nav (props,{_logout}) {
   // props = {
@@ -10,6 +11,7 @@ function Nav (props,{_logout}) {
   return (
     <nav className="navbar navbar-expand-lg border-bottom border-secondary">
       <a className="navbar-brand " href="/">Test IDE</a>
+      
       { (props.mode==="project")? 
           <ul className="navbar-nav ml-0">
             {/* If we're in project mode we need to render project specific buttons to the nav */}
@@ -45,12 +47,13 @@ function Nav (props,{_logout}) {
       
       
         <li className="nav-item   dropdown  ">
-          <a className="nav-link dropdown-toggle  " href={"/"+props.user} id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-           {props.user.username}
+        {console.log(props.currentUser.username)}
+          <a className="nav-link dropdown-toggle  " href={"/"+props.currentUser.username} id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+           {props.currentUser.username}
           </a>
           <div className="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-            <a className="dropdown-item" href={"/"+props.user.username}>Account</a>
-            <a className="dropdown-item" href={"/settings/"+props.user.username}>Edit Profile</a>
+            <Link className="dropdown-item" to={"/"+props.currentUser.username}>Account</Link>
+            <Link className="dropdown-item" to={"/settings/"+props.currentUser.username}>Edit Profile</Link>
             <div className="dropdown-divider"></div>
             <a className="dropdown-item" onClick={_logout}>Log Out</a>
           </div>
