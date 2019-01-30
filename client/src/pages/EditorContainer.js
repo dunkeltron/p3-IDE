@@ -45,7 +45,7 @@ class EditorContainer extends Component {
       ]
     }
     ,
-    currentUser: this.props.user
+    currentUser: this.props.currentUser
   };
 
   getProjects = () => {
@@ -79,6 +79,7 @@ onNewChange = (editor, data, value) =>{
   console.log(value);
 }
   componentDidMount() {
+    console.log(this.state.currentUser);
     const { user, id } = this.props.match.params;
     if (id && user) {
       //   console.log(user, id);

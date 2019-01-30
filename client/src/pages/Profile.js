@@ -5,10 +5,11 @@ import Nav from "../components/Nav";
 import API from "../utils/API";
 class Profile extends Component {
   state={
-    currentUser:this.props.user,
+    currentUser:this.props.currentUser,
     user:{}
   }
     componentDidMount(){
+      console.log(this.state.currentUser);
         const {user} = this.props.match.params;
         this.setState({
           user:{
