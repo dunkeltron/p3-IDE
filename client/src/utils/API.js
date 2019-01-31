@@ -5,8 +5,12 @@ export default {
     console.log("userName: ", userName);
     return axios.get("/api/users/" + userName);
   },
+  createProject: function(projectData) {
+    console.log("CREATEprojectData: ", projectData.newProjectObj);
+    return axios.post("/api/projects/", projectData);
+  },
   saveProject: function(projectData) {
-    console.log("ProjectData: ", projectData.projectObject);
+    console.log("SAVEprojectData: ", projectData.projectObject);
     const projectDataName = projectData.projectObject.projectName
     return axios.put("/api/projects/"+ projectDataName, projectData);
   },

@@ -21,7 +21,7 @@ const UserSchema = new Schema({
   profilePic: String,
   ownedProjects: [
     {
-      type: Schema.Types.ObjectId,
+      type: String,
       ref: "projects"
     }
   ],

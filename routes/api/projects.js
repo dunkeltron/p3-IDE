@@ -12,5 +12,5 @@ console.log("inside project routes");
    .route("/:id")
   //  .get(projectController.findByProjectName)
    .put(projectController.update)
-//   .delete(projectController.remove);
+  //  .delete(projectController.remove);
 module.exports = router;

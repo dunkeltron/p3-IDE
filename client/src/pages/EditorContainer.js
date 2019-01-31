@@ -84,11 +84,18 @@ class EditorContainer extends Component {
 
   handleOnSaveClick = event => {
     event.preventDefault();
-    console.log("Save Button Clicked");
-    this.findProject(this.props.match.params.user);
+    // console.log("Save Button Clicked");
+    let projectCopy = Object.assign({}, this.state.project); 
+    //The hard coded code is where the this.state of the code mirror goes
+    projectCopy.codeBundle.js = "let i = 333332"
+    console.log("Copy: ", projectCopy)
+    this.setState({
+      project: projectCopy
+    })
+    this.findProjectToSave(this.props.match.params.user);
   };
 
-  findProject = currentUsername => {
+  findProjectToSave = currentUsername => {
     const authUser = "TestUsername";
 
     console.log("findProject(): ", currentUsername);
@@ -98,7 +105,7 @@ class EditorContainer extends Component {
             // console.log("findProject->getUserResult: ", res.data)
             res.data.username === authUser
               ? this.saveProject(authUser, res.data.ownedProjects)
-              : console.log("findProject->getUser: User not found")
+              : console.log("findProjectToSave->getUser: User not found")
           )
           .catch(err => console.log(err))
       : console.log("Authed User trying to save project that isn't owned");
@@ -134,6 +141,31 @@ class EditorContainer extends Component {
   handleOnNewProjectClick = event => {
     event.preventDefault();
     console.log("New Project Button Clicked");
+    //
+    let authUser = "TestUsername"
+    this.createProject(authUser);
+  };
+
+  createProject = authUser => {
+    console.log("createProject->authID: ", authUser);
+    //This is just copying the current state but doesnt change it at all
+    let newProjectObj = Object.assign({}, this.state.project); 
+    //Must be hardcoded
+    newProjectObj._id = null
+    newProjectObj.owner = authUser
+    newProjectObj.projectName = "NEWPROJECT"
+    newProjectObj.codeBundle.js = ""
+    newProjectObj.codeBundle.css = ""
+    newProjectObj.codeBundle.html = ""
+    newProjectObj.comments = []
+    newProjectObj.isPublic = true
+    newProjectObj.settings = []
+    newProjectObj.views = 0
+    newProjectObj.watchers = 0
+    newProjectObj.collaborators = []
+
+    console.log("createProject->newProObj: ", newProjectObj)
+    API.createProject({ newProjectObj })    
   };
 
   handleOnSettingsClick = event => {
@@ -144,17 +176,11 @@ class EditorContainer extends Component {
   handleOnCommentsClick = event => {
     event.preventDefault();
     console.log("Comments Button Clicked");
-    console.log("Run Button Clicked ", this.state.project.codeBundle.js)
   };
 
   handleOnRunClick = event => {
     event.preventDefault();
-    let projectCopy = Object.assign({}, this.state.project); 
-    projectCopy.codeBundle.js = "let j = 01321321312312"
-    console.log("Copy: ", projectCopy)
-    this.setState({
-      project: projectCopy
-    })
+    console.log("Run button clicked");
   };
 
   // getProjects = () => {

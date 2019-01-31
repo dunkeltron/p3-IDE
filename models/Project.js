@@ -4,9 +4,10 @@ const Schema = mongoose.Schema;
 const ProjectSchema = new Schema({
   owner: {
     //I think this is what we wanted to do not sure?
-    type: Schema.Types.ObjectId,
+    type: String,
+    ref: "User",
     required: Boolean,
-    ref: "User"
+    
   },
   projectName: {
     type: String,
