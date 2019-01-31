@@ -87,7 +87,7 @@ module.exports = {
             req.session.destroy()
             res.clearCookie('connect.sid');
             console.log('logged out');
-            res.redirect("/");
+            res.send(200);
             
         }
        

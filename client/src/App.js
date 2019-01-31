@@ -24,7 +24,7 @@ constructor(){
 _logout(event) {
   event.preventDefault()
   console.log('logging out')
-  axios.post('/auth/logout').then(response => {
+  axios.post('/api/auth/logout').then(response => {
     console.log(response.data)
     if (response.status === 200) {
       this.setState({

@@ -1,5 +1,6 @@
 import React from "react";
 import {Link} from "react-router-dom";
+import AccountDropdown from "../AccountDropdown";
 
 function Nav (props,{_logout}) {
   // props = {
@@ -10,7 +11,7 @@ function Nav (props,{_logout}) {
 
   return (
     <nav className="navbar navbar-expand-lg border-bottom border-secondary">
-      <a className="navbar-brand " href="/">Test IDE</a>
+      <span className="navbar-brand " >Test IDE</span>
       
       { (props.mode==="project")? 
           <ul className="navbar-nav ml-0">
@@ -42,24 +43,26 @@ function Nav (props,{_logout}) {
               </form>
             </li>
           </ul>
-      }
-      <ul className="navbar-nav ml-auto mr-0 dropdown-menu-left">
+         }
+    {//   <ul className="navbar-nav ml-auto mr-0 dropdown-menu-left">
       
       
-        <li className="nav-item   dropdown  ">
-        {console.log(props.currentUser.username)}
-          <a className="nav-link dropdown-toggle  " href={"/"+props.currentUser.username} id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-           {props.currentUser.username}
-          </a>
-          <div className="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-            <Link className="dropdown-item" to={"/"+props.currentUser.username}>Account</Link>
-            <Link className="dropdown-item" to={"/settings/"+props.currentUser.username}>Edit Profile</Link>
-            <div className="dropdown-divider"></div>
-            <a className="dropdown-item" onClick={_logout}>Log Out</a>
-          </div>
-        </li>
+    //     <li className="nav-item   dropdown  ">
+    //     {console.log(props)}
+    //       <a className="nav-link dropdown-toggle  " href={"/"+props.currentUser.username} id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+    //        {props.currentUser.username}
+    //       </a>
+    //       <div className="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+    //         <Link className="dropdown-item" to={"/"+props.currentUser.username}>Account</Link>
+    //         <Link className="dropdown-item" to={"/settings/"+props.currentUser.username}>Edit Profile</Link>
+    //         <div className="dropdown-divider"></div>
+    //         <Link to="#" className="dropdown-item " onClick={props._logout}> Logout </Link>
+    //       </div>
+    //     </li>
       
-    </ul>
+    // </ul>
+        }
+    <AccountDropdown currentUser={props.currentUser} _logout={props._logout}></AccountDropdown>
     
   </nav>
   );

@@ -5,6 +5,9 @@ console.log("inside project routes");
 
 router.route("/register").post(authController.register);
 
+
+router.route("/logout").get(authController.logout);
+
 router.route("/login").post(function(req, res, next) {
     console.log("req.body",req.body)
     console.log('================')
@@ -26,6 +29,5 @@ router.route("/login").post(function(req, res, next) {
 		res.json({ user: cleanUser })
 });
 
-router.route("/logout").get(authController.logout);
 
 module.exports = router;

@@ -11,7 +11,7 @@ class Profile extends Component {
     user:{}
   }
     componentDidMount(){
-      console.log(this.props.match);
+      console.log(this.props);
       console.log(this.state.currentUser);
         const {user} = this.props.match.params;
         this.setState({
@@ -26,7 +26,7 @@ class Profile extends Component {
   render(){
     return (
     <Container fluid>
-       <Nav currentUser = {this.props.currentUser} user={this.state.user} onLogOut={this.props._logout} mode="profile"/>  
+       <Nav currentUser = {this.props.currentUser} user={this.state.user} _logout={this.props._logout} mode="profile"/>  
       <Row>
         <Col size="md-12">
           <Jumbotron>
