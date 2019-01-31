@@ -2,6 +2,7 @@ const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
 const UserSchema = new Schema({
+  _id: Schema.Types.ObjectId,
   username: {
     type: String,
     required: Boolean
@@ -21,7 +22,7 @@ const UserSchema = new Schema({
   profilePic: String,
   ownedProjects: [
     {
-      type: String,
+      type: Schema.Types.ObjectId,
       ref: "projects"
     }
   ],

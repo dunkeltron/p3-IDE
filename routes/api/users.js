@@ -7,12 +7,13 @@ router
   .route("/")
   .get(userController.findAll)
 //   .get(userController.findByUsername)
-  .post(userController.create);
+  // .post(userController.create)
 
 // // Matches with "/api/users/:id"
 router
   .route("/:user")
   .get(userController.findByUsername)
+  .put(userController.findByUsernameThenProject)
 //   .put(userController.update);
 //   .delete(userController.remove);
 module.exports = router;

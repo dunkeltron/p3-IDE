@@ -29,7 +29,7 @@ const userSeed = [
     ownedProjects: [],
     collabProjects: [],
     socialLinks: {
-      git: "githubf.com",
+      git: "github.com",
       linkedIn: "lifnkedin.com",
       personalSite: "perfsonalSite.com"
     }

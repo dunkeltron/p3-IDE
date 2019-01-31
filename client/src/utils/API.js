@@ -5,6 +5,10 @@ export default {
     console.log("userName: ", userName);
     return axios.get("/api/users/" + userName);
   },
+  getProjectbyUser: function(authData) {
+    console.log("authData: ", authData.newAuthData.owner);
+    return axios.put("/api/users/"+ authData.newAuthData.owner, authData.newAuthData);
+  },
   createProject: function(projectData) {
     console.log("CREATEprojectData: ", projectData.newProjectObj);
     return axios.post("/api/projects/", projectData);

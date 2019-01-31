@@ -47,6 +47,7 @@ class EditorContainer extends Component {
   };
 
   componentDidMount() {
+    console.log(this.props.currentUser);
     const { user, id } = this.props.match.params;
     if (id && user) {
       this.getUser();
@@ -85,13 +86,13 @@ class EditorContainer extends Component {
   handleOnSaveClick = event => {
     event.preventDefault();
     // console.log("Save Button Clicked");
-    let projectCopy = Object.assign({}, this.state.project); 
+    let projectCopy = Object.assign({}, this.state.project);
     //The hard coded code is where the this.state of the code mirror goes
-    projectCopy.codeBundle.js = "let i = 333332"
-    console.log("Copy: ", projectCopy)
+    projectCopy.codeBundle.js = "let i = 333332";
+    console.log("Copy: ", projectCopy);
     this.setState({
       project: projectCopy
-    })
+    });
     this.findProjectToSave(this.props.match.params.user);
   };
 
@@ -142,30 +143,62 @@ class EditorContainer extends Component {
     event.preventDefault();
     console.log("New Project Button Clicked");
     //
-    let authUser = "TestUsername"
-    this.createProject(authUser);
+    let authUser = "TestUsername";
+    this.findToCreateProject(authUser);
   };
 
-  createProject = authUser => {
-    console.log("createProject->authID: ", authUser);
-    //This is just copying the current state but doesnt change it at all
-    let newProjectObj = Object.assign({}, this.state.project); 
-    //Must be hardcoded
-    newProjectObj._id = null
-    newProjectObj.owner = authUser
-    newProjectObj.projectName = "NEWPROJECT"
-    newProjectObj.codeBundle.js = ""
-    newProjectObj.codeBundle.css = ""
-    newProjectObj.codeBundle.html = ""
-    newProjectObj.comments = []
-    newProjectObj.isPublic = true
-    newProjectObj.settings = []
-    newProjectObj.views = 0
-    newProjectObj.watchers = 0
-    newProjectObj.collaborators = []
+  findToCreateProject = authUser => {
+    API.getUser(authUser)
+      .then(res =>
+        // console.log("result: ", res.data)
+        this.createProject(authUser, res.data.ownedProjects)
+      )
+      .catch(err => console.log(err));
+  };
 
-    console.log("createProject->newProObj: ", newProjectObj)
-    API.createProject({ newProjectObj })    
+  createProject = (authUser, authUserOwnedProjects) => {
+    console.log("createProject->authID: ", authUser);
+    console.log(
+      "createProject->authUserOwnedProjects: ",
+      authUserOwnedProjects
+    );
+
+    let projectInputName = "NEWPROJECT";
+
+    // authUserOwnedProjects.push(projectInputName);
+    // console.log("updatedauthUserOwnedProjects: ", authUserOwnedProjects);
+
+    //This is just copying the current state but doesnt change it at all
+    const newProjectObj = {
+      owner: authUser,
+      projectName: projectInputName,
+      codeBundle: {
+          html: "",
+          js: "",
+          css: ""
+      },
+      isPublic: true,
+      settings: [],
+      comments: [],
+      views: 0,
+      watchers: 0,
+      collaborators: []
+    }
+
+    newProjectObj.owner = authUser;
+    newProjectObj.projectName = projectInputName;
+
+
+    console.log("createProject->newProObj: ", newProjectObj);
+    // console.log("newauthdata: ", newAuthData);
+    API.createProject({ newProjectObj })
+    .then(data => {
+      console.log(data.data);
+      let newAuthData = data.data;
+      API.getProjectbyUser({ newAuthData })
+    },
+      console.log("d----------------------------------------fasdfasfds")
+    );
   };
 
   handleOnSettingsClick = event => {

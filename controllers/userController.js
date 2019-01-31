@@ -10,11 +10,20 @@ module.exports = {
   },
   //Deleting where makes this work flawlessly
   findByUsername: function(req, res) {
-    console.log("FINDBYUSERNAME");
+    // console.log("FINDBYUSERNAME");
     db.User.findOne({
       username: req.params.user
     })
       .populate("ownedProjects")
+      .then(dbUser => res.json(dbUser))
+      .catch(err => res.status(422).json(err));
+  },
+  findByUsernameThenProject: function(req, res) {
+    console.log("FINDBYUSERNAMETHENPROJECT: ", req.body);
+    db.User.findOneAndUpdate(
+      { username: req.body.owner},
+      { $push: { ownedProjects: req.body._id } }
+    )
       .then(dbUser => res.json(dbUser))
       .catch(err => res.status(422).json(err));
   },
