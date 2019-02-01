@@ -3,9 +3,11 @@ import Editor from "../components/Editor";
 import ProjectListItem from "../components/ProjectListItem";
 import Nav from "../components/Nav";
 import API from "../utils/API";
+import Button from "../components/Button";
 
 class EditorContainer extends Component {
   state = {
+    show: true,
     project: {
       id: this.props.match.params.id,
       projectName: "Testing Project",
@@ -47,6 +49,7 @@ class EditorContainer extends Component {
   };
 
   componentDidMount() {
+    this.toggleDiv = this.toggleDiv.bind(this);
     console.log(this.props.currentUser);
     const { user, id } = this.props.match.params;
     if (id && user) {
@@ -173,9 +176,9 @@ class EditorContainer extends Component {
       owner: authUser,
       projectName: projectInputName,
       codeBundle: {
-          html: "",
-          js: "",
-          css: ""
+        html: "",
+        js: "",
+        css: ""
       },
       isPublic: true,
       settings: [],
@@ -183,22 +186,18 @@ class EditorContainer extends Component {
       views: 0,
       watchers: 0,
       collaborators: []
-    }
+    };
 
     newProjectObj.owner = authUser;
     newProjectObj.projectName = projectInputName;
 
-
     console.log("createProject->newProObj: ", newProjectObj);
     // console.log("newauthdata: ", newAuthData);
-    API.createProject({ newProjectObj })
-    .then(data => {
+    API.createProject({ newProjectObj }).then(data => {
       console.log(data.data);
       let newAuthData = data.data;
-      API.getProjectbyUser({ newAuthData })
-    },
-      console.log("d----------------------------------------fasdfasfds")
-    );
+      API.getProjectbyUser({ newAuthData });
+    }, console.log("d----------------------------------------fasdfasfds"));
   };
 
   handleOnSettingsClick = event => {
@@ -214,6 +213,12 @@ class EditorContainer extends Component {
   handleOnRunClick = event => {
     event.preventDefault();
     console.log("Run button clicked");
+    this.toggleDiv();
+  };
+
+  toggleDiv = () => {
+    const { show } = this.state;
+    this.setState({ show: !show });
   };
 
   // getProjects = () => {
@@ -266,10 +271,20 @@ class EditorContainer extends Component {
                 </div>
               </div>
             </div>
+            <button onClick= { this.toggleDiv }>Toggle div</button>
+            { this.state.show && <Box />}
           </div>
         </div>
       </div>
     );
+  }
+}
+
+class Box extends Component {
+  render() {
+    return (
+      <input></input>
+    )
   }
 }
 
