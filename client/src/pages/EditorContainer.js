@@ -7,7 +7,7 @@ import Button from "../components/Button";
 
 class EditorContainer extends Component {
   state = {
-    show: true,
+    show: false,
     project: {
       id: this.props.match.params.id,
       projectName: "Testing Project",
@@ -49,7 +49,7 @@ class EditorContainer extends Component {
   };
 
   componentDidMount() {
-    this.toggleDiv = this.toggleDiv.bind(this);
+    this.toggleInput = this.toggleInput.bind(this);
     console.log(this.props.currentUser);
     const { user, id } = this.props.match.params;
     if (id && user) {
@@ -145,10 +145,20 @@ class EditorContainer extends Component {
   handleOnNewProjectClick = event => {
     event.preventDefault();
     console.log("New Project Button Clicked");
-    //
+    this.toggleInput();
+  };
+
+  toggleInput = () => {
+    const { show } = this.state;
+    this.setState({ show: !show });
+  };
+
+  handleConfirmedNewProject = event => {
+    event.preventDefault();
+    console.log("New Project Button Clicked");
     let authUser = "TestUsername";
     this.findToCreateProject(authUser);
-  };
+  }
 
   findToCreateProject = authUser => {
     API.getUser(authUser)
@@ -213,12 +223,6 @@ class EditorContainer extends Component {
   handleOnRunClick = event => {
     event.preventDefault();
     console.log("Run button clicked");
-    this.toggleDiv();
-  };
-
-  toggleDiv = () => {
-    const { show } = this.state;
-    this.setState({ show: !show });
   };
 
   // getProjects = () => {
@@ -242,6 +246,9 @@ class EditorContainer extends Component {
           handleOnCommentsClick={this.handleOnCommentsClick}
           handleOnRunClick={this.handleOnRunClick}
           handleOnNewProjectClick={this.handleOnNewProjectClick}
+          handleConfirmedNewProject={this.handleConfirmedNewProject}
+          toggleInput={this.toggleInput}
+          toggleInputState={this.state.show}
         />
         <div className=" col-12 editor-container mx-0 px-0 ">
           <div className="row col-12 mx-0 px-0">
@@ -271,20 +278,10 @@ class EditorContainer extends Component {
                 </div>
               </div>
             </div>
-            <button onClick= { this.toggleDiv }>Toggle div</button>
-            { this.state.show && <Box />}
           </div>
         </div>
       </div>
     );
-  }
-}
-
-class Box extends Component {
-  render() {
-    return (
-      <input></input>
-    )
   }
 }
 

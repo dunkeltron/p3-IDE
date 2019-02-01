@@ -1,5 +1,6 @@
 import React from "react";
 import Button from "../Button";
+import InputBoxCreate from "../InputBoxCreate";
 
 function Nav(props) {
   // props = {
@@ -34,27 +35,27 @@ function Nav(props) {
               </button> */}
 
               <Button
-                className=""
+                className="ml-3"
                 onClick={props.handleOnCommentsClick}
                 type="success"
               >
-              Comments {props.project.comments.length}{" "}
+                Comments {props.project.comments.length}{" "}
               </Button>
-              
+
               <Button
                 className="ml-3"
                 onClick={props.handleOnSettingsClick}
                 type="secondary"
               >
-              Settings
+                Settings
               </Button>
 
               <Button
-                className="save"
+                className="save ml-3"
                 onClick={props.handleOnSaveClick}
                 type="success"
               >
-              Save
+                Save
               </Button>
 
               <Button
@@ -62,15 +63,21 @@ function Nav(props) {
                 onClick={props.handleOnRunClick}
                 type="secondary"
               >
-              Run
+                Run
               </Button>
               <Button
-                className="newProject"
+                className="newProject ml-3 mr-3"
                 onClick={props.handleOnNewProjectClick}
                 type="success"
               >
-              +
+                +
               </Button>
+              {props.toggleInputState && (
+                <InputBoxCreate
+                  type="warning"
+                  onClick={props.handleConfirmedNewProject}
+                />
+              )}
             </form>
           </li>
         </ul>
