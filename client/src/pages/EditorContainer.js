@@ -2,12 +2,13 @@ import React, { Component } from "react";
 import Editor from "../components/Editor";
 import ProjectListItem from "../components/ProjectListItem";
 import Nav from "../components/Nav";
+import SettingsPanel from "../components/SettingsPanel";
 import API from "../utils/API";
-import Button from "../components/Button";
 
 class EditorContainer extends Component {
   state = {
     show: false,
+    showSettings: false,
     project: {
       id: this.props.match.params.id,
       projectName: "Testing Project",
@@ -50,6 +51,7 @@ class EditorContainer extends Component {
 
   componentDidMount() {
     this.toggleInput = this.toggleInput.bind(this);
+    this.toggleSettings = this.toggleSettings.bind(this);
     console.log(this.props.currentUser);
     const { user, id } = this.props.match.params;
     if (id && user) {
@@ -208,7 +210,9 @@ class EditorContainer extends Component {
       let newAuthData = data.data;
       API.getProjectbyUser({ newAuthData }).then(
         console.log("data.data: ", data.data),
-        window.location.assign("/" + data.data.owner + "/project/" + data.data.projectName)
+        window.location.assign(
+          "/" + data.data.owner + "/project/" + data.data.projectName
+        )
       );
     });
   };
@@ -216,6 +220,12 @@ class EditorContainer extends Component {
   handleOnSettingsClick = event => {
     event.preventDefault();
     console.log("Settings Button Clicked");
+    this.toggleSettings();
+  };
+
+  toggleSettings = () => {
+    const { showSettings } = this.state;
+    this.setState({ showSettings: !showSettings });
   };
 
   handleOnCommentsClick = event => {
@@ -227,14 +237,6 @@ class EditorContainer extends Component {
     event.preventDefault();
     console.log("Run button clicked");
   };
-
-  // getProjects = () => {
-  //   API.getProjects()
-  //   .then(res =>
-  //     console.log("getProjects ALL", res.data)
-  //   )
-  //   .catch(err => console.log(err))
-  // }
 
   render() {
     return (
@@ -253,6 +255,7 @@ class EditorContainer extends Component {
           toggleInput={this.toggleInput}
           toggleInputState={this.state.show}
         />
+        {this.state.showSettings && <SettingsPanel />}
         <div className=" col-12 editor-container mx-0 px-0 ">
           <div className="row col-12 mx-0 px-0">
             <div className="col projects ml-0 col-1">
