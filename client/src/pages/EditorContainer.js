@@ -354,7 +354,7 @@ class EditorContainer extends Component {
               <CodeMirror
                 value= {this.state.project.codeBundle.js} 
                 options={{
-                    mode: "js",
+                    mode: "javascript",
                     theme: 'monokai',
                     lineNumbers: true
                 }}
