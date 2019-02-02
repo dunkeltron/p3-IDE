@@ -16,8 +16,6 @@ if (process.env.NODE_ENV === "production") {
   app.use(express.static("client/public"));
 }
 
-
-
 // Passport Config
 require('./config/passport')(passport);
 

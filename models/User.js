@@ -1,7 +1,8 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
-const UserSchema = new mongoose.Schema({
+const UserSchema = new Schema({
+  _id: Schema.Types.ObjectId,
   username: {
     type: String,
     required: Boolean
@@ -14,21 +15,25 @@ const UserSchema = new mongoose.Schema({
     type: String,
     required: Boolean
   },
-  name:{
-    type:String
+  name: {
+    type: String
   },
   dateCreation: { type: Date, default: Date.now },
   profilePic: String,
-  ownedProjects: [],
+  ownedProjects: [
+    {
+      type: Schema.Types.ObjectId,
+      ref: "projects"
+    }
+  ],
   collabProjects: [],
   socialLinks: {
     git: String,
     linkedIn: String,
-    personalSite: String,
+    personalSite: String
   }
-
 });
 
-const User = mongoose.model('User', UserSchema);
+const User = mongoose.model("users", UserSchema);
 
 module.exports = User;
