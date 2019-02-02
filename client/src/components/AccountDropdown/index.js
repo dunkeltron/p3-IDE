@@ -14,7 +14,7 @@
             </a>
             <div className="dropdown-menu dropdown-menu-right" aria-labelledby="accountDropdown">
             <Link className="dropdown-item" to={"/"+JSON.parse(sessionStorage.getItem("currentUser")).username}>Account</Link>
-            <Link className="dropdown-item" to={"/settings/"+JSON.parse(sessionStorage.getItem("currentUser")).username}>Edit Profile</Link>
+            <Link className="dropdown-item" to={"/"+JSON.parse(sessionStorage.getItem("currentUser")).username+"/settings"}>Edit Profile</Link>
             <div className="dropdown-divider"></div>
             <Link  className="dropdown-item "  to="/"> Logout </Link>
             </div>
