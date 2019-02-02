@@ -17,7 +17,9 @@ class LogIn extends Component {
     this.handleFormSubmit = this.handleFormSubmit.bind(this);
     this.handleInputChange = this.handleInputChange.bind(this);
 }
-  
+  componentDidMOunt(){
+      this.props.logout();
+  }
   //will have to change function once authentication is up
     handleFormSubmit = (event) => {
         //attempt to login using api call from App.js and current state of email and password.

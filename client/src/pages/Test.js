@@ -3,16 +3,23 @@ import {Link} from "react-router-dom";
 
 class Test extends Component{
     state={
-        currentUser: this.props.currentUser
+        currentUser: JSON.parse(sessionStorage.getItem("currentUser")) || "anon"
+    }
+    componenentDidMount(){
+            this.setState({
+                currentUser: JSON.parse(sessionStorage.getItem("currentUser"))
+            })
+        console.log(this.state.currentUser);
+        
     }
     render(){
-        if (this.props.currentUser){
+        if (sessionStorage.getItem("currentUser")){
             return (<div classname="Home">
                     <p>Current UserL</p>
                     <code>
                         {JSON.stringify(sessionStorage.getItem("currentUser"))}
                     </code>
-                    <Link to={"/"+this.props.currentUser.username} >{this.props.currentUser.username}'s profile</Link>
+                    <Link to={"/"+this.state.currentUser.username} >{this.state.currentUser.username}'s profile</Link>
             </div>)
         }
         else{

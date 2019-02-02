@@ -28,6 +28,19 @@ _logout(event) {
   axios.post('/api/auth/logout').then(response => {
     console.log(response.data)
     if (response.status === 200) {
+      sessionStorage.removeItem("currentUser");
+      this.setState({
+        loggedIn: false,
+        currentUser: null
+      })
+    }
+  })
+}
+logout() {
+  axios.post('/api/auth/logout').then(response => {
+    //console.log(response.data)
+    if (response.status === 200) {
+      sessionStorage.removeItem("currentUser");
       this.setState({
         loggedIn: false,
         currentUser: null
@@ -61,7 +74,7 @@ _login(email, password) {
       <div className="App">
        
        <Switch>
-          <Route exact path="/" render={(props) => <LogIn {...props} _login={this._login} currentUser={this.state.currentUser}/>} />
+          <Route exact path="/" render={(props) => <LogIn {...props} _login={this._login} logout= {this.logout} currentUser={this.state.currentUser}/>} />
           <Route exact path="/register" component={Register}/>
           {/* <Route exact path="/:user/update" component={Settings}/> */}
           <Route exact path="/test/test" render={(props)=> <Test {...props} _logout={this._logout} _loggedIn={this.state.loggedIn} currentUser={this.state.currentUser}/> }/>

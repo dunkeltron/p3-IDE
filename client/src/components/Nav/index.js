@@ -62,7 +62,8 @@ function Nav (props,{_logout}) {
       
     // </ul>
         }
-    <AccountDropdown currentUser={props.currentUser} _logout={props._logout}></AccountDropdown>
+        
+    <AccountDropdown currentUser={(sessionStorage.getItem("currentUser"))} _logout={props._logout}></AccountDropdown>
     
   </nav>
   );
