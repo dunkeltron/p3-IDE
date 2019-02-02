@@ -3,6 +3,17 @@ import Editor from "../components/Editor";
 import ProjectListItem from "../components/ProjectListItem";
 import Nav from "../components/Nav";
 import API from "../utils/API";
+import { stat } from "fs";
+
+import{UnControlled as CodeMirror} from 'react-codemirror2';
+require('codemirror/lib/codemirror.css');
+require('codemirror/theme/material.css');
+require('codemirror/theme/monokai.css');
+require('codemirror/mode/xml/xml.js');
+require('codemirror/mode/javascript/javascript.js');
+require('codemirror/mode/css/css.js');
+require('codemirror/mode/htmlmixed/htmlmixed.js');
+require( "../components/Editor/editor.css");
 
 class EditorContainer extends Component {
   state = {
@@ -75,6 +86,45 @@ class EditorContainer extends Component {
       console.log("no id");
     }
   }
+
+  // Brian Edits 3 functions for HTML CSS and Javascript
+
+  updateHTMLCode(newCode) {
+    //this.state.project.codeBundle.html = newCode // suggested by Joe
+		this.setState({
+     project: {
+       codeBundle: {
+         html: newCode}
+       } // diving into the object to insert HTML
+      });
+  }
+  
+  updateCSSCode(newCode) {
+		this.setState({
+      project: {
+        codeBundle: {
+          css:newCode}
+      } // diving into the object to insert CSS
+		});
+  }
+  
+  updateJSCode(newCode) {
+		this.setState({
+      project: {
+        codeBundle: {
+          js: newCode}
+      } // diving into the object to insert JS
+		});
+  }
+  
+  // mergeCode() {
+  //   var tempHTML = this.state.project.codeBundle.html;
+  //   var tempCSS = "<script>" + this.state.project.codeBundle.css + "</script>"
+  //   var tempHTMLCSS = tempHTML + tempCSS;
+  // }
+  
+  // End of Brian's Edits
+  
   render() {
     return (
       <div className="container-fluid mx-0 px-0">
@@ -94,27 +144,49 @@ class EditorContainer extends Component {
             </div>
             <div className="col-11 mx-0 px-0">
               <div className="row top-row mh-50r col-12 mx-0 px-0">
+
+              {/* Javascript Code */}
                 <Editor
                   lang="javascript"
                   code={this.state.project.codeBundle.js}
                 />{" "}
                 {/* add code prop*/}
+                {/* replace with http://www.alexrothenberg.com/2012/02/29/building-a-browser-ide.html example*/}
+
+                {/* CSS CODE */}
                 <Editor
                   lang="css"
                   code={this.state.project.codeBundle.css}
                 />{" "}
                 {/* add code prop*/}
+
               </div>
               <div className="row bottom-row mh-50 col-12 mx-0 px-0">
-                <Editor
-                  lang="htmlmixed"
-                  code={this.state.project.codeBundle.html}
-                />{" "}
+
+              {/* HTMLCODE */}
+              <div className={"col-6 border border-secondary editor html"}>
+                <CodeMirror
+                value= {this.state.project.codeBundle.html} 
+                options={{
+                    mode: "htmlmixed",
+                    theme: 'monokai',
+                    lineNumbers: true
+                }}
+                onChange={(editor, data, value) => {
+                    this.updateHTMLCode(value);
+                    console.log("EditorContainer (HTML): " + value);
+                    }}
+                  />
+                </div> 
+
                 {/* add code prop*/}
                 <div className="border border-secondary md-6 resp-container px-0 mx-0 col-6">
+                
                   <iframe
                     className="render-window resp-iframe col-12"
                     title="Render Panel"
+                    id="preview"
+                    srcdoc={this.state.project.codeBundle.html}
                   />
                 </div>
               </div>

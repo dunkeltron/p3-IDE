@@ -23,7 +23,7 @@ function Nav (props,{handleLogOut}) {
                     put number of comments in a circle or something*/}
             <li className="nav-text  mr-0">
               <form className="form-inline ml-5 ">
-                <button className="btn btn-success" type="button">Comments {props.project.comments.length} </button>
+                {/* <button className="btn btn-success" type="button">Comments {props.project.comments.length} </button> */}
                 <button className="btn btn-secondary ml-3" type="button">Settings</button>
                 <button className="btn btn-success save" type="button">Save </button>
                 <button className="btn btn-secondary ml-3 run" type="button">Run</button>
