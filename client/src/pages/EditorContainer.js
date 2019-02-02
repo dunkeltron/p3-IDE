@@ -4,6 +4,17 @@ import ProjectListItem from "../components/ProjectListItem";
 import Nav from "../components/Nav";
 import SettingsPanel from "../components/SettingsPanel";
 import API from "../utils/API";
+import { stat } from "fs";
+
+import{UnControlled as CodeMirror} from 'react-codemirror2';
+require('codemirror/lib/codemirror.css');
+require('codemirror/theme/material.css');
+require('codemirror/theme/monokai.css');
+require('codemirror/mode/xml/xml.js');
+require('codemirror/mode/javascript/javascript.js');
+require('codemirror/mode/css/css.js');
+require('codemirror/mode/htmlmixed/htmlmixed.js');
+require( "../components/Editor/editor.css");
 
 class EditorContainer extends Component {
   state = {
@@ -63,6 +74,42 @@ class EditorContainer extends Component {
     }
   }
 
+  // Brian Edits 3 functions for HTML CSS and Javascript
+
+  updateHTMLCode = newCode => {
+    //this.state.project.codeBundle.html = newCode // suggested by Joe
+    //console.log(this.state.project.codeBundle.html)
+		this.setState({
+     project: {
+       codeBundle: {
+         html: newCode}
+       } // diving into the object to insert HTML
+    });
+  }
+  
+  updateCSSCode(newCode) {
+		this.setState({
+      project: {
+        codeBundle: {
+          css:newCode}
+      } // diving into the object to insert CSS
+		});
+  }
+  
+  updateJSCode(newCode) {
+		this.setState({
+      project: {
+        codeBundle: {
+          js: newCode}
+      } // diving into the object to insert JS
+		});
+  }
+  
+  
+
+  
+  // End of Brian's Edits
+  
   //Does user check against user URL
   getUser = currentUsername => {
     // console.log(this.props.match.params.user)
@@ -79,7 +126,7 @@ class EditorContainer extends Component {
 
   getProjects = ownedProjects => {
     // console.log(this.props.match.params.id);
-    console.log("OwnedProjects: ", ownedProjects);
+    //console.log("OwnedProjects: ", ownedProjects);
     for (let i = 0; i < ownedProjects.length; ++i) {
       ownedProjects[i].projectName === this.props.match.params.id
         ? //Return
@@ -304,22 +351,64 @@ class EditorContainer extends Component {
             </div>
             <div className="col-11 mx-0 px-0">
               <div className="row top-row mh-50r col-12 mx-0 px-0">
+
+              {/* Javascript Code */}
                 <Editor
                   lang="javascript"
                   code={this.state.project.codeBundle.js}
                   onNewChange={this.onNewChange}
                 />{" "}
-                <Editor lang="css" code={this.state.project.codeBundle.css} />{" "}
+                {/* add code prop*/}
+                {/* replace with http://www.alexrothenberg.com/2012/02/29/building-a-browser-ide.html example*/}
+
+                {/* CSS CODE */}
+                <CodeMirror
+                value= {this.state.project.codeBundle.css} 
+                options={{
+                    mode: "css",
+                    theme: 'monokai',
+                    lineNumbers: true
+                }}
+                onChange={(editor, data, value) => {
+                    //this.updateCSSCode(value);
+                    console.log("EditorContainer (CSS): " + value);
+                    }}
+                  />
+
+
+                {/* <Editor
+                  lang="css"
+                  code={this.state.project.codeBundle.css}
+                />{" "} */}
+                {/* add code prop*/}
+
               </div>
               <div className="row bottom-row mh-50 col-12 mx-0 px-0">
-                <Editor
-                  lang="htmlmixed"
-                  code={this.state.project.codeBundle.html}
-                />{" "}
+
+              {/* HTMLCODE */}
+              <div className={"col-6 border border-secondary editor html"}>
+                <CodeMirror
+                value= {this.state.project.codeBundle.html} 
+                options={{
+                    mode: "htmlmixed",
+                    theme: 'monokai',
+                    lineNumbers: true
+                }}
+                onChange={(editor, data, value) => {
+                    this.updateHTMLCode(value);
+                    //console.log("EditorContainer (HTML): " + value);
+                    }}
+                  />
+                </div> 
+
+                {/* add code prop*/}
                 <div className="border border-secondary md-6 resp-container px-0 mx-0 col-6">
+                
                   <iframe
                     className="render-window resp-iframe col-12"
                     title="Render Panel"
+                    id="preview"
+                    srcdoc={this.state.project.codeBundle.html}
                   />
                 </div>
               </div>
