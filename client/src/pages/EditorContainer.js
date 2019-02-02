@@ -180,9 +180,6 @@ class EditorContainer extends Component {
 
     let projectInputName = "NEWPROJECT";
 
-    // authUserOwnedProjects.push(projectInputName);
-    // console.log("updatedauthUserOwnedProjects: ", authUserOwnedProjects);
-
     //This is just copying the current state but doesnt change it at all
     const newProjectObj = {
       owner: authUser,
@@ -228,6 +225,44 @@ class EditorContainer extends Component {
     this.setState({ showSettings: !showSettings });
   };
 
+  handleOnDeleteProject = event => {
+    event.preventDefault();
+    console.log("Delete Project Button Clicked");
+    let authUser = "TestUsername";
+    this.findToDeleteProject(authUser);
+  };
+
+  findToDeleteProject = authUser => {
+    API.getUser(authUser)
+      .then(res =>
+        // console.log("result: ", res.data)
+        this.deleteProject(authUser, res.data.ownedProjects)
+      )
+      .catch(err => console.log(err));
+  };
+
+  deleteProject = (authUser, authUserOwnedProjects) => {
+    console.log("deleteProject->authID: ", authUser);
+    console.log(
+      "deleteProject->authUserOwnedProjects: ",
+      authUserOwnedProjects
+    );
+
+    let currentProject = this.props.match.params.id;
+
+    const deleteProjectData = {
+      username: authUser,
+      projectName: currentProject
+    };
+
+    console.log("deleteproject->deleteProjectData: ", deleteProjectData);
+
+    API.deleteProject({ deleteProjectData }).then(
+      console.log("Delete Successful?"),
+      window.location.assign("/" + authUser + "/")
+    );
+  };
+
   handleOnCommentsClick = event => {
     event.preventDefault();
     console.log("Comments Button Clicked");
@@ -255,7 +290,9 @@ class EditorContainer extends Component {
           toggleInput={this.toggleInput}
           toggleInputState={this.state.show}
         />
-        {this.state.showSettings && <SettingsPanel />}
+        {this.state.showSettings && (
+          <SettingsPanel onClick={this.handleOnDeleteProject} />
+        )}
         <div className=" col-12 editor-container mx-0 px-0 ">
           <div className="row col-12 mx-0 px-0">
             <div className="col projects ml-0 col-1">
