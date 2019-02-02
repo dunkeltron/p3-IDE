@@ -24,11 +24,8 @@ module.exports = {
       .catch(err => res.status(422).json(err));
   },
   remove: function(req, res) {
-    console.log("remove: ", req.body.deleteProjectData.username);
-    db.Project.findOne(
-      { owner: req.body.deleteProjectData.username },
-      { projectName: req.body.deleteProjectData.projectName }
-    )
+    console.log("remove: ", req.body.deleteProjectData.id);
+    db.Project.findById(req.body.deleteProjectData.id)
       .then(dbProject => dbProject.remove())
       .then(dbProject => res.json(dbProject))
       .catch(err => res.status(422).json(err));

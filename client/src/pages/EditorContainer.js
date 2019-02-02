@@ -242,24 +242,35 @@ class EditorContainer extends Component {
   };
 
   deleteProject = (authUser, authUserOwnedProjects) => {
-    console.log("deleteProject->authID: ", authUser);
     console.log(
       "deleteProject->authUserOwnedProjects: ",
       authUserOwnedProjects
     );
 
+    let projectToDeleteId = "";
+
+    for (let i = 0; i < authUserOwnedProjects.length; ++i) {
+      authUserOwnedProjects[i].projectName === this.props.match.params.id
+        ? //Return
+          projectToDeleteId = authUserOwnedProjects[i]._id
+        : // console.log("deleteSelectedProject :", authUserOwnedProjects[i])
+          console.log();
+    }
+    console.log("deleteProject->authID: ", authUser);
+
     let currentProject = this.props.match.params.id;
 
     const deleteProjectData = {
       username: authUser,
+      id: projectToDeleteId,
       projectName: currentProject
     };
 
     console.log("deleteproject->deleteProjectData: ", deleteProjectData);
 
     API.deleteProject({ deleteProjectData }).then(
-      console.log("Delete Successful?"),
-      window.location.assign("/" + authUser + "/")
+      console.log("Delete Successful?")
+      // window.location.assign("/" + authUser + "/")
     );
   };
 
