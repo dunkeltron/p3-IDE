@@ -12,7 +12,7 @@ module.exports = {
     // Register mapped to /api/auth/register=
     register: function (req, res) {
         console.log("register");
-        console.log(req.body);
+        //console.log(req.body);
         const {
             name,
             username,
@@ -23,15 +23,15 @@ module.exports = {
         let errors = [];
 
         if (!name || !username  || !email || !password || !password2) {
-            console.log("all fields must be filled in.")
+            errors.push("all fields must be filled in.")
         }
 
         if (password != password2) {
-            console.log("Passwords must match")
+            errors.push("Passwords must match")
         }
 
         if (password.length < 5){
-            console.log("length less than five")
+            errors.push("length less than five")
         }
         
 
@@ -58,7 +58,7 @@ module.exports = {
                       console.log("success");
                       res.status(200).redirect('/');
                     })
-                    .catch(err => console.log("didn't work =("));
+                    .catch(err => console.log(err));
                 });
             });
 

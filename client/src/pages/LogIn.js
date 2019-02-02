@@ -9,7 +9,7 @@ class LogIn extends Component {
 
     super();
     this.state={
-        email:"",
+        username:"",
         password:"",
         currentUser: null,
         redirectTo: null
@@ -17,18 +17,14 @@ class LogIn extends Component {
     this.handleFormSubmit = this.handleFormSubmit.bind(this);
     this.handleInputChange = this.handleInputChange.bind(this);
 }
-  componentDidMOunt(){
-      this.props.logout();
-  }
+ 
   //will have to change function once authentication is up
     handleFormSubmit = (event) => {
         //attempt to login using api call from App.js and current state of email and password.
         event.preventDefault();
         console.log(this.state);
-        this.props._login(this.state.email,this.state.password);
-        this.setState({
-            redirectTo: '/test/test'
-        })
+        this.props._login(this.state.username,this.state.password);
+        this.setState({redirectTo: this.state.username});
  
     }
     handleInputChange = (event) => {
@@ -36,6 +32,9 @@ class LogIn extends Component {
         this.setState({
             [name]:value
         })
+    }
+    componentWillMount(){
+        sessionStorage.removeItem("currentUser");
     }
     render(){
         // this handles the redirect after login by checking if we have assigned redirectTo 

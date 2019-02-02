@@ -17,7 +17,7 @@
             <Link className="dropdown-item" to={"/"+JSON.parse(sessionStorage.getItem("currentUser")).username}>Account</Link>
             <Link className="dropdown-item" to={"/settings/"+JSON.parse(sessionStorage.getItem("currentUser")).username}>Edit Profile</Link>
             <div className="dropdown-divider"></div>
-            <Link to="/" className="dropdown-item " > Logout </Link>
+            <Link  className="dropdown-item "  to="/"> Logout </Link>
             </div>
         </li>    
     </ul>
