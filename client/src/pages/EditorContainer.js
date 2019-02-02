@@ -76,14 +76,15 @@ class EditorContainer extends Component {
 
   // Brian Edits 3 functions for HTML CSS and Javascript
 
-  updateHTMLCode(newCode) {
+  updateHTMLCode = newCode => {
     //this.state.project.codeBundle.html = newCode // suggested by Joe
+    //console.log(this.state.project.codeBundle.html)
 		this.setState({
      project: {
        codeBundle: {
          html: newCode}
        } // diving into the object to insert HTML
-      });
+    });
   }
   
   updateCSSCode(newCode) {
@@ -104,11 +105,8 @@ class EditorContainer extends Component {
 		});
   }
   
-  // mergeCode() {
-  //   var tempHTML = this.state.project.codeBundle.html;
-  //   var tempCSS = "<script>" + this.state.project.codeBundle.css + "</script>"
-  //   var tempHTMLCSS = tempHTML + tempCSS;
-  // }
+  
+
   
   // End of Brian's Edits
   
@@ -128,7 +126,7 @@ class EditorContainer extends Component {
 
   getProjects = ownedProjects => {
     // console.log(this.props.match.params.id);
-    console.log("OwnedProjects: ", ownedProjects);
+    //console.log("OwnedProjects: ", ownedProjects);
     for (let i = 0; i < ownedProjects.length; ++i) {
       ownedProjects[i].projectName === this.props.match.params.id
         ? //Return
@@ -364,10 +362,24 @@ class EditorContainer extends Component {
                 {/* replace with http://www.alexrothenberg.com/2012/02/29/building-a-browser-ide.html example*/}
 
                 {/* CSS CODE */}
-                <Editor
+                <CodeMirror
+                value= {this.state.project.codeBundle.css} 
+                options={{
+                    mode: "css",
+                    theme: 'monokai',
+                    lineNumbers: true
+                }}
+                onChange={(editor, data, value) => {
+                    //this.updateCSSCode(value);
+                    console.log("EditorContainer (CSS): " + value);
+                    }}
+                  />
+
+
+                {/* <Editor
                   lang="css"
                   code={this.state.project.codeBundle.css}
-                />{" "}
+                />{" "} */}
                 {/* add code prop*/}
 
               </div>
@@ -384,7 +396,7 @@ class EditorContainer extends Component {
                 }}
                 onChange={(editor, data, value) => {
                     this.updateHTMLCode(value);
-                    console.log("EditorContainer (HTML): " + value);
+                    //console.log("EditorContainer (HTML): " + value);
                     }}
                   />
                 </div> 

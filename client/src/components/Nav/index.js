@@ -38,7 +38,7 @@ function Nav(props) {
                 onClick={props.handleOnCommentsClick}
                 type="success"
               >
-                Comments {props.project.comments.length}{" "}
+                Comments{" "}
               </Button>
 
               <Button
