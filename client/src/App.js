@@ -18,6 +18,7 @@ constructor(){
   };
   this._logout = this._logout.bind(this);
   this._login = this._login.bind(this);
+  
 
 }
 
@@ -45,6 +46,7 @@ _login(email, password) {
       console.log(response)
       if (response.status === 200) {
         // update the state
+        sessionStorage.setItem("currentUser",JSON.stringify(response.data.user));
           this.setState({
           loggedIn: true,
           currentUser: response.data.user

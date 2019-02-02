@@ -10,7 +10,7 @@ class Test extends Component{
             return (<div classname="Home">
                     <p>Current UserL</p>
                     <code>
-                        {JSON.stringify(this.props.currentUser)}
+                        {JSON.stringify(sessionStorage.getItem("currentUser"))}
                     </code>
                     <Link to={"/"+this.props.currentUser.username} >{this.props.currentUser.username}'s profile</Link>
             </div>)
