@@ -138,7 +138,7 @@ class EditorContainer extends Component {
     for (let i = 0; i < selectedProject.length; ++i) {
       selectedProject[i].projectName === this.props.match.params.id
         ? API.saveProject({ projectObject })
-        : console.log(); //"saveProject->selectedProject not found"
+        : console.log();
     }
   };
 
@@ -158,7 +158,7 @@ class EditorContainer extends Component {
     console.log("New Project Button Clicked");
     let authUser = "TestUsername";
     this.findToCreateProject(authUser);
-  }
+  };
 
   findToCreateProject = authUser => {
     API.getUser(authUser)
@@ -206,8 +206,11 @@ class EditorContainer extends Component {
     API.createProject({ newProjectObj }).then(data => {
       console.log(data.data);
       let newAuthData = data.data;
-      API.getProjectbyUser({ newAuthData });
-    }, console.log("d----------------------------------------fasdfasfds"));
+      API.getProjectbyUser({ newAuthData }).then(
+        console.log("data.data: ", data.data),
+        window.location.assign("/" + data.data.owner + "/project/" + data.data.projectName)
+      );
+    });
   };
 
   handleOnSettingsClick = event => {
