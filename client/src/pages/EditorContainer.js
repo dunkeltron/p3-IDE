@@ -79,29 +79,26 @@ class EditorContainer extends Component {
   updateHTMLCode = newCode => {
     //this.state.project.codeBundle.html = newCode // suggested by Joe
     //console.log(this.state.project.codeBundle.html)
+    let newProjectObj = Object.assign({}, this.state.project);
+    newProjectObj.codeBundle.html = newCode // drilling into this.state.project.codeBundle.html
 		this.setState({
-     project: {
-       codeBundle: {
-         html: newCode}
-       } // diving into the object to insert HTML
+     project: newProjectObj
     });
   }
   
   updateCSSCode(newCode) {
+    let newProjectObj = Object.assign({}, this.state.project);
+    newProjectObj.codeBundle.css = newCode // drilling into this.state.project.codeBundle.css
 		this.setState({
-      project: {
-        codeBundle: {
-          css:newCode}
-      } // diving into the object to insert CSS
+     project: newProjectObj
 		});
   }
   
   updateJSCode(newCode) {
+    let newProjectObj = Object.assign({}, this.state.project);
+    newProjectObj.codeBundle.js = newCode // drilling into this.state.project.codeBundle.js
 		this.setState({
-      project: {
-        codeBundle: {
-          js: newCode}
-      } // diving into the object to insert JS
+     project: newProjectObj
 		});
   }
   
@@ -309,7 +306,7 @@ class EditorContainer extends Component {
     API.deleteProject({ deleteProjectData }).then(
       console.log("Delete Successful?"),
       window.location.assign("/" + authUser + "/")
-    );
+    );  
   };
 
   handleOnCommentsClick = event => {
@@ -353,15 +350,23 @@ class EditorContainer extends Component {
               <div className="row top-row mh-50r col-12 mx-0 px-0">
 
               {/* Javascript Code */}
-                <Editor
-                  lang="javascript"
-                  code={this.state.project.codeBundle.js}
-                  onNewChange={this.onNewChange}
-                />{" "}
-                {/* add code prop*/}
-                {/* replace with http://www.alexrothenberg.com/2012/02/29/building-a-browser-ide.html example*/}
+              <div className={"col-6 border border-secondary editor js"}>
+              <CodeMirror
+                value= {this.state.project.codeBundle.js} 
+                options={{
+                    mode: "js",
+                    theme: 'monokai',
+                    lineNumbers: true
+                }}
+                onChange={(editor, data, value) => {
+                  //this.updateJSCode(value);
+                  console.log("EditorContainer (JS): " + value);
+                  }}
+                />
+                </div>
 
                 {/* CSS CODE */}
+                <div className={"col-6 border border-secondary editor css"}>
                 <CodeMirror
                 value= {this.state.project.codeBundle.css} 
                 options={{
@@ -374,14 +379,12 @@ class EditorContainer extends Component {
                     console.log("EditorContainer (CSS): " + value);
                     }}
                   />
-
-
                 {/* <Editor
                   lang="css"
                   code={this.state.project.codeBundle.css}
                 />{" "} */}
                 {/* add code prop*/}
-
+                </div>
               </div>
               <div className="row bottom-row mh-50 col-12 mx-0 px-0">
 
