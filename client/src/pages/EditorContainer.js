@@ -29,7 +29,9 @@ class EditorContainer extends Component {
       codeBundle: {
         js: "var i = 0; \n return i+2;",
         css: "body { background: #fff}",
-        html: '<div class = "new-div"></div>'
+        html: '<div class = "new-div"></div>',
+        combinedHTMLCSS: "",
+        combined: ""
       }
     },
     user: {
@@ -81,32 +83,47 @@ class EditorContainer extends Component {
   updateHTMLCode = newCode => {
     //this.state.project.codeBundle.html = newCode // suggested by Joe
     //console.log(this.state.project.codeBundle.html)
-    let newProjectObj = Object.assign({}, this.state.project);
+    let newProjectObj = Object.assign({}, this.state.project); // creates duplicate of project
     newProjectObj.codeBundle.html = newCode // drilling into this.state.project.codeBundle.html
 		this.setState({
      project: newProjectObj
     });
+    this.updateCombinedHTMLCSSCode();
   }
   
   updateCSSCode(newCode) {
-    let newProjectObj = Object.assign({}, this.state.project);
+    let newProjectObj = Object.assign({}, this.state.project); // creates duplicate of project
     newProjectObj.codeBundle.css = newCode // drilling into this.state.project.codeBundle.css
 		this.setState({
      project: newProjectObj
-		});
+    });
+    this.updateCombinedHTMLCSSCode();   
   }
   
   updateJSCode(newCode) {
-    let newProjectObj = Object.assign({}, this.state.project);
+    let newProjectObj = Object.assign({}, this.state.project); // creates duplicate of project
     newProjectObj.codeBundle.js = newCode // drilling into this.state.project.codeBundle.js
 		this.setState({
      project: newProjectObj
-		});
+    });
+    this.updateCombinedCode()
+    //this.updateCombinedCode();   // this works but need to have it execute on run JS click, separate HTML/CSS and JS
   }
-  
-  
 
-  
+  updateCombinedHTMLCSSCode() {
+    let newProjectObj = Object.assign({}, this.state.project);
+    newProjectObj.codeBundle.combinedHTMLCSS = ""; // sets combined HTML and CSS as blank
+    newProjectObj.codeBundle.combinedHTMLCSS = newProjectObj.codeBundle.html + "<style>" + newProjectObj.codeBundle.css + "</style>" //+ "<script>" + newProjectObj.codeBundle.js + "</script>"; // merging HTML + CSS // + JS to combined
+    console.log ("CombinedHTMLCSS: " + newProjectObj.codeBundle.combinedHTMLCSS)
+  }
+
+  updateCombinedCode() {
+    let newProjectObj = Object.assign({}, this.state.project);
+    newProjectObj.codeBundle.combined = ""; // sets combined(HTML + CSS + JS) as blank
+    newProjectObj.codeBundle.combined =  newProjectObj.codeBundle.combinedHTMLCSS + "<script>" + newProjectObj.codeBundle.js + "</script>" // merging HTMLCSS + JS into single element.
+    console.log("CombinedCode: " + newProjectObj.codeBundle.combined)
+  }
+    
   // End of Brian's Edits
   
   handleInputTextChange = event => {
@@ -329,6 +346,7 @@ class EditorContainer extends Component {
   handleOnRunClick = event => {
     event.preventDefault();
     console.log("Run button clicked");
+    this.updateCombinedCode();
   };
 
   render() {
@@ -373,8 +391,8 @@ class EditorContainer extends Component {
                     lineNumbers: true
                 }}
                 onChange={(editor, data, value) => {
-                  //this.updateJSCode(value);
-                  console.log("EditorContainer (JS): " + value);
+                  this.updateJSCode(value);
+                  //console.log("EditorContainer (JS): " + value);
                   }}
                 />
                 </div>
@@ -389,15 +407,10 @@ class EditorContainer extends Component {
                     lineNumbers: true
                 }}
                 onChange={(editor, data, value) => {
-                    //this.updateCSSCode(value);
-                    console.log("EditorContainer (CSS): " + value);
+                    this.updateCSSCode(value);
+                    //console.log("EditorContainer (CSS): " + value);
                     }}
                   />
-                {/* <Editor
-                  lang="css"
-                  code={this.state.project.codeBundle.css}
-                />{" "} */}
-                {/* add code prop*/}
                 </div>
               </div>
               <div className="row bottom-row mh-50 col-12 mx-0 px-0">
@@ -425,7 +438,7 @@ class EditorContainer extends Component {
                     className="render-window resp-iframe col-12"
                     title="Render Panel"
                     id="preview"
-                    srcdoc={this.state.project.codeBundle.html}
+                    srcdoc={this.state.project.codeBundle.combinedHTMLCSS || this.state.project.codeBundle.combined} // current output of iframe data
                   />
                 </div>
               </div>
