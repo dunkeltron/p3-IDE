@@ -9,6 +9,7 @@ class EditorContainer extends Component {
   state = {
     show: false,
     showSettings: false,
+    inputTextValue: "",
     project: {
       id: this.props.match.params.id,
       projectName: "Testing Project",
@@ -52,6 +53,7 @@ class EditorContainer extends Component {
   componentDidMount() {
     this.toggleInput = this.toggleInput.bind(this);
     this.toggleSettings = this.toggleSettings.bind(this);
+    this.handleInputTextChange = this.handleInputTextChange.bind(this);
     console.log(this.props.currentUser);
     const { user, id } = this.props.match.params;
     if (id && user) {
@@ -59,6 +61,10 @@ class EditorContainer extends Component {
     } else {
       console.log("no id");
     }
+  }
+
+  handleInputTextChange = event => {
+    this.setState({inputTextValue: event.target.value});
   }
 
   //Does user check against user URL
@@ -178,7 +184,7 @@ class EditorContainer extends Component {
       authUserOwnedProjects
     );
 
-    let projectInputName = "NEWPROJECT";
+    let projectInputName = this.state.inputTextValue.trim();
 
     //This is just copying the current state but doesnt change it at all
     const newProjectObj = {
@@ -201,7 +207,6 @@ class EditorContainer extends Component {
     newProjectObj.projectName = projectInputName;
 
     console.log("createProject->newProObj: ", newProjectObj);
-    // console.log("newauthdata: ", newAuthData);
     API.createProject({ newProjectObj }).then(data => {
       console.log(data.data);
       let newAuthData = data.data;
@@ -234,10 +239,7 @@ class EditorContainer extends Component {
 
   findToDeleteProject = authUser => {
     API.getUser(authUser)
-      .then(res =>
-        // console.log("result: ", res.data)
-        this.deleteProject(authUser, res.data.ownedProjects)
-      )
+      .then(res => this.deleteProject(authUser, res.data.ownedProjects))
       .catch(err => console.log(err));
   };
 
@@ -252,9 +254,8 @@ class EditorContainer extends Component {
     for (let i = 0; i < authUserOwnedProjects.length; ++i) {
       authUserOwnedProjects[i].projectName === this.props.match.params.id
         ? //Return
-          projectToDeleteId = authUserOwnedProjects[i]._id
-        : // console.log("deleteSelectedProject :", authUserOwnedProjects[i])
-          console.log();
+          (projectToDeleteId = authUserOwnedProjects[i]._id)
+        : console.log();
     }
     console.log("deleteProject->authID: ", authUser);
 
@@ -269,8 +270,8 @@ class EditorContainer extends Component {
     console.log("deleteproject->deleteProjectData: ", deleteProjectData);
 
     API.deleteProject({ deleteProjectData }).then(
-      console.log("Delete Successful?")
-      // window.location.assign("/" + authUser + "/")
+      console.log("Delete Successful?"),
+      window.location.assign("/" + authUser + "/")
     );
   };
 
@@ -300,6 +301,8 @@ class EditorContainer extends Component {
           handleConfirmedNewProject={this.handleConfirmedNewProject}
           toggleInput={this.toggleInput}
           toggleInputState={this.state.show}
+          inputTextValue={this.inputTextValue}
+          handleInputTextChange={this.handleInputTextChange}
         />
         {this.state.showSettings && (
           <SettingsPanel onClick={this.handleOnDeleteProject} />
