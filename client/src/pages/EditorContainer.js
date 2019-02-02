@@ -29,6 +29,7 @@ class EditorContainer extends Component {
         js: "var i = 0; \n return i+2;",
         css: "body { background: #fff}",
         html: '<div class = "new-div"></div>',
+        combinedHTMLCSS: "",
         combined: ""
       }
     },
@@ -85,7 +86,7 @@ class EditorContainer extends Component {
 		this.setState({
      project: newProjectObj
     });
-    this.updateCombinedCode();
+    this.updateCombinedHTMLCSSCode();
   }
   
   updateCSSCode(newCode) {
@@ -94,7 +95,7 @@ class EditorContainer extends Component {
 		this.setState({
      project: newProjectObj
     });
-    this.updateCombinedCode();   
+    this.updateCombinedHTMLCSSCode();   
   }
   
   updateJSCode(newCode) {
@@ -103,14 +104,22 @@ class EditorContainer extends Component {
 		this.setState({
      project: newProjectObj
     });
-    this.updateCombinedCode();   // this works but need to have it execute on run JS click
+    this.updateCombinedCode()
+    //this.updateCombinedCode();   // this works but need to have it execute on run JS click, separate HTML/CSS and JS
   }
 
-  updateCombinedCode(newCode) {
+  updateCombinedHTMLCSSCode() {
     let newProjectObj = Object.assign({}, this.state.project);
-    newProjectObj.codeBundle.combined = "";
-    newProjectObj.codeBundle.combined = newProjectObj.codeBundle.html + "<style>" + newProjectObj.codeBundle.css + "</style>" + "<script>" + newProjectObj.codeBundle.js + "</script>"; // merging HTML + CSS + JS to combined
-    console.log ("Combined: " + newProjectObj.codeBundle.combined)
+    newProjectObj.codeBundle.combinedHTMLCSS = ""; // sets combined HTML and CSS as blank
+    newProjectObj.codeBundle.combinedHTMLCSS = newProjectObj.codeBundle.html + "<style>" + newProjectObj.codeBundle.css + "</style>" //+ "<script>" + newProjectObj.codeBundle.js + "</script>"; // merging HTML + CSS // + JS to combined
+    console.log ("CombinedHTMLCSS: " + newProjectObj.codeBundle.combinedHTMLCSS)
+  }
+
+  updateCombinedCode() {
+    let newProjectObj = Object.assign({}, this.state.project);
+    newProjectObj.codeBundle.combined = ""; // sets combined(HTML + CSS + JS) as blank
+    newProjectObj.codeBundle.combined =  newProjectObj.codeBundle.combinedHTMLCSS + "<script>" + newProjectObj.codeBundle.js + "</script>" // merging HTMLCSS + JS into single element.
+    console.log("CombinedCode: " + newProjectObj.codeBundle.combined)
   }
     
   // End of Brian's Edits
@@ -415,7 +424,7 @@ class EditorContainer extends Component {
                     className="render-window resp-iframe col-12"
                     title="Render Panel"
                     id="preview"
-                    srcdoc={this.state.project.codeBundle.combined} // current output of iframe data
+                    srcdoc={this.state.project.codeBundle.combinedHTMLCSS || this.state.project.codeBundle.combined} // current output of iframe data
                   />
                 </div>
               </div>
