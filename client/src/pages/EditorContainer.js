@@ -28,7 +28,8 @@ class EditorContainer extends Component {
       codeBundle: {
         js: "var i = 0; \n return i+2;",
         css: "body { background: #fff}",
-        html: '<div class = "new-div"></div>'
+        html: '<div class = "new-div"></div>',
+        combined: ""
       }
     },
     user: {
@@ -79,32 +80,39 @@ class EditorContainer extends Component {
   updateHTMLCode = newCode => {
     //this.state.project.codeBundle.html = newCode // suggested by Joe
     //console.log(this.state.project.codeBundle.html)
-    let newProjectObj = Object.assign({}, this.state.project);
+    let newProjectObj = Object.assign({}, this.state.project); // creates duplicate of project
     newProjectObj.codeBundle.html = newCode // drilling into this.state.project.codeBundle.html
 		this.setState({
      project: newProjectObj
     });
+    this.updateCombinedCode();
   }
   
   updateCSSCode(newCode) {
-    let newProjectObj = Object.assign({}, this.state.project);
+    let newProjectObj = Object.assign({}, this.state.project); // creates duplicate of project
     newProjectObj.codeBundle.css = newCode // drilling into this.state.project.codeBundle.css
 		this.setState({
      project: newProjectObj
-		});
+    });
+    this.updateCombinedCode();   
   }
   
   updateJSCode(newCode) {
-    let newProjectObj = Object.assign({}, this.state.project);
+    let newProjectObj = Object.assign({}, this.state.project); // creates duplicate of project
     newProjectObj.codeBundle.js = newCode // drilling into this.state.project.codeBundle.js
 		this.setState({
      project: newProjectObj
-		});
+    });
+    this.updateCombinedCode();   // this works but need to have it execute on run JS click
   }
-  
-  
 
-  
+  updateCombinedCode(newCode) {
+    let newProjectObj = Object.assign({}, this.state.project);
+    newProjectObj.codeBundle.combined = "";
+    newProjectObj.codeBundle.combined = newProjectObj.codeBundle.html + "<style>" + newProjectObj.codeBundle.css + "</style>" + "<script>" + newProjectObj.codeBundle.js + "</script>"; // merging HTML + CSS + JS to combined
+    console.log ("Combined: " + newProjectObj.codeBundle.combined)
+  }
+    
   // End of Brian's Edits
   
   //Does user check against user URL
@@ -317,6 +325,7 @@ class EditorContainer extends Component {
   handleOnRunClick = event => {
     event.preventDefault();
     console.log("Run button clicked");
+    this.updateCombinedCode();
   };
 
   render() {
@@ -354,13 +363,13 @@ class EditorContainer extends Component {
               <CodeMirror
                 value= {this.state.project.codeBundle.js} 
                 options={{
-                    mode: "js",
+                    mode: "javascript",
                     theme: 'monokai',
                     lineNumbers: true
                 }}
                 onChange={(editor, data, value) => {
-                  //this.updateJSCode(value);
-                  console.log("EditorContainer (JS): " + value);
+                  this.updateJSCode(value);
+                  //console.log("EditorContainer (JS): " + value);
                   }}
                 />
                 </div>
@@ -375,15 +384,10 @@ class EditorContainer extends Component {
                     lineNumbers: true
                 }}
                 onChange={(editor, data, value) => {
-                    //this.updateCSSCode(value);
-                    console.log("EditorContainer (CSS): " + value);
+                    this.updateCSSCode(value);
+                    //console.log("EditorContainer (CSS): " + value);
                     }}
                   />
-                {/* <Editor
-                  lang="css"
-                  code={this.state.project.codeBundle.css}
-                />{" "} */}
-                {/* add code prop*/}
                 </div>
               </div>
               <div className="row bottom-row mh-50 col-12 mx-0 px-0">
@@ -411,7 +415,7 @@ class EditorContainer extends Component {
                     className="render-window resp-iframe col-12"
                     title="Render Panel"
                     id="preview"
-                    srcdoc={this.state.project.codeBundle.html}
+                    srcdoc={this.state.project.codeBundle.combined} // current output of iframe data
                   />
                 </div>
               </div>
