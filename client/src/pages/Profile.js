@@ -1,13 +1,21 @@
 import React, { Component } from "react";
-import { Col, Row, Container } from "../components/Grid";
+import { Row, Container } from "../components/Grid";
+import API from "../utils/API";
 import Jumbotron from "../components/Jumbotron";
 import Nav from "../components/Nav";
-import API from "../utils/API";
 import ProjectCard from "../components/ProjectCard";
+import ProfileBanner from "../components/ProfileBanner";
 
 class Profile extends Component {
   state = {
     profileOwnedProject: [],
+    dateCreation: {},
+    profilePic: "",
+    socialLinks: {
+      git: "",
+      linkedIn: "",
+      personalSite: ""
+    },
     project: {
       id: this.props.match.params.id,
       projectName: "Testing Project",
@@ -61,9 +69,10 @@ class Profile extends Component {
     // console.log(this.props.match.params.user)
     API.getUser(currentUsername)
       .then(res =>
-        // console.log("result: ", res.data)
+        // console.log("result: ", res.data.profilePic),
         this.setState({
-          profileOwnedProject: res.data.ownedProjects
+          profileOwnedProject: res.data.ownedProjects,
+          user: res.data
         })
       )
       .catch(err => console.log(err));
@@ -75,26 +84,10 @@ class Profile extends Component {
         <Container fluid>
           <Nav user={this.state.user} mode="profile" />
           <Row>
-            <Col size="md-12">
-              <Jumbotron>
-                <h1 className="text-center"> {this.props.match.params.user}</h1>
-                {/* this href needs to be changed to pop up a modal to create a project*/}
-                <a
-                  className="editor-redir"
-                  alt=""
-                  href={
-                    "/" + this.props.match.params.user + "/project/newProject"
-                  }
-                >
-                  {" "}
-                  To the Editor.
-                </a>
-                <a className="log-in-redir" alt="" href="/">
-                  {" "}
-                  To the Log In.
-                </a>
-              </Jumbotron>
-            </Col>
+            <ProfileBanner
+              user={this.state.user.username}
+              src={this.state.user.profilePic}
+            />
           </Row>
         </Container>
 
@@ -102,7 +95,7 @@ class Profile extends Component {
           <ProjectCard
             key={project.id}
             title={project.projectName}
-            link={project.owner+"/project/"+project.projectName}
+            link={project.owner + "/project/" + project.projectName}
           />
         ))}
       </div>
@@ -111,3 +104,22 @@ class Profile extends Component {
 }
 
 export default Profile;
+
+// {/* <Jumbotron>
+// // <h1 className="text-center"> {this.props.match.params.user}</h1>
+// // {/* this href needs to be changed to pop up a modal to create a project*/}
+// <a
+//   className="editor-redir"
+//   alt=""
+//   href={
+//     "/" + this.props.match.params.user + "/project/newProject"
+//   }
+// >
+//   {" "}
+//   To the Editor.
+// </a>
+// <a className="log-in-redir" alt="" href="/">
+//   {" "}
+//   To the Log In.
+// </a>
+// </Jumbotron> */}

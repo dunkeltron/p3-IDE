@@ -1,0 +1,27 @@
+.profileBannerHeader {
+  margin: 0 auto;
+}
+
+.card-body {
+  margin: 0 auto;
+}
+
+.profileImg {
+  border-radius: 50%;
+  margin: 0 auto;
+  width: 150px;
+  height: 150px;
+  /* background: yellow; */
+  border: 2px solid rgb(112, 112, 112);
+}
+
+.profileText {
+  margin: 0 auto;
+}
+
+.githubLink,
+.linkedinLink,
+.personalLink {
+  margin: 0 auto;
+  display: inline-block;
+}
