@@ -10,7 +10,7 @@ const userSeed = [
     password: "TestPassword",
     name: "TestName",
     dateCreation: new Date(Date.now()),
-    profilePic: "IMG@URL.COM",
+    profilePic: "https://static.seattletimes.com/wp-content/uploads/2017/08/3d6cec34-7bd5-11e7-9d5c-00ff6fbfa61f-780x574.jpg",
     ownedProjects: [],
     collabProjects: [],
     socialLinks: {
@@ -25,7 +25,7 @@ const userSeed = [
     password: "TestPassword",
     name: "TestNameAnon",
     dateCreation: new Date(Date.now()),
-    profilePic: "IMGfsdafads@URL.COM",
+    profilePic: "https://static.seattletimes.com/wp-content/uploads/2017/08/3d6cec34-7bd5-11e7-9d5c-00ff6fbfa61f-780x574.jpg",
     ownedProjects: [],
     collabProjects: [],
     socialLinks: {

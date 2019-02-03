@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import { Row, Container } from "../components/Grid";
 import API from "../utils/API";
-import Jumbotron from "../components/Jumbotron";
 import Nav from "../components/Nav";
 import ProjectCard from "../components/ProjectCard";
 import ProfileBanner from "../components/ProfileBanner";
@@ -70,7 +69,7 @@ class Profile extends Component {
     // console.log(this.props.match.params.user)
     API.getUser(currentUsername)
       .then(res =>
-        // console.log("result: ", res.data.profilePic),
+        // console.log("result: ", res.data),
         this.setState({
           profileOwnedProject: res.data.ownedProjects,
           dateCreation: res.data.dateCreation,
@@ -92,9 +91,8 @@ class Profile extends Component {
             user={this.state.user.username}
             src={this.state.user.profilePic}
           >
+            <SocialLinks />
           </ProfileBanner>
-          <SocialLinks />
-
         </Container>
 
         {this.state.profileOwnedProject.map(project => (
@@ -110,22 +108,3 @@ class Profile extends Component {
 }
 
 export default Profile;
-
-// {/* <Jumbotron>
-// // <h1 className="text-center"> {this.props.match.params.user}</h1>
-// // {/* this href needs to be changed to pop up a modal to create a project*/}
-// <a
-//   className="editor-redir"
-//   alt=""
-//   href={
-//     "/" + this.props.match.params.user + "/project/newProject"
-//   }
-// >
-//   {" "}
-//   To the Editor.
-// </a>
-// <a className="log-in-redir" alt="" href="/">
-//   {" "}
-//   To the Log In.
-// </a>
-// </Jumbotron> */}
