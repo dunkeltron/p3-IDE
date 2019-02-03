@@ -75,6 +75,8 @@ function Nav(props) {
                 <InputBoxCreate
                   type="warning"
                   onClick={props.handleConfirmedNewProject}
+                  onChange={props.handleInputTextChange}
+                  value={props.inputTextValue}
                 />
               )}
             </form>

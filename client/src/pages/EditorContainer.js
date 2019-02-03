@@ -20,6 +20,7 @@ class EditorContainer extends Component {
   state = {
     show: false,
     showSettings: false,
+    inputTextValue: "",
     project: {
       id: this.props.match.params.id,
       projectName: "Testing Project",
@@ -29,8 +30,8 @@ class EditorContainer extends Component {
         js: "var i = 0; \n return i+2;",
         css: "body { background: #fff}",
         html: '<div class = "new-div"></div>',
-        combinedHTMLCSS: "",
-        combined: ""
+        combinedHTMLCSS: "", // new addition to hold the HTML, CSS
+        combined: "" // new addition to hold HMTL, CSS, and JS
       }
     },
     user: {
@@ -67,6 +68,7 @@ class EditorContainer extends Component {
   componentDidMount() {
     this.toggleInput = this.toggleInput.bind(this);
     this.toggleSettings = this.toggleSettings.bind(this);
+    this.handleInputTextChange = this.handleInputTextChange.bind(this);
     console.log(this.props.currentUser);
     const { user, id } = this.props.match.params;
     if (id && user) {
@@ -75,8 +77,6 @@ class EditorContainer extends Component {
       console.log("no id");
     }
   }
-
-  // Brian Edits 3 functions for HTML CSS and Javascript
 
   updateHTMLCode = newCode => {
     //this.state.project.codeBundle.html = newCode // suggested by Joe
@@ -112,18 +112,20 @@ class EditorContainer extends Component {
     let newProjectObj = Object.assign({}, this.state.project);
     newProjectObj.codeBundle.combinedHTMLCSS = ""; // sets combined HTML and CSS as blank
     newProjectObj.codeBundle.combinedHTMLCSS = newProjectObj.codeBundle.html + "<style>" + newProjectObj.codeBundle.css + "</style>" //+ "<script>" + newProjectObj.codeBundle.js + "</script>"; // merging HTML + CSS // + JS to combined
-    console.log ("CombinedHTMLCSS: " + newProjectObj.codeBundle.combinedHTMLCSS)
+    //console.log ("CombinedHTMLCSS: " + newProjectObj.codeBundle.combinedHTMLCSS)
   }
 
   updateCombinedCode() {
     let newProjectObj = Object.assign({}, this.state.project);
     newProjectObj.codeBundle.combined = ""; // sets combined(HTML + CSS + JS) as blank
-    newProjectObj.codeBundle.combined =  newProjectObj.codeBundle.combinedHTMLCSS + "<script>" + newProjectObj.codeBundle.js + "</script>" // merging HTMLCSS + JS into single element.
-    console.log("CombinedCode: " + newProjectObj.codeBundle.combined)
+    newProjectObj.codeBundle.combined =  newProjectObj.codeBundle.combinedHTMLCSS + "<script>" + newProjectObj.codeBundle.js + "</script>" // merging HTMLCSS + JS into single element as combined
+    //console.log("CombinedCode: " + newProjectObj.codeBundle.combined)
   }
     
-  // End of Brian's Edits
-  
+  handleInputTextChange = event => {
+    this.setState({inputTextValue: event.target.value});
+  }
+
   //Does user check against user URL
   getUser = currentUsername => {
     // console.log(this.props.match.params.user)
@@ -241,7 +243,7 @@ class EditorContainer extends Component {
       authUserOwnedProjects
     );
 
-    let projectInputName = "NEWPROJECT";
+    let projectInputName = this.state.inputTextValue.trim();
 
     //This is just copying the current state but doesnt change it at all
     const newProjectObj = {
@@ -264,7 +266,6 @@ class EditorContainer extends Component {
     newProjectObj.projectName = projectInputName;
 
     console.log("createProject->newProObj: ", newProjectObj);
-    // console.log("newauthdata: ", newAuthData);
     API.createProject({ newProjectObj }).then(data => {
       console.log(data.data);
       let newAuthData = data.data;
@@ -297,24 +298,31 @@ class EditorContainer extends Component {
 
   findToDeleteProject = authUser => {
     API.getUser(authUser)
-      .then(res =>
-        // console.log("result: ", res.data)
-        this.deleteProject(authUser, res.data.ownedProjects)
-      )
+      .then(res => this.deleteProject(authUser, res.data.ownedProjects))
       .catch(err => console.log(err));
   };
 
   deleteProject = (authUser, authUserOwnedProjects) => {
-    console.log("deleteProject->authID: ", authUser);
     console.log(
       "deleteProject->authUserOwnedProjects: ",
       authUserOwnedProjects
     );
 
+    let projectToDeleteId = "";
+
+    for (let i = 0; i < authUserOwnedProjects.length; ++i) {
+      authUserOwnedProjects[i].projectName === this.props.match.params.id
+        ? //Return
+          (projectToDeleteId = authUserOwnedProjects[i]._id)
+        : console.log();
+    }
+    console.log("deleteProject->authID: ", authUser);
+
     let currentProject = this.props.match.params.id;
 
     const deleteProjectData = {
       username: authUser,
+      id: projectToDeleteId,
       projectName: currentProject
     };
 
@@ -334,7 +342,13 @@ class EditorContainer extends Component {
   handleOnRunClick = event => {
     event.preventDefault();
     console.log("Run button clicked");
+    console.log("Before: " + document.getElementById("preview").srcdoc)
     this.updateCombinedCode();
+    document.getElementById("preview").srcdoc = this.state.project.codeBundle.combined // set's src doc to the newly combined code
+    console.log("After: "+ document.getElementById("preview").srcdoc)
+    
+    //console.log(this.state.project.codeBundle.combined);
+    //this.$("#preview").srcdoc = this.newProjectObj.codeBundle.combined
   };
 
   render() {
@@ -353,6 +367,8 @@ class EditorContainer extends Component {
           handleConfirmedNewProject={this.handleConfirmedNewProject}
           toggleInput={this.toggleInput}
           toggleInputState={this.state.show}
+          inputTextValue={this.inputTextValue}
+          handleInputTextChange={this.handleInputTextChange}
         />
         {this.state.showSettings && (
           <SettingsPanel onClick={this.handleOnDeleteProject} />
@@ -378,7 +394,8 @@ class EditorContainer extends Component {
                 }}
                 onChange={(editor, data, value) => {
                   this.updateJSCode(value);
-                  //console.log("EditorContainer (JS): " + value);
+                  this.forceUpdate();
+                  console.log("EditorContainer (JS): " + value);
                   }}
                 />
                 </div>
@@ -424,7 +441,7 @@ class EditorContainer extends Component {
                     className="render-window resp-iframe col-12"
                     title="Render Panel"
                     id="preview"
-                    srcdoc={this.state.project.codeBundle.combinedHTMLCSS || this.state.project.codeBundle.combined} // current output of iframe data
+                    srcdoc={this.state.project.codeBundle.combinedHTMLCSS} // current output of iframe data
                   />
                 </div>
               </div>
