@@ -5,8 +5,57 @@ import Jumbotron from "../components/Jumbotron";
 import Nav from "../components/Nav";
 import API from "../utils/API";
 import {Link} from "react-router-dom";
+import ProjectCard from "../components/ProjectCard";
+import ProfileBanner from "../components/ProfileBanner";
+import SocialLinks from "../components/SocialLinks";
 class Profile extends Component {
-  state={
+  state = {
+    profileOwnedProject: [],
+    dateCreation: {},
+    profilePic: "",
+    socialLinks: {
+      git: "",
+      linkedIn: "",
+      personalSite: ""
+    },
+    project: {
+      id: this.props.match.params.id,
+      projectName: "Testing Project",
+      owner: this.props.match.params.user,
+      comments: ["test1", "test2", "test3"],
+      codeBundle: {
+        js: "var i = 0; \n return i+2;",
+        css: "body { background: #fff}",
+        html: '<div class = "new-div"></div>'
+      }
+    },
+    user: {
+      username: this.props.match.params.user,
+      projects: [
+        {
+          id: "project2",
+          projectName: "Project 2",
+          owner: this.props.match.params.user,
+          comments: ["test3"],
+          codeBundle: {
+            js: 'console.log("Hello World!");',
+            css: "body { background: #000}",
+            html: '<button class = "new-button"></button>'
+          }
+        },
+        {
+          id: "project1",
+          projectName: "Project 1",
+          owner: this.props.match.params.user,
+          comments: ["test1", "test2", "test3"],
+          codeBundle: {
+            js: "var i = 0; \n return i+2;",
+            css: "body { background: #fff}",
+            html: '<div class = "new-div"></div>'
+          }
+        }
+      ]
+    },  
     currentUser:this.props.currentUser,
     user:{},
     inputTextValue: "",
@@ -90,19 +139,35 @@ class Profile extends Component {
       console.log(this.props);
       console.log(this.state.currentUser);
         const {user} = this.props.match.params;
+
+    if (user) {
+      this.getUser(this.props.match.params.user);
+    } else {
+      console.log("no id");
+    }
+  }
+
+  getUser = currentUsername => {
+    // console.log(this.props.match.params.user)
+    API.getUser(currentUsername)
+      .then(res =>
+        // console.log("result: ", res.data),
         this.setState({
-          user:{
-            username:user
-          }
+          profileOwnedProject: res.data.ownedProjects,
+          dateCreation: res.data.dateCreation,
+          profilePic: res.data.profilePic,
+          socialLinks: res.data.socialLinks,
+          user: res.data
         })
-    }
-    onLogOut(){
-      API.logout();
-    }
-  render(){
+      )
+      .catch(err => console.log(err));
+  };
+
+  render() {
     return (
-    <Container fluid>
-       <Nav currentUser = {this.props.currentUser} 
+      <div>
+        <Container fluid>
+        <Nav currentUser = {this.props.currentUser} 
             user={this.state.user} 
             _logout={this.props._logout} 
             mode="profile"
@@ -112,24 +177,26 @@ class Profile extends Component {
             toggleInputState={this.state.show}
             inputTextValue={this.inputTextValue}
             handleInputTextChange={this.handleInputTextChange}
-          />  
-      <Row>
-        <Col size="md-12">
-          <Jumbotron>
-            <h1 className="text-center"> {this.props.match.params.user}</h1>   
-            {/* this href needs to be changed to pop up a modal to create a project*/}
-            <Link className="editor-redir" to={"/"+this.props.match.params.user+"/project/newProject"}> To the Editor.</Link>  
-            <Link className="log-in-redir" to="/"> To the Log In.</Link>   
-            <Link to="/somebodyElse"> Link to Somebody Else's profile</Link>    
-          </Jumbotron>
-        </Col>
-      </Row>
-      {/*<Row>
-        <ProjectContainer/>
-      </Row>*/}
-    </Container>
-  );
-}
+      />  
+          <Row />
+          <ProfileBanner
+            user={this.state.user.username}
+            src={this.state.user.profilePic}
+          >
+            <SocialLinks />
+          </ProfileBanner>
+        </Container>
+
+        {this.state.profileOwnedProject.map(project => (
+          <ProjectCard
+            key={project.id}
+            title={project.projectName}
+            link={project.owner + "/project/" + project.projectName}
+          />
+        ))}
+      </div>
+    );
+  }
 }
 
 export default Profile;
