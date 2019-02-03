@@ -5,6 +5,7 @@ import Jumbotron from "../components/Jumbotron";
 import Nav from "../components/Nav";
 import ProjectCard from "../components/ProjectCard";
 import ProfileBanner from "../components/ProfileBanner";
+import SocialLinks from "../components/SocialLinks";
 
 class Profile extends Component {
   state = {
@@ -72,6 +73,9 @@ class Profile extends Component {
         // console.log("result: ", res.data.profilePic),
         this.setState({
           profileOwnedProject: res.data.ownedProjects,
+          dateCreation: res.data.dateCreation,
+          profilePic: res.data.profilePic,
+          socialLinks: res.data.socialLinks,
           user: res.data
         })
       )
@@ -83,12 +87,14 @@ class Profile extends Component {
       <div>
         <Container fluid>
           <Nav user={this.state.user} mode="profile" />
-          <Row>
-            <ProfileBanner
-              user={this.state.user.username}
-              src={this.state.user.profilePic}
-            />
-          </Row>
+          <Row />
+          <ProfileBanner
+            user={this.state.user.username}
+            src={this.state.user.profilePic}
+          >
+          </ProfileBanner>
+          <SocialLinks />
+
         </Container>
 
         {this.state.profileOwnedProject.map(project => (
