@@ -19,7 +19,7 @@ function Nav(props) {
       { (props.mode==="project")? 
           (<ul className="navbar-nav ml-0">
             {/* If we're in project mode we need to render project specific buttons to the nav */}
-              <li className="nav-text align-middle"  id="project-brand" >
+              <li className="nav-link"  id="project-brand" >
                 <span className=" project-name-banner ">{props.project.projectName}</span>
                 
               </li>
@@ -83,36 +83,27 @@ function Nav(props) {
           </li>
         </ul>
       ) : (
-        <ul className="navbar-nav ml-0">
-          {/* Or we are in profile view and don't need project buttons */}
-            <li className="nav-text  mr-0">
-              <form className="form-inline ml-5 ">
-                <button className="btn btn-secondary ml-3" type="button">New Project</button>
-              </form>
-            </li>
-          </ul>
+        <ul className="navbar-nav ml-auto mr-0 dropdown-menu-left">
+        
+            <li className="nav-item   dropdown  ">
+            <a className="nav-link dropdown-toggle  "  id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              New Project
+            </a>
+            <div className="dropdown-menu dropdown-menu-bottom" aria-labelledby="navbarDropdown">
+            <div className="input-group input-group-sm mb-3 dropdown-item">
+                <div className="input-group-prepend dropdown-item">
+                  <span className="input-group-text dropdown-item" id="inputGroup-sizing-sm">Project Name</span>
+                </div>
+                <input type="text" class="form-control dropdown-item" aria-label="Small" aria-describedby="inputGroup-sizing-sm"></input>
+            </div>
+            <Button  className="dropdown-item "  to="/"> Logout </Button>
+            </div>
+        </li>    
+    </ul>
       )
          }
-    {/*   <ul className="navbar-nav ml-auto mr-0 dropdown-menu-left">
-      
-      
-    //     <li className="nav-item   dropdown  ">
-    //     {console.log(props)}
-    //       <a className="nav-link dropdown-toggle  " href={"/"+props.currentUser.username} id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-    //        {props.currentUser.username}
-    //       </a>
-    //       <div className="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-    //         <Link className="dropdown-item" to={"/"+props.currentUser.username}>Account</Link>
-    //         <Link className="dropdown-item" to={"/settings/"+props.currentUser.username}>Edit Profile</Link>
-    //         <div className="dropdown-divider"></div>
-    //         <Link to="#" className="dropdown-item " onClick={props._logout}> Logout </Link>
-    //       </div>
-    //     </li>
-      
-    // </ul>
-        */ }
         
-    <AccountDropdown currentUser={(sessionStorage.getItem("currentUser"))} _logout={props._logout}></AccountDropdown>
+    <AccountDropdown currentUser={(sessionStorage.getItem("currentUser"))} _logout={props._logout} ></AccountDropdown>
     
   </nav>
   );

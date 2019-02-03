@@ -1,6 +1,7 @@
 import axios from "axios";
 import React, { Component } from 'react';
 import { BrowserRouter as Router, Route, Switch} from "react-router-dom";
+import { RedirectTo } from "react-router-dom";
 import EditorContainer from "./pages/EditorContainer";
 import NoMatch from "./pages/NoMatch";
 import LogIn from "./pages/LogIn";
@@ -23,7 +24,7 @@ constructor(){
 }
 
 _logout(event) {
-  event.preventDefault()
+  //event.preventDefault()
   console.log('logging out')
   axios.post('/api/auth/logout').then(response => {
     console.log(response.data)
@@ -33,26 +34,16 @@ _logout(event) {
         loggedIn: false,
         currentUser: null
       })
-    }
-  })
-}
-logout() {
-  axios.post('/api/auth/logout').then(response => {
-    //console.log(response.data)
-    if (response.status === 200) {
-      sessionStorage.removeItem("currentUser");
-      this.setState({
-        loggedIn: false,
-        currentUser: null
-      })
+      window.location.href="/"
     }
   })
 }
 
-_login(email, password) {
+
+_login(username, password) {
   axios
     .post('/api/auth/login', {
-      email,
+      username,
       password
     })
     .then(response => {

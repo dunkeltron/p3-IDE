@@ -7,17 +7,16 @@
     
         return(  
         <ul className="navbar-nav ml-auto mr-0 dropdown-menu-left">
-        {console.log(JSON.parse(sessionStorage.getItem("currentUser")))}
         
             <li className="nav-item   dropdown  ">
-            <a className="nav-link dropdown-toggle  " href={"/"+JSON.parse(sessionStorage.getItem("currentUser")).username} id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <a className="nav-link dropdown-toggle  " href={"/"+JSON.parse(sessionStorage.getItem("currentUser")).username} id="accountDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             {JSON.parse(sessionStorage.getItem("currentUser")).username}
             </a>
-            <div className="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+            <div className="dropdown-menu dropdown-menu-right" aria-labelledby="accountDropdown">
             <Link className="dropdown-item" to={"/"+JSON.parse(sessionStorage.getItem("currentUser")).username}>Account</Link>
             <Link className="dropdown-item" to={"/settings/"+JSON.parse(sessionStorage.getItem("currentUser")).username}>Edit Profile</Link>
             <div className="dropdown-divider"></div>
-            <Link to="/" className="dropdown-item " > Logout </Link>
+            <Link  className="dropdown-item "  to="/"> Logout </Link>
             </div>
         </li>    
     </ul>

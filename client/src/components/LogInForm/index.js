@@ -4,13 +4,13 @@ function LogInForm({handleInputChange,handleFormSubmit}) {
     return(
         <form action="/api/auth/login" method="POST">
           <div className="form-group">
-            <label for="email">Email</label>
+            <label for="username">Username</label>
             <input
-                type="email"
-                id="email"
-                name="email"
+                type="username"
+                id="username"
+                name="username"
                 className="form-control"
-                placeholder="Enter Email"
+                placeholder="Enter Username"
                 onChange = { handleInputChange}
             />
           </div>
