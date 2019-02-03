@@ -17,7 +17,6 @@ class Register extends Component {
         })
     }
     handleFormSubmit = (event) =>{
-        event.preventDefault();
         console.log(this.state);
     }
 

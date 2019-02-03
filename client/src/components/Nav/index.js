@@ -84,22 +84,23 @@ function Nav(props) {
         </ul>
       ) : (
         <ul className="navbar-nav ml-auto mr-0 dropdown-menu-left">
-        
-            <li className="nav-item   dropdown  ">
-            <a className="nav-link dropdown-toggle  "  id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              New Project
-            </a>
-            <div className="dropdown-menu dropdown-menu-bottom" aria-labelledby="navbarDropdown">
-            <div className="input-group input-group-sm mb-3 dropdown-item">
-                <div className="input-group-prepend dropdown-item">
-                  <span className="input-group-text dropdown-item" id="inputGroup-sizing-sm">Project Name</span>
-                </div>
-                <input type="text" class="form-control dropdown-item" aria-label="Small" aria-describedby="inputGroup-sizing-sm"></input>
-            </div>
-            <Button  className="dropdown-item "  to="/"> Logout </Button>
-            </div>
-        </li>    
-    </ul>
+            <form className="form-inline ml-5 ">
+              <Button
+                  className="newProject ml-3 mr-3"
+                  onClick={props.handleOnNewProjectClick}
+                  type="success"
+                >
+                  New Project
+                </Button>
+                {props.toggleInputState && (
+                  <InputBoxCreate
+                    type="warning"
+                    onClick={props.handleConfirmedNewProject}
+                    onChange={props.handleInputTextChange}
+                    value={props.inputTextValue}
+                  />)}
+            </form>
+        </ul>
       )
          }
         

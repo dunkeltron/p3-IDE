@@ -10,7 +10,8 @@ class Profile extends Component {
     currentUser:this.props.currentUser,
     user:{},
     inputTextValue: "",
-    show:false
+    show:false,
+    toggleInputState:false
   }
   handleInputTextChange = event => {
     this.setState({inputTextValue: event.target.value});
@@ -105,6 +106,8 @@ class Profile extends Component {
             user={this.state.user} 
             _logout={this.props._logout} 
             mode="profile"
+            handleOnNewProjectClick={this.handleOnNewProjectClick}
+            handleConfirmedNewProject={this.handleConfirmedNewProject}
             toggleInput={this.toggleInput}
             toggleInputState={this.state.show}
             inputTextValue={this.inputTextValue}

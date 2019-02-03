@@ -438,7 +438,7 @@ class EditorContainer extends Component {
                     className="render-window resp-iframe col-12"
                     title="Render Panel"
                     id="preview"
-                    srcdoc={this.state.project.codeBundle.combinedHTMLCSS || this.state.project.codeBundle.combined} // current output of iframe data
+                    srcdoc={this.state.project.codeBundle.combined || this.state.project.codeBundle.combinedHTMLCSS } // current output of iframe data
                   />
                 </div>
               </div>
