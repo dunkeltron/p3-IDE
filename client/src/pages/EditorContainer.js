@@ -157,7 +157,9 @@ class EditorContainer extends Component {
     // console.log("Save Button Clicked");
     let projectCopy = Object.assign({}, this.state.project);
     //The hard coded code is where the this.state of the code mirror goes
-    projectCopy.codeBundle.js = "let i = 333332";
+     projectCopy.codeBundle.js = this.state.project.codeBundle.js;
+     projectCopy.codeBundle.css = this.state.project.codeBundle.css;
+     projectCopy.codeBundle.html = this.state.project.codeBundle.html;
     console.log("Copy: ", projectCopy);
     this.setState({
       project: projectCopy
@@ -166,7 +168,7 @@ class EditorContainer extends Component {
   };
 
   findProjectToSave = currentUsername => {
-    const authUser = "TestUsername";
+    const authUser = JSON.parse(sessionStorage.getItem("currentUser").username);
 
     console.log("findProject(): ", currentUsername);
     authUser === currentUsername
@@ -222,7 +224,7 @@ class EditorContainer extends Component {
   handleConfirmedNewProject = event => {
     event.preventDefault();
     console.log("New Project Button Clicked");
-    let authUser = "TestUsername";
+    let authUser = JSON.parse(sessionStorage.getItem("currentUser").username);
     this.findToCreateProject(authUser);
   };
 
@@ -291,7 +293,7 @@ class EditorContainer extends Component {
   handleOnDeleteProject = event => {
     event.preventDefault();
     console.log("Delete Project Button Clicked");
-    let authUser = "TestUsername";
+    let authUser = JSON.parse(sessionStorage.getItem("currentUser").username);
     this.findToDeleteProject(authUser);
   };
 
@@ -437,7 +439,7 @@ class EditorContainer extends Component {
                     className="render-window resp-iframe col-12"
                     title="Render Panel"
                     id="preview"
-                    srcdoc={this.state.project.codeBundle.combinedHTMLCSS} // current output of iframe data
+                    srcDoc={this.state.project.codeBundle.combinedHTMLCSS} // current output of iframe data
                   />
                 </div>
               </div>

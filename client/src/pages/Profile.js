@@ -80,7 +80,7 @@ class Profile extends Component {
   handleConfirmedNewProject = event => {
     event.preventDefault();
     console.log("New Project Button Clicked");
-    let authUser = sessionStorage.getItem("currentUser").username;
+    let authUser = JSON.parse(sessionStorage.getItem("currentUser")).username;
     this.findToCreateProject(authUser);
   };
 
