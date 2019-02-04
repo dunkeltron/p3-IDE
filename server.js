@@ -13,7 +13,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 // Serve up static assets (usually on heroku)
 if (process.env.NODE_ENV === "production") {
-  app.use(express.static("client/public"));
+  app.use(express.static("client/build"));
 }
 
 // Passport Config
@@ -59,7 +59,9 @@ app.use(function(req, res, next) {
 // Add routes, both API and view
 app.use(routes);
 
-// Connect to the Mongo DB
+app.get('/', function(req, res) {
+  res.sendFile(path.join(__dirname, 'build', 'index.html'));
+});
 
 // Start the API server
 app.listen(PORT, function() {
