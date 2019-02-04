@@ -11,13 +11,6 @@ import SocialLinks from "../components/SocialLinks";
 class Profile extends Component {
   state = {
     profileOwnedProject: [],
-    dateCreation: {},
-    profilePic: "",
-    socialLinks: {
-      git: "",
-      linkedIn: "",
-      personalSite: ""
-    },
     project: {
       id: this.props.match.params.id,
       projectName: "Testing Project",
@@ -31,6 +24,13 @@ class Profile extends Component {
     },
     user: {
       username: this.props.match.params.user,
+      dateCreation: {},
+      profilePic: "",
+      socialLinks: {
+        git: "",
+        linkedIn: "",
+        personalSite: ""
+      },
       projects: [
         {
           id: "project2",
@@ -150,15 +150,17 @@ class Profile extends Component {
   getUser = currentUsername => {
     // console.log(this.props.match.params.user)
     API.getUser(currentUsername)
-      .then(res =>
-        // console.log("result: ", res.data),
-        this.setState({
-          profileOwnedProject: res.data.ownedProjects,
-          dateCreation: res.data.dateCreation,
-          profilePic: res.data.profilePic,
-          socialLinks: res.data.socialLinks,
-          user: res.data
-        })
+      .then(
+        res =>
+          // console.log("result: ", res.data),
+          this.setState({
+            profileOwnedProject: res.data.ownedProjects,
+            dateCreation: res.data.dateCreation,
+            profilePic: res.data.profilePic,
+            socialLinks: res.data.socialLinks,
+            user: res.data
+          }),
+        console.log(this.state.socialLinks)
       )
       .catch(err => console.log(err));
   };
@@ -183,7 +185,11 @@ class Profile extends Component {
             user={this.state.user.username}
             src={this.state.user.profilePic}
           >
-            <SocialLinks />
+            <SocialLinks
+              srcGith={this.state.user.socialLinks.git}
+              srcLinked={this.state.user.socialLinks.linkedIn}
+              srcPersonal={this.state.user.socialLinks.personalSite}
+            />
           </ProfileBanner>
         </Container>
 
