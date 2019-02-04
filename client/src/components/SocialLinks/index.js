@@ -6,7 +6,7 @@ function SocialLinks({ user, srcGith, srcLinked, srcPersonal }) {
     <div className="SLContainer">
       <a
         className="imageAnchor socialLinks"
-        href={srcGith}
+        href={srcGith||"www.github.com"}
         target="_blank"
         rel="noopener noreferrer"
       >
@@ -21,7 +21,7 @@ function SocialLinks({ user, srcGith, srcLinked, srcPersonal }) {
 
       <a
         className="imageAnchor socialLinks"
-        href={srcLinked}
+        href={srcLinked||"www.linkedin.com"}
         target="_blank"
         rel="noopener noreferrer"
       >
@@ -36,7 +36,7 @@ function SocialLinks({ user, srcGith, srcLinked, srcPersonal }) {
 
       <a
         className="imageAnchor socialLinks"
-        href={srcPersonal}
+        href={srcPersonal||null}
         target="_blank"
         rel="noopener noreferrer"
       >

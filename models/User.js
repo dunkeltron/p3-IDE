@@ -24,7 +24,10 @@ const UserSchema = new Schema({
     type: String
   },
   dateCreation: { type: Date, default: Date.now },
-  profilePic: String,
+  profilePic: {
+    type: String,
+    default: 'http://www.vibro.no/wp-content/uploads/2018/01/default-user-image.png'
+},
   ownedProjects: [
     {
       type: Schema.Types.ObjectId,
@@ -33,9 +36,18 @@ const UserSchema = new Schema({
   ],
   collabProjects: [],
   socialLinks: {
-    git: String,
-    linkedIn: String,
-    personalSite: String
+    git:  {
+      type: String,
+      default: 'http://www.github.com'
+  },
+    linkedIn:  {
+      type: String,
+      default: 'http://www.linkedin.com'
+  },
+    personalSite:  {
+      type: String,
+      default: '/'
+  }
   }
 });
 
