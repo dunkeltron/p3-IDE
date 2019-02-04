@@ -1,33 +1,74 @@
 const db = require("../models");
 
-{/*Boiler plate from class code*/}
+// // Defining methods for the UserController
+module.exports = {
+  findAll: function(req, res) {
+    console.log("FINDALLUSERS");
+    db.User.find(req.query)
+      .then(dbUser => res.json(dbUser))
+      .catch(err => res.status(422).json(err));
+  },
+  //Deleting where makes this work flawlessly
+  findByUsername: function(req, res) {
+    // console.log("FINDBYUSERNAME");
+    db.User.findOne({
+      username: req.params.user
+    })
+      .populate("ownedProjects")
+      .then(dbUser => res.json(dbUser))
+      .catch(err => res.status(422).json(err));
+  },
+  findByUsernameThenProject: function(req, res) {
+    console.log("FINDBYUSERNAMETHENPROJECT: ", req.body);
+    db.User.findOneAndUpdate(
+      { username: req.body.owner},
+      { $push: { ownedProjects: req.body._id } }
+    )
+      .then(dbUser => res.json(dbUser))
+      .catch(err => res.status(422).json(err));
+  },
+  // update: function(req, res) {
+  //   db.User.findOneAndUpdate({ username: req.params.user, projectName: req.params.id }, req.body)
+  //     .then(dbUser => res.json(dbUser))
+  //     .catch(err => res.status(422).json(err));
+  // },
 
-// // Defining methods for the bookController
-// module.exports = {
-//   findAll: function(req, res) {
-//     db.Book.find(req.query)
-//       .then(dbBook => res.json(dbBook))
-//       .catch(err => res.status(422).json(err));
-//   },
-//   findById: function(req, res) {
-//     db.Book.findById(req.params.id)
-//       .then(dbBook => res.json(dbBook))
-//       .catch(err => res.status(422).json(err));
-//   },
-//   create: function(req, res) {
-//     db.Book.create(req.body)
-//       .then(dbBook => res.json(dbBook))
-//       .catch(err => res.status(422).json(err));
-//   },
-//   update: function(req, res) {
-//     db.Book.findOneAndUpdate({ id: req.params.id }, req.body)
-//       .then(dbBook => res.json(dbBook))
-//       .catch(err => res.status(422).json(err));
-//   },
-//   remove: function(req, res) {
-//     db.Book.findById(req.params.id)
-//       .then(dbBook => dbBook.remove())
-//       .then(dbBook => res.json(dbBook))
-//       .catch(err => res.status(422).json(err));
-//   }
-// };
+  //
+  //
+  //
+  findByEmail: function(req, res) {
+    // console.log(req);
+    db.User.findOne({
+      where: {
+        email: req.email
+      },
+      update:{  //update with the body of the request object
+        req
+      },
+      options:{     //options object
+        new:true,   //returns modified document instead of original
+        upsert:true //creates the object if it doesn't exist
+      }
+    })
+      
+      .catch(err => {return err})
+      .then(dbUser => {
+        return dbUser});
+  },
+  create: function(req, res) {
+    db.User.create(req.body)
+      .then(dbUser => {
+        res.json("new User",dbUser);
+      })
+      .catch(err => res.status(422).json(err));
+  },
+  test: function(req, res) {
+    res.json({ test: "User test worked" });
+  }
+  //   remove: function(req, res) {
+  //     db.User.findById(req.params.id)
+  //       .then(dbUser => dbUser.remove())
+  //       .then(dbUser => res.json(dbUser))
+  //       .catch(err => res.status(422).json(err));
+  //   }
+};

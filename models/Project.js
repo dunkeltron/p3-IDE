@@ -1,23 +1,22 @@
 const mongoose = require("mongoose");
-
 const Schema = mongoose.Schema;
 
 const ProjectSchema = new Schema({
   owner: {
-    //I think this is what we wanted to do not sure?
-    type: Schema.Types.ObjectId,
-    required: true
+    type: String,
+    ref: "users",
+    required: Boolean    
   },
   projectName: {
     type: String,
-    required: true
+    required: Boolean
   },
   codeBundle: {
-      html: {},
-      js: {},
-      css: {},
+      html: "",
+      js: "",
+      css: ""
   },
-  isPublic: true,
+  isPublic: Boolean,
   settings: [],
   comments: [],
   views: 0,
@@ -25,6 +24,6 @@ const ProjectSchema = new Schema({
   collaborators: []
 });
 
-const Project = mongoose.model("Project", ProjectSchema);
+const Project = mongoose.model("projects", ProjectSchema);
 
 module.exports = Project;

@@ -1,36 +1,66 @@
 
 import React, { Component } from "react";
+import LogInForm from "../components/LogInForm";
+import { Redirect} from 'react-router-dom';
+
+
 class LogIn extends Component {
-    
+    constructor(){
+
+    super();
+    this.state={
+        username:"",
+        password:"",
+        currentUser: null,
+        redirectTo: null
+    };
+    this.handleFormSubmit = this.handleFormSubmit.bind(this);
+    this.handleInputChange = this.handleInputChange.bind(this);
+}
+ 
   //will have to change function once authentication is up
-    handleSubmit = (event) => {
+    handleFormSubmit = (event) => {
+        //attempt to login using api call from App.js and current state of email and password.
         event.preventDefault();
-        window.location.href="/editor"; 
+        console.log(this.state);
+        this.props._login(this.state.username,this.state.password);
+        this.setState({redirectTo: this.state.username});
+ 
+    }
+    handleInputChange = (event) => {
+        const {name,value} = event.target;
+        this.setState({
+            [name]:value
+        })
+    }
+    componentWillMount(){
+        sessionStorage.removeItem("currentUser");
     }
     render(){
-    return (
-        <div class="container justify-content-center">
-        <div class="card card-container col-4 mx-auto">
-            <img id="profile-img" class="profile-img-card" src="//ssl.gstatic.com/accounts/ui/avatar_2x.png" />
-            <p id="profile-name" class="profile-name-card"></p>
-            <form class="form-signin">
-                <input type="username" id="inputUsername" class="form-control" placeholder="Username" required />
-                <input type="password" id="inputPassword" class="form-control" placeholder="Password" required/> 
-                {/* potentially  nice feature to have.
-                <div id="remember" class="checkbox">
-                    <label>
-                        <input type="checkbox" value="remember-me"> Remember me</input>
-                    </label>
-                </div> */}
-                <a class="btn btn-lg btn-primary btn-block btn-signin"  href="/profile">Sign in</a>
-            </form>
-            <a href="/editor" class="forgot-password">
-                Forgot your password?
-            </a>
-         </div>{/*<!-- /card-container --> */}
-    </div>
-    
-    );
+        // this handles the redirect after login by checking if we have assigned redirectTo 
+        if(this.state.redirectTo){
+            return <Redirect to={{ pathname: this.state.redirectTo}}/>
+        }
+        else{
+            return (
+                <div className="row mt-5">
+                    <div className="col-md-6 m-auto">
+                        <div className="card card-body">
+                            <h1 className="text-center mb-3">
+                                <i className="fas fa-door-open"></i> Login
+                            </h1>
+                            <LogInForm handleFormSubmit={this.handleFormSubmit} handleInputChange ={this.handleInputChange}/>
+                        
+                            <p className="lead mt-4">
+                                Need an Account?  
+                                <a href="/register">Register Here</a>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            
+            );
+        }
     }
     
 }
