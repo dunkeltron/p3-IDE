@@ -11,53 +11,8 @@ import SocialLinks from "../components/SocialLinks";
 class Profile extends Component {
   state = {
     profileOwnedProject: [],
-    project: {
-      id: this.props.match.params.id,
-      projectName: "Testing Project",
-      owner: this.props.match.params.user,
-      comments: ["test1", "test2", "test3"],
-      codeBundle: {
-        js: "var i = 0; \n return i+2;",
-        css: "body { background: #fff}",
-        html: '<div class = "new-div"></div>'
-      }
-    },
-    user: {
-      username: this.props.match.params.user,
-      dateCreation: {},
-      profilePic: "",
-      socialLinks: {
-        git: "",
-        linkedIn: "",
-        personalSite: ""
-      },
-      projects: [
-        {
-          id: "project2",
-          projectName: "Project 2",
-          owner: this.props.match.params.user,
-          comments: ["test3"],
-          codeBundle: {
-            js: 'console.log("Hello World!");',
-            css: "body { background: #000}",
-            html: '<button class = "new-button"></button>'
-          }
-        },
-        {
-          id: "project1",
-          projectName: "Project 1",
-          owner: this.props.match.params.user,
-          comments: ["test1", "test2", "test3"],
-          codeBundle: {
-            js: "var i = 0; \n return i+2;",
-            css: "body { background: #fff}",
-            html: '<div class = "new-div"></div>'
-          }
-        }
-      ]
-    },  
-    currentUser:this.props.currentUser,
-    user:{},
+    currentUser: JSON.parse(sessionStorage.getItem("currentUser")),
+    profileOwner:{},
     inputTextValue: "",
     show:false,
     toggleInputState:false
@@ -158,7 +113,7 @@ class Profile extends Component {
             dateCreation: res.data.dateCreation,
             profilePic: res.data.profilePic,
             socialLinks: res.data.socialLinks,
-            user: res.data
+            profileOwner: res.data
           }),
         console.log(this.state.socialLinks)
       )
@@ -170,7 +125,6 @@ class Profile extends Component {
       <div>
         <Container fluid>
         <Nav currentUser = {this.props.currentUser} 
-            user={this.state.user} 
             _logout={this.props._logout} 
             mode="profile"
             handleOnNewProjectClick={this.handleOnNewProjectClick}
@@ -182,13 +136,13 @@ class Profile extends Component {
       />  
           <Row />
           <ProfileBanner
-            user={this.state.user.username}
-            src={this.state.user.profilePic}
+            user={this.state.profileOwner.username}
+            src={this.state.profileOwner.profilePic}
           >
             <SocialLinks
-              srcGith={this.state.user.socialLinks.git}
-              srcLinked={this.state.user.socialLinks.linkedIn}
-              srcPersonal={this.state.user.socialLinks.personalSite}
+              srcGith={this.state.profileOwner.socialLinks.git}
+              srcLinked={this.state.profileOwner.socialLinks.linkedIn}
+              srcPersonal={this.state.profileOwner.socialLinks.personalSite}
             />
           </ProfileBanner>
         </Container>
