@@ -3,10 +3,9 @@ const Schema = mongoose.Schema;
 
 const ProjectSchema = new Schema({
   owner: {
-    //I think this is what we wanted to do not sure?
-    type: Schema.Types.ObjectId,
-    required: Boolean,
-    ref: "User"
+    type: String,
+    ref: "users",
+    required: Boolean    
   },
   projectName: {
     type: String,
@@ -25,6 +24,6 @@ const ProjectSchema = new Schema({
   collaborators: []
 });
 
-const Project = mongoose.model("Project", ProjectSchema);
+const Project = mongoose.model("projects", ProjectSchema);
 
 module.exports = Project;

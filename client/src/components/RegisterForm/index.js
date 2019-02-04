@@ -15,11 +15,11 @@ function RegisterForm({handleInputChange,handleFormSubmit}) {
                     />
                 </div>
                 <div className="form-group">
-                    <label for="userName">User Name</label>
+                    <label for="username">User Name</label>
                     <input
-                        type="userName"
-                        id="userName"
-                        name="userName"
+                        type="username"
+                        id="username"
+                        name="username"
                         className="form-control"
                         placeholder="Enter User Name"
                         onChange = { handleInputChange}

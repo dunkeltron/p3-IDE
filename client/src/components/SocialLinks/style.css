@@ -1,0 +1,23 @@
+.SLContainer {
+  margin: 0 auto;
+}
+
+.socialLinks {
+  display: inline-block;
+  margin: 0 auto;
+}
+
+.gitAva,
+.linkedinAva,
+.personalAva {
+  border-radius: 50%;
+  border: 1px solid rgb(53, 53, 53);
+}
+
+.gitAva {
+  margin-right: 15px;
+}
+
+.personalAva {
+  margin-left: 15px;
+}

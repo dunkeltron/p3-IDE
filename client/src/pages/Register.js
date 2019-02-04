@@ -6,7 +6,7 @@ class Register extends Component {
     state={
         email:"",
         password:"",
-        userName:"",
+        username:"",
         name:"",
         password2:""
     }
@@ -17,7 +17,6 @@ class Register extends Component {
         })
     }
     handleFormSubmit = (event) =>{
-        event.preventDefault();
         console.log(this.state);
     }
 

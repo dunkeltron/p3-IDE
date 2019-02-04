@@ -16,8 +16,6 @@ if (process.env.NODE_ENV === "production") {
   app.use(express.static("client/public"));
 }
 
-
-
 // Passport Config
 require('./config/passport')(passport);
 
@@ -62,7 +60,6 @@ app.use(function(req, res, next) {
 app.use(routes);
 
 // Connect to the Mongo DB
-
 
 // Start the API server
 app.listen(PORT, function() {
