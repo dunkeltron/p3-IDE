@@ -66,6 +66,7 @@ class EditorContainer extends Component {
   };
 
   componentDidMount() {
+    console.log(this.props);
     this.toggleInput = this.toggleInput.bind(this);
     this.toggleSettings = this.toggleSettings.bind(this);
     this.handleInputTextChange = this.handleInputTextChange.bind(this);
@@ -171,6 +172,8 @@ class EditorContainer extends Component {
     const authUser = JSON.parse(sessionStorage.getItem("currentUser").username);
 
     console.log("findProject(): ", currentUsername);
+    //ternary operator comparing projectowner (from url) to logged in user
+
     authUser === currentUsername
       ? API.getUser(authUser)
           .then(res =>
