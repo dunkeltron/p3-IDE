@@ -90,9 +90,9 @@ class Profile extends Component {
     });
   };
 
-    componentDidMount(){
+    componentWillMount(){
       console.log(this.props);
-      console.log(this.state.currentUser);
+      //console.log(this.state.currentUser);
         const {user} = this.props.match.params;
 
     if (user) {
