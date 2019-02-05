@@ -382,7 +382,7 @@ class EditorContainer extends Component {
               <div className="row top-row mh-50r col-12 mx-0 px-0">
 
               {/* Javascript Code */}
-              <div className={"col-6 border border-secondary editor js"}>
+              <div className={"col-6 border border-secondary editor js"}> Javascript
               <CodeMirror
                 value= {this.state.project.codeBundle.js} 
                 options={{
@@ -399,7 +399,7 @@ class EditorContainer extends Component {
                 </div>
 
                 {/* CSS CODE */}
-                <div className={"col-6 border border-secondary editor css"}>
+                <div className={"col-6 border border-secondary editor css"}>CSS
                 <CodeMirror
                 value= {this.state.project.codeBundle.css} 
                 options={{
@@ -417,7 +417,7 @@ class EditorContainer extends Component {
               <div className="row bottom-row mh-50 col-12 mx-0 px-0">
 
               {/* HTMLCODE */}
-              <div className={"col-6 border border-secondary editor html"}>
+              <div className={"col-6 border border-secondary editor html"}>HTML
                 <CodeMirror
                 value= {this.state.project.codeBundle.html} 
                 options={{
