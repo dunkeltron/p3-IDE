@@ -169,7 +169,7 @@ class EditorContainer extends Component {
   };
 
   findProjectToSave = currentUsername => {
-    const authUser = JSON.parse(sessionStorage.getItem("currentUser").username);
+    const authUser = currentUsername //JSON.parse(sessionStorage.getItem("currentUser").username);
     console.log(sessionStorage.getItem("currentUser"));
     console.log("findProject(): ", currentUsername);
     //ternary operator comparing projectowner (from url) to logged in user
