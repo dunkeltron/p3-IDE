@@ -169,15 +169,14 @@ class EditorContainer extends Component {
   };
 
   findProjectToSave = currentUsername => {
-    const authUser = currentUsername //JSON.parse(sessionStorage.getItem("currentUser").username);
-    console.log(sessionStorage.getItem("currentUser"));
+    const authUser = JSON.parse(sessionStorage.getItem("currentUser")).username;
     console.log("findProject(): ", currentUsername);
     //ternary operator comparing projectowner (from url) to logged in user
-
+    //console.log("currentUserName:" ,currentUsername)
     authUser === currentUsername
       ? API.getUser(authUser)
           .then(res =>
-            // console.log("findProject->getUserResult: ", res.data)
+             //console.log("findProject->getUserResult: ", res.data)
             res.data.username === authUser
               ? this.saveProject(authUser, res.data.ownedProjects)
               : console.log("findProjectToSave->getUser: User not found")
