@@ -35,20 +35,19 @@ const UserSchema = new Schema({
     }
   ],
   collabProjects: [],
-  socialLinks: {
-    git:  {
+  gitLink:  {
       type: String,
       default: 'http://www.github.com'
   },
-    linkedIn:  {
+    linkedInLink:  {
       type: String,
       default: 'http://www.linkedin.com'
   },
-    personalSite:  {
+    personalSiteLink:  {
       type: String,
       default: '/'
   }
-  }
+  
 });
 
 const User = mongoose.model("users", UserSchema);

@@ -43,8 +43,7 @@ module.exports = {
                 name,
                 username,
                 email,
-                password,
-                socialLinks
+                password
               });
 
             bcrypt.genSalt(10, (err, salt) => {

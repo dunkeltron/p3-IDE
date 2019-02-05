@@ -140,9 +140,9 @@ class Profile extends Component {
             src={this.state.profileOwner.profilePic}
           >
             <SocialLinks
-              srcGith={this.state.profileOwner.socialLinks.git}
-              srcLinked={this.state.profileOwner.socialLinks.linkedIn}
-              srcPersonal={this.state.profileOwner.socialLinks.personalSite}
+              srcGith={this.state.profileOwner.gitLink}
+              srcLinked={this.state.profileOwner.linkedInLink}
+              srcPersonal={this.state.profileOwner.personalSiteLink}
             />
           </ProfileBanner>
         </Container>
