@@ -22,8 +22,9 @@ module.exports = {
     console.log("FINDBYUSERNAMETHENPROJECT: ", req.body);
     db.User.findOneAndUpdate(
       { username: req.body.owner},
-      { $push: { ownedProjects: req.body._id } }
-    )
+      { $push: { ownedProjects: req.body._id } },
+      {new:true}
+    ) .populate("ownedProjects")
       .then(dbUser => res.json(dbUser))
       .catch(err => res.status(422).json(err));
   },

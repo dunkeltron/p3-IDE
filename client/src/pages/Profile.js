@@ -80,12 +80,16 @@ class Profile extends Component {
     console.log("createProject->newProObj: ", newProjectObj);
     API.createProject({ newProjectObj }).then(data => {
       console.log(data.data);
-      let newAuthData = data.data;
-      API.getProjectbyUser({ newAuthData }).then(
-        console.log("data.data: ", data.data),
-        window.location.assign(
-          "/" + data.data.owner + "/project/" + data.data.projectName
-        )
+      return data.data;
+      
+    }).then(function(result) {
+      API.getProjectbyUser( result ).then(function(result){
+          console.log("data.data: ", result.data.ownedProjects[result.data.ownedProjects.length-1]);
+          const newProject = result.data.ownedProjects[result.data.ownedProjects.length-1];
+          window.location.assign(
+          "/" + newProject.owner + "/project/" + newProject.projectName
+          )
+      }
       );
     });
   };

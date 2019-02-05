@@ -73,7 +73,7 @@ class EditorContainer extends Component {
     console.log(this.props.currentUser);
     const { user, id } = this.props.match.params;
     if (id && user) {
-      this.getUser();
+      this.getUser(user);
     } else {
       console.log("no id");
     }
@@ -142,14 +142,16 @@ class EditorContainer extends Component {
 
   getProjects = ownedProjects => {
     // console.log(this.props.match.params.id);
-    //console.log("OwnedProjects: ", ownedProjects);
+    console.log("OwnedProjects: ", ownedProjects);
     for (let i = 0; i < ownedProjects.length; ++i) {
-      ownedProjects[i].projectName === this.props.match.params.id
-        ? //Return
-          this.setState({
-            project: ownedProjects[i]
-          })
-        : console.log();
+      if(ownedProjects[i].projectName === this.props.match.params.id){
+        this.setState({
+          project: ownedProjects[i]
+        })
+      }
+      else{
+        console.log("problems");
+      }
     }
   };
 
