@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import Editor from "../components/Editor";
 import ProjectListItem from "../components/ProjectListItem";
 import Nav from "../components/Nav";
 import SettingsPanel from "../components/SettingsPanel";
@@ -62,7 +61,7 @@ class EditorContainer extends Component {
       ]
     }
     ,
-    currentUser: this.props.currentUser
+    currentUser: JSON.parse(sessionStorage.getItem("currentUser"))
   };
 
   componentDidMount() {
@@ -228,7 +227,7 @@ class EditorContainer extends Component {
   handleConfirmedNewProject = event => {
     event.preventDefault();
     console.log("New Project Button Clicked");
-    let authUser = JSON.parse(sessionStorage.getItem("currentUser").username);
+    let authUser = JSON.parse(sessionStorage.getItem("currentUser")).username;
     this.findToCreateProject(authUser);
   };
 
@@ -273,12 +272,16 @@ class EditorContainer extends Component {
     console.log("createProject->newProObj: ", newProjectObj);
     API.createProject({ newProjectObj }).then(data => {
       console.log(data.data);
-      let newAuthData = data.data;
-      API.getProjectbyUser({ newAuthData }).then(
-        console.log("data.data: ", data.data),
-        window.location.assign(
-          "/" + data.data.owner + "/project/" + data.data.projectName
-        )
+      return data.data;
+      
+    }).then(function(result) {
+      API.getProjectbyUser( result ).then(function(result){
+          console.log("data.data: ", result.data.ownedProjects[result.data.ownedProjects.length-1]);
+          const newProject = result.data.ownedProjects[result.data.ownedProjects.length-1];
+          window.location.assign(
+          "/" + newProject.owner + "/project/" + newProject.projectName
+          )
+      }
       );
     });
   };
