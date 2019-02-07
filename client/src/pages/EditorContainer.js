@@ -377,23 +377,28 @@ class EditorContainer extends Component {
               ))}
             </div>
             <div className="col-11 mx-0 px-0">
-              <div className="row top-row mh-50r col-12 mx-0 px-0">
 
-              {/* Javascript Code */}
-              <div className={"col-6 border border-secondary editor js"}>
-              <CodeMirror
+              <div className="row top-row mh-50 col-12 mx-0 px-0"> */}
+              {/* original row above -- test row below */}
+              {/* <div className="row top-row mh-100 col-12 mx-0 px-0">
+
+                {/* Javascript Code */}
+                <div className={"col-6 border border-secondary editor js"}>
+                <CodeMirror
+                  value= {this.state.project.codeBundle.js} 
                 value= {this.state.project.codeBundle.js} 
-                options={{
-                    mode: "javascript",
-                    theme: 'monokai',
-                    lineNumbers: true
-                }}
-                onChange={(editor, data, value) => {
-                  this.updateJSCode(value);
-                  this.forceUpdate();
-                  //console.log("EditorContainer (JS): " + value);
+                  value= {this.state.project.codeBundle.js} 
+                  options={{
+                      mode: "javascript",
+                      theme: 'monokai',
+                      lineNumbers: true
                   }}
-                />
+                  onChange={(editor, data, value) => {
+                    this.updateJSCode(value);
+                    this.forceUpdate();
+                    //console.log("EditorContainer (JS): " + value);
+                    }}
+                  />
                 </div>
 
                 {/* CSS CODE */}
@@ -411,11 +416,15 @@ class EditorContainer extends Component {
                     }}
                   />
                 </div>
+
               </div>
+
+              <div className="row bottom-row mh-50 col-12 mx-0 px-0">
+              {/* original row above / test row above */}
               <div className="row bottom-row mh-50 col-12 mx-0 px-0">
 
-              {/* HTMLCODE */}
-              <div className={"col-6 border border-secondary editor html"}>
+                {/* HTMLCODE */}
+                <div className={"col-6 border border-secondary editor html"}>
                 <CodeMirror
                 value= {this.state.project.codeBundle.html} 
                 options={{
@@ -431,7 +440,7 @@ class EditorContainer extends Component {
                 </div> 
 
                 {/* add code prop*/}
-                <div className="border border-secondary md-6 resp-container px-0 mx-0 col-6">
+                <div className="border border-secondary md-12 resp-container px-0 mx-0 col-6">
                 
                   <iframe
                     className="render-window resp-iframe col-12"
@@ -444,6 +453,7 @@ class EditorContainer extends Component {
             </div>
           </div>
         </div>
+      </div>
       </div>
     );
   }
