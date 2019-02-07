@@ -1,13 +1,11 @@
 import axios from "axios";
 import React, { Component } from 'react';
 import { BrowserRouter as Router, Route, Switch} from "react-router-dom";
-import { RedirectTo } from "react-router-dom";
 import EditorContainer from "./pages/EditorContainer";
 import NoMatch from "./pages/NoMatch";
 import LogIn from "./pages/LogIn";
 import Profile from "./pages/Profile";
 import Register from "./pages/Register";  
-import Test from "./pages/Test";
 import './App.css';
 
 class App extends Component {

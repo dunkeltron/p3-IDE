@@ -3,7 +3,6 @@ import ProjectListItem from "../components/ProjectListItem";
 import Nav from "../components/Nav";
 import SettingsPanel from "../components/SettingsPanel";
 import API from "../utils/API";
-import { stat } from "fs";
 
 import{UnControlled as CodeMirror} from 'react-codemirror2';
 require('codemirror/lib/codemirror.css');
@@ -446,7 +445,7 @@ class EditorContainer extends Component {
                 <div className="border border-primary mh-100 col-12 resp-container px-0 mx-0 ">
                 
                   <iframe
-                    className="render-window resp-iframe col-12 px-0"
+                    className="render-window resp-iframe col-8 px-0"
                     title="Render Panel"
                     id="preview"
                     srcDoc={this.state.project.codeBundle.combinedHTMLCSS} // current output of iframe data
