@@ -300,7 +300,7 @@ class EditorContainer extends Component {
   handleOnDeleteProject = event => {
     event.preventDefault();
     console.log("Delete Project Button Clicked");
-    let authUser = JSON.parse(sessionStorage.getItem("currentUser").username);
+    let authUser = JSON.parse(sessionStorage.getItem("currentUser")).username;
     this.findToDeleteProject(authUser);
   };
 
