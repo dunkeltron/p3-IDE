@@ -13,7 +13,7 @@ function Nav(props) {
   // saveProjects() { alert('The button was clicked.') }
 
   return (
-    <nav className="navbar navbar-expand-lg border-bottom border-secondary">
+    <nav className="navbar navbar-expand-lg border-bottom border-primary">
       <span className="navbar-brand " >Test IDE</span>
       
       { (props.mode==="project")? 
