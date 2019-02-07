@@ -40,7 +40,7 @@ class LogIn extends Component {
     } else {
       return (
         <div>
-          <Particles className="particles-js"
+          <Particles
             params={{
               particles: {
                 number: {
