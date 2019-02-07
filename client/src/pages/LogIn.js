@@ -126,7 +126,7 @@ class LogIn extends Component {
                 />
 
                 <p className="lead mt-4">
-                  Need an Account?
+                  Need an Account? 
                   <a href="/register">Register Here</a>
                 </p>
               </div>
