@@ -45,7 +45,7 @@ _login(username, password) {
       password
     })
     .then(response => {
-      console.log(response)
+      //console.log(response)
       if (response.status === 200) {
         // update the state
         sessionStorage.setItem("currentUser",JSON.stringify(response.data.user));

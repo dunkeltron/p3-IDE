@@ -20,22 +20,16 @@ class LogIn extends Component {
   handleFormSubmit = event => {
     //attempt to login using api call from App.js and current state of email and password.
     event.preventDefault();
-    this.props._login(this.state.username, this.state.password,this.finalizeLogIn)
-    
-    
-    
-    
-  };
-  finalizeLogIn(response){
-    console.log(response);
-    if(response===200){
-      console.log("success");
-      //this.setState({ redirectTo: this.state.username });
+    console.log(this.state);
+    this.props._login(this.state.username, this.state.password);
+    if(sessionStorage.getItem("currentUser")){
+      this.setState({ redirectTo: this.state.username });
     }
     else{
-      console.log("failure");
+      alert("Log In failed.")
     }
-  }
+    
+  };
   handleInputChange = event => {
     const { name, value } = event.target;
     this.setState({

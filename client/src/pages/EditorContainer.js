@@ -207,7 +207,7 @@ class EditorContainer extends Component {
 
     for (let i = 0; i < selectedProject.length; ++i) {
       selectedProject[i].projectName === this.props.match.params.id
-        ? API.saveProject({ projectObject })
+        ? API.saveProject({ projectObject }) // ? alert("Project succesfuly saved.") : alert ("Project failed to save.")
         : console.log();
     }
   };
@@ -437,15 +437,16 @@ class EditorContainer extends Component {
                 </div> 
               </div>
               
-              <div className="row bottom-row mh-100 col-12 mx-0 px-0">
+              <div className="row bottom-row  col-12 ">
 
               
 
                 {/* add code prop*/}
-                <div className="border border-primary mh-100 col-12 resp-container px-0 mx-0 ">
+                <div className="col-2"></div>
+                <div className="border border-primary  col-8   resp-container  ">
                 
                   <iframe
-                    className="render-window resp-iframe col-8 px-0"
+                    className="render-window resp-iframe   col-12 px-0"
                     title="Render Panel"
                     id="preview"
                     srcDoc={this.state.project.codeBundle.combinedHTMLCSS} // current output of iframe data

@@ -23,7 +23,7 @@ code {
 .resp-container {
   position: relative;
   overflow: hidden;
-  padding-top: 56.25%;
+  padding-top: 36%;
 }
 
 .resp-iframe {
@@ -60,13 +60,13 @@ code {
 .CodeMirror-hscrollbar::-webkit-scrollbar-thumb {
 	border-radius: 10px;
 	-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,.3);
-	background-color: #555;
+	background-color: #78C2AD;
 }
 
 .CodeMirror-hscrollbar::-webkit-scrollbar-track {
 	-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
 	border-radius: 10px;
-	background-color: #78C2AD;
+	background-color: #282c34;
 }
 .CodeMirror-hscrollbar::-webkit-scrollbar {
 	height: 7px;
