@@ -19,46 +19,8 @@ class EditorContainer extends Component {
     show: false,
     showSettings: false,
     inputTextValue: "",
-    project: {
-      id: this.props.match.params.id,
-      projectName: "Testing Project",
-      owner: this.props.match.params.user,
-      comments: ["test1", "test2", "test3"],
-      codeBundle: {
-        js: "var i = 0; \n return i+2;",
-        css: "body { background: #fff}",
-        html: '<div class = "new-div"></div>',
-        combinedHTMLCSS: "", // new addition to hold the HTML, CSS
-        combined: "" // new addition to hold HMTL, CSS, and JS
-      }
-    },
-    user: {
-      username: this.props.match.params.user,
-      projects: [
-        {
-          id: "project2",
-          projectName: "Project 2",
-          owner: this.props.match.params.user,
-          comments: ["test3"],
-          codeBundle: {
-            js: 'console.log("Hello World!");',
-            css: "body { background: #000}",
-            html: '<button class = "new-button"></button>'
-          }
-        },
-        {
-          id: "project1",
-          projectName: "Project 1",
-          owner: this.props.match.params.user,
-          comments: ["test1", "test2", "test3"],
-          codeBundle: {
-            js: "var i = 0; \n return i+2;",
-            css: "body { background: #fff}",
-            html: '<div class = "new-div"></div>'
-          }
-        }
-      ]
-    }
+    project: {},
+    user: {}
     ,
     currentUser: JSON.parse(sessionStorage.getItem("currentUser"))
   };
@@ -380,9 +342,9 @@ class EditorContainer extends Component {
         <div className=" col-12 editor-container mx-0 px-0 ">
           <div className="row col-12 mx-0 px-0">
             <div className="col projects ml-0 col-1">
-              {this.state.user.projects.map(project => (
+              {this.state.user.projects ? this.state.user.projects.map(project => (
                 <ProjectListItem project={project} />
-              ))}
+              )): console.log()}
             </div>
             <div className="col-10 mx-0 px-0">
               <div className="row top-row mh-50r col-12 mx-0 px-0 mb-2">
@@ -390,7 +352,7 @@ class EditorContainer extends Component {
               {/* Javascript Code */}
               <div className={"col-4 col-xs-12 border-left border-right border-bottom  border-primary editor js px-0"}> &nbsp; &nbsp; Javascript
               <CodeMirror
-                value= {this.state.project.codeBundle.js} 
+                value= {this.state.project.codeBundle ? this.state.project.codeBundle.js:""} 
                 options={{
                     mode: "javascript",
                     theme: 'monokai',
@@ -407,7 +369,7 @@ class EditorContainer extends Component {
                 {/* CSS CODE */}
                 <div className={"col-4 xs-12 border-left border-right border-bottom border-primary editor css px-0"}>&nbsp; &nbsp; CSS
                 <CodeMirror
-                value= {this.state.project.codeBundle.css} 
+                value= {this.state.project.codeBundle ? this.state.project.codeBundle.css : ""} 
                 options={{
                     mode: "css",
                     theme: 'monokai',
@@ -423,7 +385,7 @@ class EditorContainer extends Component {
               <div className={"col-4 xs-12 border-left border-right border-bottom border-primary editor html px-0"}>
                 &nbsp; &nbsp; HTML
                 <CodeMirror
-                value= {this.state.project.codeBundle.html} 
+                value= {this.state.project.codeBundle ? this.state.project.codeBundle.html : ""} 
                 options={{
                     mode: "htmlmixed",
                     theme: 'monokai',
@@ -449,7 +411,7 @@ class EditorContainer extends Component {
                     className="render-window resp-iframe   col-12 px-0"
                     title="Render Panel"
                     id="preview"
-                    srcDoc={this.state.project.codeBundle.combinedHTMLCSS} // current output of iframe data
+                    srcDoc={this.state.project.codeBundle ? this.state.project.codeBundle.combinedHTMLCSS : ""} // current output of iframe data
                   ></iframe>
                 </div>
               </div>

@@ -1,10 +1,8 @@
 
 import React, {Component} from "react";
-import { Col, Row, Container } from "../components/Grid";
-import Jumbotron from "../components/Jumbotron";
+import { Row, Container } from "../components/Grid";
 import Nav from "../components/Nav";
 import API from "../utils/API";
-import {Link} from "react-router-dom";
 import ProjectCard from "../components/ProjectCard";
 import ProfileBanner from "../components/ProfileBanner";
 import SocialLinks from "../components/SocialLinks";
