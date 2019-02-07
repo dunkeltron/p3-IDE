@@ -386,10 +386,10 @@ class EditorContainer extends Component {
               ))}
             </div>
             <div className="col-10 mx-0 px-0">
-              <div className="row top-row mh-50r col-12 mx-0 px-0">
+              <div className="row top-row mh-50r col-12 mx-0 px-0 mb-2">
 
               {/* Javascript Code */}
-              <div className={"col-4 col-xs-12 border-left border-right border-bottom  editor js "}> Javascript
+              <div className={"col-4 col-xs-12 border-left border-right border-bottom  border-primary editor js px-0"}> &nbsp; &nbsp; Javascript
               <CodeMirror
                 value= {this.state.project.codeBundle.js} 
                 options={{
@@ -406,7 +406,7 @@ class EditorContainer extends Component {
                 </div>
 
                 {/* CSS CODE */}
-                <div className={"col-4 xs-12 border-left border-right border-bottom  editor css "}>CSS
+                <div className={"col-4 xs-12 border-left border-right border-bottom border-primary editor css px-0"}>&nbsp; &nbsp; CSS
                 <CodeMirror
                 value= {this.state.project.codeBundle.css} 
                 options={{
@@ -421,8 +421,8 @@ class EditorContainer extends Component {
                   />
                 </div>
                 {/* HTMLCODE */}
-              <div className={"col-4 xs-12 border-left border-right border-bottom  editor html "}>
-                HTML
+              <div className={"col-4 xs-12 border-left border-right border-bottom border-primary editor html px-0"}>
+                &nbsp; &nbsp; HTML
                 <CodeMirror
                 value= {this.state.project.codeBundle.html} 
                 options={{
@@ -443,10 +443,10 @@ class EditorContainer extends Component {
               
 
                 {/* add code prop*/}
-                <div className="border  mh-100 col-12 resp-container px-0 mx-0 ">
+                <div className="border border-primary mh-100 col-12 resp-container px-0 mx-0 ">
                 
                   <iframe
-                    className="render-window resp-iframe col-12"
+                    className="render-window resp-iframe col-12 px-0"
                     title="Render Panel"
                     id="preview"
                     srcDoc={this.state.project.codeBundle.combinedHTMLCSS} // current output of iframe data
