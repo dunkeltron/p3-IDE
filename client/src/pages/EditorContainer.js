@@ -358,6 +358,7 @@ class EditorContainer extends Component {
                     theme: 'monokai',
                     lineNumbers: true
                 }}
+                autoCursor={false}
                 onChange={(editor, data, value) => {
                   this.updateJSCode(value);
                   this.forceUpdate();
@@ -375,6 +376,7 @@ class EditorContainer extends Component {
                     theme: 'monokai',
                     lineNumbers: true
                 }}
+                autoCursor={false}
                 onChange={(editor, data, value) => {
                     this.updateCSSCode(value);
                     //console.log("EditorContainer (CSS): " + value);
@@ -391,6 +393,7 @@ class EditorContainer extends Component {
                     theme: 'monokai',
                     lineNumbers: true
                 }}
+                autoCursor={false}
                 onChange={(editor, data, value) => {
                     this.updateHTMLCode(value);
                     //console.log("EditorContainer (HTML): " + value);
