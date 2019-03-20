@@ -40,7 +40,7 @@ _logout(event) {
 
 _login(username, password) {
   axios
-    .post('/api/auth/login', {
+    .post(`/api/auth/login`, {
       username,
       password
     })
@@ -54,6 +54,7 @@ _login(username, password) {
           currentUser: response.data.user
           
         })
+        window.location=`/${response.data.user.username}`;
       }
     })
 }

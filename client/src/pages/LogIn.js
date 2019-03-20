@@ -17,19 +17,15 @@ class LogIn extends Component {
   }
 
   //will have to change function once authentication is up
-  handleFormSubmit = event => {
+  handleFormSubmit =  event => {
     //attempt to login using api call from App.js and current state of email and password.
     event.preventDefault();
-    console.log(this.state);
-    this.props._login(this.state.username, this.state.password);
-    if(sessionStorage.getItem("currentUser")){
-      this.setState({ redirectTo: this.state.username });
-    }
-    else{
-      alert("Log In failed.")
-    }
+    this.props._login(this.state.username, this.state.password)
+      
+    };
     
-  };
+    
+
   handleInputChange = event => {
     const { name, value } = event.target;
     this.setState({
@@ -132,8 +128,8 @@ class LogIn extends Component {
                 />
 
                 <p className="lead mt-4">
-                  Need an Account? 
-                  <a href="/register">Register Here</a>
+                 
+                  <a href="/register" class="ml-6">Create an Account </a>
                 </p>
               </div>
             </div>
